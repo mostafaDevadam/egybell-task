@@ -58,8 +58,6 @@ const ProfilePage = () => {
         {!isView && role === Role.ADMIN && user && id && <EditProfile user={user} />}
         {isView && role === Role.ADMIN && user && id && <ViewProfile user={user} />}
         {!id && <ViewProfile user={currentUser} />}
-       
-        {currentUser?.id}
 
       
     </div>
