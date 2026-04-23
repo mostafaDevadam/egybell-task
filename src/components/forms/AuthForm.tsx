@@ -78,12 +78,12 @@ const AuthForm = ({ action, buttonTitle, formTitle, isConfirm = false, isRole = 
 
 
     return (
-        <div className="w-full">
-            <h1 className="text-xl font-semibold mb-4 text-gray-800 dark:text-gray-100">{formTitle}</h1>
+        <div className="w-full" id="main">
+            <h1 className="text-xl font-semibold mb-4 text-gray-800 dark:text-gray-100" data-testid="form-title">{formTitle}</h1>
             <form action={formAction} className="flex flex-col gap-5 mx-auto">
                 {isRole && <div className="flex flex-col gap-2">
                     <Label htmlFor="role" className="block text-sm font-medium text-start" title="Role" />
-                    <select name="role" defaultValue={"admin"} className={`px-2 block w-full bg-white border border-gray-300 text-gray-700 py-2 rounded-lg leading-tight focus:outline-none focus:bg-white focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-colors duration-200 text-sm sm:text-base cursor-pointer`}>
+                    <select name="role" role="role" defaultValue={"admin"} className={`px-2 block w-full bg-white border border-gray-300 text-gray-700 py-2 rounded-lg leading-tight focus:outline-none focus:bg-white focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-colors duration-200 text-sm sm:text-base cursor-pointer`}>
                         {/*<option value="0">Choose</option>*/}
                         <option value="user">User</option>
                         <option value="admin">Admin</option>
@@ -125,6 +125,8 @@ const AuthForm = ({ action, buttonTitle, formTitle, isConfirm = false, isRole = 
 
                 <button
                     type="submit"
+                    role="button"
+                    data-testid="submit-button"
                     className={`bg-blue-600 text-white rounded-lg px-4 py-2 
                      hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 
                      dark:bg-blue-700 dark:hover:bg-blue-600 dark:focus:ring-offset-gray-800 
