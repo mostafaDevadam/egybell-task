@@ -45,6 +45,18 @@ I used tailwindcss for styling of App and react-toastify for displaying feedback
 I used redux-toolkit for auth and created reusable AuthForm component for login and register pages.
 I saved token in cookie using js-cookie library because react has not built-in api/lib for cookie.
 
+Pages:
+Login: use AuthForm with validation(email, password)
+Register: useAuthForm with validation(role, email, password, confirm-password)
+Dashboard: is default page when user/admin is logged-in 
+Profile: display email and role
+Users: for admin and when current role is admin and admin can view/edit user profile
+ActivityLogs: for admin and current role is admin and admin can see the user activities
+
+Routes:
+I created app-routes and protected routes based on current user and his role
+
+I created UI as responsive and with dark mode if browser is in dark mode
 
 Backend:
 I developed a very simple Node.js/Express.js server and with restAPI with jwt
