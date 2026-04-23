@@ -59,7 +59,7 @@ I created app-routes and protected routes based on current user and his role
 I created UI as responsive and with dark mode if browser is in dark mode
 
 Backend:
-I developed a very simple Node.js/Express.js server and with restAPI with jwt
+I developed a very simple Node.js/Express.js server  with restAPI and jwt
 
 
 Backend/API:
