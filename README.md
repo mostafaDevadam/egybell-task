@@ -28,8 +28,7 @@ actions
 api
 assets
 auth
-components
-hooks
+components/: buttons/, data-tables/, forms/, layouts/, view/
 lib
 pages
 routes
@@ -46,12 +45,12 @@ I used redux-toolkit for auth and created reusable AuthForm component for login 
 I saved token in cookie using js-cookie library because react has not built-in api/lib for cookie.
 
 Pages:
-Login: use AuthForm with validation(email, password)
-Register: useAuthForm with validation(role, email, password, confirm-password)
-Dashboard: is default page when user/admin is logged-in 
-Profile: display email and role
-Users: for admin and when current role is admin and admin can view/edit user profile
-ActivityLogs: for admin and current role is admin and admin can see the user activities
+auth/Login: use AuthForm with validation(email, password)
+auth/Register: useAuthForm with validation(role, email, password, confirm-password)
+pages/Dashboard: is default page when user/admin is logged-in 
+pages/Profile: display email and role
+pages/Users: for admin and when current role is admin and admin can view/edit user profile
+pages/ActivityLogs: for admin and current role is admin and admin can see the user activities
 
 Routes:
 I created app-routes and protected routes based on current user and his role
