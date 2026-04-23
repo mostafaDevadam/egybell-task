@@ -40,7 +40,8 @@ const UsersPage = () => {
 
   return (
     <div>
-      <h1>Users</h1>
+      <p className='text-gray-500 text-2xl p-2'>Users List</p>
+
       <div>
         {!users && isLoading && <div><Spinner title="Loading..." /> </div>}
         <Suspense fallback={<Spinner title="Loading..." />}>
