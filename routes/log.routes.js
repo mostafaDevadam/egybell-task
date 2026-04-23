@@ -1,0 +1,21 @@
+const auth = require("../middleware/auth");
+const { logs } = require("../models/log.model");
+const { users } = require("../models/user.model");
+const express = require("express");
+const router = express.Router();
+
+router.get("/", auth, (req, res) => {
+     if (req.user.role !== "admin") {
+        return res.status(403).json({ message: "Access denied" });
+    }
+
+    const ls = logs.map((l) => {
+        const user = users.find(u => u.id === l.user_id);
+        return { ...l, user };
+    });
+
+
+    res.json({ statusCode: 200, message: "All logs", data: ls });
+});
+
+module.exports = router;

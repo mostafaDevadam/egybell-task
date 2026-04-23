@@ -4,6 +4,7 @@ const jwt = require("jsonwebtoken");
 const { users } = require("../models/user.model");
 const auth = require("../middleware/auth");
 const role = require("../middleware/role");
+const { logs } = require("../models/log.model");
 
 const router = express.Router();
 
@@ -48,8 +49,40 @@ router.post("/login", async (req, res) => {
 
   console.log("user:", user)
 
+  logs.push({
+    id: logs.length + 1,
+    user_id: user.id,
+    action: "login",
+    timestamp: new Date().toISOString(),
+  });
+
   res.json({statusCode: 201, message: "Login successful", data: {id: user.id, role: user.role, access_token: token} });
 });
+
+
+router.post("/logout/:id", auth, async (req, res) => {
+
+  const userId = parseInt(req.params.id);
+
+    // user can only access himself
+    if (req.user.id !== userId) {
+        return res.status(403).json({ message: "Access denied" });
+    }
+
+    const user = users.find(u => u.id === userId);
+    if (!user) return res.status(404).json({ message: "User not found" });
+
+
+    logs.push({
+    id: logs.length + 1,
+    user_id: user.id,
+    action: "logout",
+    timestamp: new Date().toISOString(),
+  });
+
+    res.json({statusCode: 201, message: "Logout successful", data: null });
+
+})
 
 
 module.exports = router;
