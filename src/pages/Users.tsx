@@ -45,7 +45,7 @@ const UsersPage = () => {
       <div>
         {!users && isLoading && <div><Spinner title="Loading..." /> </div>}
         <Suspense fallback={<Spinner title="Loading..." />}>
-           {users && <Table fields={["id", "email", "role"]} docs={users} isActions={true} />}
+           {users && <Table fields={["id", "email", "role", "actions"]} docs={users} isActions={true} />}
         </Suspense>
       </div>
     </div>
