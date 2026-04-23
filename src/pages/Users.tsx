@@ -3,20 +3,19 @@ import { USER_TYPE } from '../types'
 import { getUsersAPI } from '../api/user.api'
 import DataTable from '../components/data-tables/DataTable'
 import Spinner from '../components/Spinner'
+import Table from '../components/data-tables/Table'
 
 const UsersPage = () => {
 
   const [users, setUsers] = useState<USER_TYPE[]>()
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [isError, setIsError] = useState<boolean>(false)
-  //const [isMounted, setIsMounted] = useState<boolean>()
-  const [isFinished, setIsFinished] = useState<boolean>(false)
+  
 
   useEffect(() => {
     let mounted = true
     setIsLoading(true)
     const time = setTimeout(() => {
-
       getUsersAPI().then((th) => {
         // if (!mounted) return
         setIsLoading(false)
@@ -31,10 +30,9 @@ const UsersPage = () => {
         setIsLoading(false)
         setIsError(false)
       })
-    }, 5000)
+    }, 1000)
     return () => {
       clearTimeout(time)
-      setIsFinished(true)
       setIsLoading(false)
       mounted = false
     }
@@ -44,14 +42,10 @@ const UsersPage = () => {
     <div>
       <h1>Users</h1>
       <div>
-        {!isFinished || !users && isLoading && <div><Spinner title="Loading..." /> </div>}
-
+        {!users && isLoading && <div><Spinner title="Loading..." /> </div>}
         <Suspense fallback={<Spinner title="Loading..." />}>
-          {users &&
-            <DataTable users={users!!} />
-          }
+           {users && <Table fields={["id", "email", "role"]} docs={users} isActions={true} />}
         </Suspense>
-
       </div>
     </div>
   )
