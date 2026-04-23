@@ -24,8 +24,16 @@ export type AUTH_RESPONSE_TYPE = {
     role: Role
 }
 export type USER_TYPE = {
-       id?: number | string
-       name?: string
-       email?: string
-       role?: Role
+    id?: number | string
+    name?: string
+    email?: string
+    role?: Role
+}
+
+export type LOG_TYPE = {
+    id: number
+    user_id: number
+    action: string
+    timestamp: string
+    user: USER_TYPE
 }
