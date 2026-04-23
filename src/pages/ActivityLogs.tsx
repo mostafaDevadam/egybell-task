@@ -49,7 +49,7 @@ const ActivityLogsPage = () => {
         <div>
             <p className='text-gray-500 text-2xl p-2'>Activity Logs</p>
             {!logs && isLoading && <div><Spinner title="Loading..." /> </div>}
-            {logs && <Table fields={["id", "action", "timestamp"]} docs={logs} isActions={false} />}
+            {logs && <Table fields={["id", "action", "user", "timestamp" ]} docs={logs} isActions={false} />}
         </div>
     )
 }
