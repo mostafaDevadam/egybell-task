@@ -8,17 +8,20 @@ const ViewProfile = ({ user }: Props) => {
     const [state, setState] = useState<USER_TYPE>()
 
     useEffect(() => {
-        if(user){
+        if (user) {
             setState(user)
         }
-    },[state, user])
+    }, [state, user])
     return (
         <div>
-            <h1>ViewProfile</h1>
-            {state && <div>
-                <p>Email: {state!!.email}</p>
-                <p>Role: {state!!.role}</p>
-            </div>}
+            <p className='text-gray-500 text-2xl p-2'>Profile</p>
+            {state &&
+                <div className='text-start px-4 flex flex-col gap-5'>
+                    <p className='bg-gray-50 dark:bg-gray-800 p-6 rounded-lg shadow-md border border-gray-200 dark:border-gray-700'>Email: {state!!.email}</p>
+                    <p className='bg-gray-50 dark:bg-gray-800 p-6 rounded-lg shadow-md border border-gray-200 dark:border-gray-700 sm:mt-10'>Role: {state!!.role}</p>
+                </div>
+
+            }
 
         </div>
     )
