@@ -11,10 +11,10 @@ type Props<T = any> = {
 function Table({ docs, fields, isActions }: Props) {
     const { role } = useAppSelector(state => state.auth)
 
-     const formatDate = (cellValue: any) => {
-    if(!cellValue) return cellValue
-   return new Date(cellValue!!).toISOString().slice(0,10)
-}
+    const formatDate = (cellValue: any) => {
+        if (!cellValue) return cellValue
+        return new Date(cellValue!!).toISOString().slice(0, 10)
+    }
 
 
     return (
@@ -37,34 +37,21 @@ function Table({ docs, fields, isActions }: Props) {
                     </thead>
 
                     <tbody className="bg-white divide-y divide-gray-200 dark:bg-gray-900 dark:divide-gray-700">
+
+
                         {docs && docs.map((m, index) => (
                             <tr key={index} className="text-sm text-gray-500 dark:text-gray-300 hover:bg-gray-300 hover:text-gray-700">
-                                <td className="px-3 py-2 whitespace-nowrap">{m.id}</td>
+                               
+                               
 
-                                {m?.email && <td
-                                    className="px-3 py-2 truncate overflow-hidden"
-                                    title={m.email}
-                                >
-                                    {m.email}
-                                </td>}
-
-                                {m.action && <td
-                                    className="px-3 py-2 truncate overflow-hidden"
-                                    title={m.action}
-                                >
-                                    {m.action}
-                                </td>}
-
-                                {m.timestamp && <td
-                                    className="px-3 py-2 truncate overflow-hidden"
-                                    title={m.timestamp}
-                                >
-                                    {formatDate(m.timestamp)}
-                                </td>}
-
-
-
-                                {m.role && <td className="px-3 py-2 whitespace-nowrap">{m.role}</td>}
+                                {
+                                    fields && fields.map((f, index) => (
+                                        <td key={index} className="px-3 py-2 whitespace-nowrap">
+                                            { f === "id" ? m[f] : f === "email" ? m[f] : f === "action" ? m[f] : f === "user" ? m[f].email
+                                            : f === "role" ? m[f] : f === "timestamp" ? formatDate(m[f]) : m[f] }
+                                        </td>
+                                   ))
+                                }
 
                                 <td className="px-3 py-2">
                                     {isActions && role === 'admin' && <div className="flex flex-col md:flex-row gap-2">
