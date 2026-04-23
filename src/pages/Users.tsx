@@ -40,7 +40,7 @@ const UsersPage = () => {
 
   return (
     <div>
-      <p className='text-gray-500 text-2xl p-2'>Users List</p>
+      <p className='text-gray-500 text-2xl p-2 dark:text-gray-100'>Users List</p>
 
       <div>
         {!users && isLoading && <div><Spinner title="Loading..." /> </div>}
