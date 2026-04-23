@@ -2,7 +2,6 @@ import React, { Suspense, useEffect, useState } from 'react'
 import { USER_TYPE } from '../types'
 import { getUsersAPI } from '../api/user.api'
 import DataTable from '../components/data-tables/DataTable'
-import { truncate } from 'node:fs'
 import Spinner from '../components/Spinner'
 
 const UsersPage = () => {
