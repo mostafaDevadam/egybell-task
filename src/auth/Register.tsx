@@ -2,7 +2,7 @@ import React from 'react'
 import AuthForm from '../components/forms/AuthForm'
 import { registerAction } from '../actions/auth.actions'
 
-const Register = () => {
+const RegisterPage = () => {
   return (
       <div className="flex flex-col items-center justify-center min-h-[calc(100vh-8rem)] p-4 sm:p-6 lg:p-8 bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100">
           <div className="text-center pb-5">
@@ -17,4 +17,4 @@ const Register = () => {
   )
 }
 
-export default Register
+export default RegisterPage
