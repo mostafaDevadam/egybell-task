@@ -1,3 +1,94 @@
+
+# Setup
+
+Install Node.js from
+
+Terminal: git clone <link-of-repo>
+
+In project folder:
+Using git switch to branch frontend: 
+Terminal: npm i 
+
+Run frontend:
+Terminal: npm run dev
+
+test frontend:
+Terminal: npm run test
+
+
+Using git switch to branch backend:
+Terminal: npm i 
+
+Run backend:
+Terminal: npm run start
+
+Frontend folders:
+./src/
+actions
+api
+assets
+auth
+components
+hooks
+lib
+pages
+routes
+store
+App.tsx
+custom.d.ts: to impoting css/scss/sass files in react pages or components 
+enum.ts
+types.ts
+
+./test/auth: testing for auth files
+
+I used tailwindcss for styling of App
+I used redux-toolkit for auth and created reusable AuthForm component for login and register pages.
+
+If I have more time then I will develop and features themes and languages like arabic and english and handle direction on content from righ to left and 
+I will make more testing using vitest/react-test for everything in the app.
+
+
+Backend:
+I developed a very simple Node.js/Express.js server and with restAPI with jwt
+
+
+API:
+
+EndPoint: "/auth/register"
+Method: POST
+body: 
+role is mandatory and it's enum("user"|"admin")
+email is mandatory
+password is mandatory
+response: statusCode is number, data, message is string
+
+
+EndPoint: "/auth/login"
+Method: POST
+body: 
+email is mandatory
+password is mandatory
+response: statusCode is number, data has token and id, message is string
+
+EndPoint: "/users/id"
+Method: GET
+Params: id is mandatory
+Token is mandatory in headers
+response: statusCode is number, data: {user data}, message is string
+
+
+if current user role is admin then can get the response with data
+EndPoint: "/users"
+Method: GET
+Params: id is mandatory
+Token is mandatory in headers
+body: 
+email is mandatory
+password is mandatory
+response: statusCode is number, data:[list of users], message is string
+
+
+
 # React + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
