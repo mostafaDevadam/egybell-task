@@ -13,6 +13,8 @@ const ProfilePage = () => {
   const { pathname } = useLocation()
   const [isView, setIsView] = useState<boolean>(false)
   const [user, setUser] = useState<USER_TYPE | null>(null)
+    const [isOwn, setIsOwn] = useState<boolean>(false)
+
 
   useEffect(() => {
     if (pathname.includes("edit")) {
@@ -27,24 +29,39 @@ const ProfilePage = () => {
 
 
   useEffect(() => {
-    if (id && role && role === Role.ADMIN) {
+    if (id) {
       getUserProfileAPI(id).then((th) => {
         setUser(th.data)
       })
-    } else if (role === Role.USER) {
+    } /*else if (role === Role.USER) {
+      setUser(currentUser)
+    }*/
+  }, [id, role])
+
+  useEffect(() => { 
+    if(!id) {
+      setIsOwn(true)
       setUser(currentUser)
     }
-  }, [id, role])
+  }, [user, role])
+
+
+   useEffect(() => { 
+   console.log("currentUser:", currentUser)
+   },[currentUser])
 
   console.log("profile:", id, pathname)
   return (
     <div>
       <h1></h1>
-      <Suspense fallback={<div>Loading...</div>}>
-        {!isView && role === Role.ADMIN && <EditProfile user={user!!} />}
-        {isView && role === Role.ADMIN && <ViewProfile user={user!!} />}
-        {!isView && role !== Role.ADMIN && <ViewProfile user={currentUser!!} />}
-      </Suspense>
+      <Suspense fallback={<div>Loading...</div>}></Suspense>
+        {!isView && role === Role.ADMIN && user && id && <EditProfile user={user} />}
+        {isView && role === Role.ADMIN && user && id && <ViewProfile user={user} />}
+        {!id && <ViewProfile user={currentUser} />}
+       
+        {currentUser?.id}
+
+      
     </div>
   )
 }
