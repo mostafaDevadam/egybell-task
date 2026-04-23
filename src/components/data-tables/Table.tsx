@@ -6,8 +6,9 @@ import { useAppSelector } from '../../store/store'
 type Props<T = any> = {
     docs: T[]
     fields: string[]
+    isActions: boolean
 }
-const Table = ({docs, fields }: Props) => {
+const Table = ({docs, fields, isActions }: Props) => {
     const {role} = useAppSelector(state => state.auth)
 
 
@@ -16,16 +17,16 @@ const Table = ({docs, fields }: Props) => {
             <div className="flex flex-col md:flex-row justify-between gap-4 pb-5 px-4 " >
                 <table className="min-w-full table-fixed divide-y divide-gray-200 dark:divide-gray-700 shadow-sm">
                     <colgroup>
-                        <col style={{ width: "5%" }} />   {/* id */}
-                        <col style={{ width: "50%", marginLeft: '50px' }} />  {/* email (adjust down if needed) */}
-                        <col style={{ width: "20%" }} />  {/* role */}
-                        <col style={{ width: "15%" }} />  {/* actions */}
+                        <col style={{ width: "5%" }} />   
+                        <col style={{ width: "50%", marginLeft: '50px' }} /> 
+                        <col style={{ width: "20%" }} />  
+                        <col style={{ width: "15%" }} />  
                     </colgroup>
 
                     <thead className="bg-gray-50 dark:bg-gray-800">
                         <tr>
                         {fields && fields.map((f, index) => (
-                            <th key={index} className="px-3 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider dark:text-gray-300">{f}</th>
+                            <th key={index} className="px-3 py-2 text-center text-xs font-medium text-gray-500 uppercase tracking-wider dark:text-gray-300">{f}</th>
                         ))}
                         </tr>
                     </thead>
@@ -35,17 +36,33 @@ const Table = ({docs, fields }: Props) => {
                             <tr key={index} className="text-sm text-gray-500 dark:text-gray-300 hover:bg-gray-300 hover:text-gray-700">
                                 <td className="px-3 py-2 whitespace-nowrap">{m.id}</td>
 
-                                <td
+                              {m.email &&  <td
                                     className="px-3 py-2 truncate overflow-hidden"
                                     title={m.email}
                                 >
                                     {m.email}
-                                </td>
+                                </td>}
 
-                                <td className="px-3 py-2 whitespace-nowrap">{m.role}</td>
+                                 {m.action &&  <td
+                                    className="px-3 py-2 truncate overflow-hidden"
+                                    title={m.action}
+                                >
+                                    {m.action}
+                                </td>}
+
+                                {m.timestamp &&  <td
+                                    className="px-3 py-2 truncate overflow-hidden"
+                                    title={m.timestamp}
+                                >
+                                    {m.timestamp}
+                                </td>}
+
+                                
+
+                               {m.role && <td className="px-3 py-2 whitespace-nowrap">{m.role}</td>}
 
                                 <td className="px-3 py-2">
-                                   {role === 'admin' && <div className="flex flex-col md:flex-row gap-2">
+                                   {isActions && role === 'admin' && <div className="flex flex-col md:flex-row gap-2">
                                          <Link to={`/profile/${m.id}/view`} 
                                         className="cursor-pointer text-blue-700 border border-blue-700 hover:border-0 hover:bg-blue-500 hover:text-white px-3 py-1 rounded">View</Link>
                                         <Link to={`/profile/${m.id}/edit`} 
