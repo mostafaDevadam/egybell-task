@@ -65,6 +65,12 @@ const Navbar = () => {
                       >
                         Users
                       </Link>}
+                       {role === "admin" && <Link
+                        to={`/logs`}
+                        className="px-5 py-2 text-sm font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 rounded-lg transition-colors dark:text-gray-300 dark:hover:text-blue-400 dark:hover:bg-gray-700"
+                      >
+                        Activity Logs
+                      </Link>}
                       <Link
                         to={`/profile`}
                         className="px-5 py-2 text-sm font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 rounded-lg transition-colors dark:text-gray-300 dark:hover:text-blue-400 dark:hover:bg-gray-700"
@@ -132,12 +138,18 @@ const Navbar = () => {
                     >
                       Dashboard
                     </Link>
-                    <Link
+                    {role === "admin" && <Link
                       to={`/users`}
                       className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 dark:text-gray-300 dark:hover:text-blue-400 dark:hover:bg-gray-700"
                     >
                       Users
-                    </Link>
+                    </Link>}
+                     {role === "admin" && <Link
+                      to={`/logs`}
+                      className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 dark:text-gray-300 dark:hover:text-blue-400 dark:hover:bg-gray-700"
+                    >
+                      Activity Logs
+                    </Link>}
                     <Link
                       to={`/profile`}
                       className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 dark:text-gray-300 dark:hover:text-blue-400 dark:hover:bg-gray-700"
