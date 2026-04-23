@@ -4,6 +4,7 @@ const jwt = require("jsonwebtoken");
 const { users } = require("../models/user.model");
 const auth = require("../middleware/auth");
 const role = require("../middleware/role");
+const { logs } = require("../models/log.model");
 
 const router = express.Router();
 
@@ -46,15 +47,24 @@ router.patch("/:id", auth, (req, res) => {
     const updated = users.map((m) => m.id === userId && (m = user));
     console.log("updated:", updated)
 
-   /*users = users.map((m) => {
-        if (m.id === userId) {
-            m = user
-        }
-        return m
+    if (req.body.role) {
+        logs.push({
+            id: logs.length + 1,
+            user_id: user.id,
+            action: "changed role to " + req.body.role,
+            timestamp: new Date().toISOString(),
+        });
     }
-    );
 
-    console.log("users:", users)*/
+    /*users = users.map((m) => {
+         if (m.id === userId) {
+             m = user
+         }
+         return m
+     }
+     );
+ 
+     console.log("users:", users)*/
 
 
 
