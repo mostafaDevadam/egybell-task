@@ -41,18 +41,16 @@ types.ts
 
 ./test/auth: testing for auth files
 
-I used tailwindcss for styling of App
+I used tailwindcss for styling of App and react-toastify for displaying feedback by toast-ui
 I used redux-toolkit for auth and created reusable AuthForm component for login and register pages.
-
-If I have more time then I will develop and features themes and languages like arabic and english and handle direction on content from righ to left and 
-I will make more testing using vitest/react-test for everything in the app.
+I saved token in cookie using js-cookie library because react has not built-in api/lib for cookie.
 
 
 Backend:
 I developed a very simple Node.js/Express.js server and with restAPI with jwt
 
 
-API:
+Backend/API:
 
 EndPoint: "/auth/register"
 Method: POST
@@ -86,6 +84,10 @@ body:
 email is mandatory
 password is mandatory
 response: statusCode is number, data:[list of users], message is string
+
+
+If I have more time then I will develop and features themes and languages like arabic and english and handle direction on content from righ to left and 
+I will make more testing using vitest/react-test for everything and develop or add a refresh-token in the app.
 
 
 
