@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react'
-import { Routes   , Route, useLocation, Navigate } from 'react-router';
+import { Routes, Route, useLocation, Navigate, MemoryRouter } from 'react-router';
 import DashboardPage from '../pages/Dashboard'
 import UsersPage from '../pages/Users'
 import ProfilePage from '../pages/Profile'
@@ -33,6 +33,7 @@ const AppRoutes = () => {
     console.log("routes user:", user)
 
     return (
+        <MemoryRouter initialEntries={['/login']}>
         <Routes>
             <Route index element={<ProtectedRoute roles={['admin', 'user']}><DashboardPage /></ProtectedRoute>} />
             <Route path="/" element={<ProtectedRoute roles={['admin', 'user']}><DashboardPage /></ProtectedRoute>} />
@@ -43,6 +44,7 @@ const AppRoutes = () => {
             <Route path="/login" element={isAuth || token ? <Navigate to="/" /> : <LoginPage />} />
             <Route path="/register" element={isAuth || token ? <Navigate to="/" /> : <RegisterPage />} />
         </Routes>
+        </MemoryRouter>
     )
 }
 
