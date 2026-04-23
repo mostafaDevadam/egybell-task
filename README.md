@@ -85,6 +85,12 @@ email is mandatory
 password is mandatory
 response: statusCode is number, data:[list of users], message is string
 
+if current user role is admin then can get the response with data
+EndPoint: "/logs"
+Method: GET
+Token is mandatory in headers
+response: statusCode is number, data:[list of logs], message is string
+
 
 If I have more time then I will develop and features themes and languages like arabic and english and handle direction on content from righ to left and 
 I will make more testing using vitest/react-test for everything and develop or add a refresh-token in the app.
