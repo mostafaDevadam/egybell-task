@@ -8,6 +8,7 @@ import LoginPage from '../auth/Login';
 import { useAppSelector } from '../store/store';
 import { getToken } from '../lib/token';
 import { getRole } from '../lib/role';
+import ActivityLogsPage from '../pages/ActivityLogs';
 
 const ProtectedRoute = ({children, roles}: {children: ReactNode, roles: string[]}) => {
     const {user, role} = useAppSelector(state => state.auth)
@@ -33,18 +34,19 @@ const AppRoutes = () => {
     console.log("routes user:", user)
 
     return (
-        <MemoryRouter initialEntries={['/login']}>
+        
         <Routes>
             <Route index element={<ProtectedRoute roles={['admin', 'user']}><DashboardPage /></ProtectedRoute>} />
             <Route path="/" element={<ProtectedRoute roles={['admin', 'user']}><DashboardPage /></ProtectedRoute>} />
             <Route path="/users" element={<ProtectedRoute roles={['admin']}><UsersPage /></ProtectedRoute>} />
+            <Route path="/logs" element={<ProtectedRoute roles={['admin']}><ActivityLogsPage /></ProtectedRoute>} />
             <Route path="/profile" element={<ProtectedRoute roles={['admin', 'user']}><ProfilePage /></ProtectedRoute>} />
             <Route path="/profile/:id/view" element={<ProtectedRoute roles={['admin']}><ProfilePage /></ProtectedRoute>} />
             <Route path="/profile/:id/edit" element={<ProtectedRoute roles={['admin']}><ProfilePage /></ProtectedRoute>} />
             <Route path="/login" element={isAuth || token ? <Navigate to="/" /> : <LoginPage />} />
             <Route path="/register" element={isAuth || token ? <Navigate to="/" /> : <RegisterPage />} />
         </Routes>
-        </MemoryRouter>
+       
     )
 }
 
