@@ -98,7 +98,7 @@ const AuthForm = ({ action, buttonTitle, formTitle, isConfirm = false, isRole = 
                 </div>}
                 <div className="flex flex-col gap-1.5 sm:gap-2">
                     <Label htmlFor="password" className="text-sm sm:text-base font-medium text-gray-700 dark:text-gray-100 text-start" title={"Password"} />
-                    <InputPassword value={password} onChange={handleChangePassword} minLength={6} />
+                    <InputPassword value={password} name="password" onChange={handleChangePassword} minLength={6} />
                 </div>
 
                 {showPasswordError && <div>
@@ -110,8 +110,8 @@ const AuthForm = ({ action, buttonTitle, formTitle, isConfirm = false, isRole = 
                     (
                         <>
                             <div className="flex flex-col gap-1.5 sm:gap-2">
-                                <Label htmlFor="confirmPassword" className="text-sm sm:text-base font-medium text-gray-700 dark:text-gray-100 text-start" title={"Confirm Password"} />
-                                <InputPassword value={confirmPassword} name="confirmPassword" onChange={handleChangeConfirmPassword} />
+                                <Label htmlFor="confirm" className="text-sm sm:text-base font-medium text-gray-700 dark:text-gray-100 text-start" title={"confirm"} />
+                                <InputPassword value={confirmPassword} dataTestid="confirm-password" name="confirm" onChange={handleChangeConfirmPassword} />
                             </div>
                             {!isMatched && <div>
                                 <p className="text-red-500 px-2 py-1 rounded-lg hover:bg-red-400 hover:text-gray-100">Password is not matched</p>

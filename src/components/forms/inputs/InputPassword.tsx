@@ -9,9 +9,10 @@ onBlur?: (val: any) => void
 name?: string
 value?: any
 minLength?: number
+dataTestid?: string
 }
 
-const InputPassword = ({name = "password", value, onChange, onBlur, minLength = 1}: Props) => {
+const InputPassword = ({name, value, onChange, onBlur, minLength = 1, dataTestid}: Props) => {
     const [showPassword, setShowPassword] = useState(false);
 
 
@@ -21,7 +22,7 @@ const InputPassword = ({name = "password", value, onChange, onBlur, minLength = 
                 <input
                     type={showPassword ? "text" : "password"}
                     id="password"
-                    name={name || "password"}
+                    name={name}
                     placeholder={"Enter your password"}
                     defaultValue={value}
                     className={`w-full border border-gray-300 rounded-lg dark:bg-white dark:text-gray-700 py-2 px-3 sm:py-2.5 sm:px-4 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200`} 
@@ -29,6 +30,7 @@ const InputPassword = ({name = "password", value, onChange, onBlur, minLength = 
                     onBlur={(e) => {(onBlur && name !== "password" && onBlur(e))}}
                     minLength={minLength}
                     title="Password must be at least 6 characters long"
+                    data-testid={dataTestid!!}
                     required
                 />
                 <button

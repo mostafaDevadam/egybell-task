@@ -15,6 +15,7 @@ const InputEmail = ({defaultValue, onChange }: Props) => {
         <input
             type="email"
             id="email"
+            data-testid="email" 
             name="email"
             defaultValue={defaultValue ?? ''}
             placeholder={"Enter your email"}
