@@ -41,26 +41,27 @@ function Table({ docs, fields, isActions }: Props) {
 
                         {docs && docs.map((m, index) => (
                             <tr key={index} className="text-sm text-gray-500 dark:text-gray-300 hover:bg-gray-300 hover:text-gray-700">
-                               
-                               
+
+
 
                                 {
                                     fields && fields.map((f, index) => (
                                         <td key={index} className="px-3 py-2 whitespace-nowrap">
-                                            { f === "id" ? m[f] : f === "email" ? m[f] : f === "action" ? m[f] : f === "user" ? m[f].email
-                                            : f === "role" ? m[f] : f === "timestamp" ? formatDate(m[f]) : m[f] }
+                                            {f === "id" ? m[f] : f === "email" ? m[f] : f === "action" ? m[f] : f === "user" ? m[f].email
+                                                : f === "role" ? m[f] : f === "timestamp" ? formatDate(m[f])
+                                                    : isActions && role === 'admin' ? (
+                                                        <div className="flex flex-col md:flex-row gap-2">
+                                                            <Link to={`/profile/${m.id}/view`}
+                                                                className="cursor-pointer text-blue-700 border border-blue-700 hover:border-0 hover:bg-blue-500 hover:text-white px-3 py-1 rounded">View</Link>
+                                                            <Link to={`/profile/${m.id}/edit`}
+                                                                className="cursor-pointer text-green-700 border border-green-700 hover:border-0 hover:bg-green-500 hover:text-white px-3 py-1 rounded">Edit</Link>
+                                                        </div>
+                                                    ) : m[f]}
                                         </td>
-                                   ))
+                                    ))
                                 }
 
-                                <td className="px-3 py-2">
-                                    {isActions && role === 'admin' && <div className="flex flex-col md:flex-row gap-2">
-                                        <Link to={`/profile/${m.id}/view`}
-                                            className="cursor-pointer text-blue-700 border border-blue-700 hover:border-0 hover:bg-blue-500 hover:text-white px-3 py-1 rounded">View</Link>
-                                        <Link to={`/profile/${m.id}/edit`}
-                                            className="cursor-pointer text-green-700 border border-green-700 hover:border-0 hover:bg-green-500 hover:text-white px-3 py-1 rounded">Edit</Link>
-                                    </div>}
-                                </td>
+
                             </tr>
                         ))}
                     </tbody>
