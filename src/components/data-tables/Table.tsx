@@ -1,6 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router'
 import { useAppSelector } from '../../store/store'
+import useLocale from '../../hooks/useLocale'
+import { useTranslation } from 'react-i18next'
 
 type Props<T = any> = {
     docs: T[]
@@ -9,6 +11,8 @@ type Props<T = any> = {
 }
 function Table({ docs, fields, isActions }: Props) {
     const { role } = useAppSelector(state => state.auth)
+    const locale = useLocale()
+    const {t} = useTranslation()
 
     const formatDate = (cellValue: any) => {
         if (!cellValue) return cellValue
@@ -30,7 +34,10 @@ function Table({ docs, fields, isActions }: Props) {
                     <thead className="bg-gray-50 dark:bg-gray-800">
                         <tr>
                             {fields && fields.map((f, index) => (
-                                <th key={index} className="px-3 py-2 text-center text-xs font-medium text-gray-500 uppercase tracking-wider dark:text-gray-300">{f}</th>
+                                <th key={index} className="px-3 py-2 text-center text-xs font-medium text-gray-500 uppercase tracking-wider dark:text-gray-300">
+                                    {t("table." + f)}
+                                    
+                                </th>
                             ))}
                         </tr>
                     </thead>
@@ -47,10 +54,10 @@ function Table({ docs, fields, isActions }: Props) {
                                                 : f === "role" ? m[f] : f === "timestamp" ? formatDate(m[f])
                                                     : isActions && role === 'admin' ? (
                                                         <div className="flex flex-col md:flex-row gap-2">
-                                                            <Link to={`/profile/${m.id}/view`} data-testid="view"
-                                                                className="cursor-pointer text-blue-700 border border-blue-700 hover:border-0 hover:bg-blue-500 hover:text-white px-3 py-1 rounded">View</Link>
-                                                            <Link to={`/profile/${m.id}/edit`} data-testid="edit"
-                                                                className="cursor-pointer text-green-700 border border-green-700 hover:border-0 hover:bg-green-500 hover:text-white px-3 py-1 rounded">Edit</Link>
+                                                            <Link to={`/${locale}/profile/${m.id}/view`} data-testid="view"
+                                                                className="cursor-pointer text-blue-700 border border-blue-700 hover:border-0 hover:bg-blue-500 hover:text-white px-3 py-1 rounded">{t("table.view")}</Link>
+                                                            <Link to={`/${locale}/profile/${m.id}/edit`} data-testid="edit"
+                                                                className="cursor-pointer text-green-700 border border-green-700 hover:border-0 hover:bg-green-500 hover:text-white px-3 py-1 rounded">{t("table.edit")}</Link>
                                                         </div>
                                                     ) : m[f]}
                                         </td>

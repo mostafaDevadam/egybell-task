@@ -15,7 +15,7 @@ const EditProfile = ({user}: Props) => {
       </div>
 
       <div className="w-full max-w-md bg-gray-50 dark:bg-gray-800 p-6 rounded-lg shadow-md border border-gray-200 dark:border-gray-700">
-         {user && <ProfileForm action={updateUserAction} buttonTitle='Update' title="Edit Profile" user={user} />}
+         {user && <ProfileForm action={updateUserAction} buttonTitle='Update' title="edit-profile" user={user} />}
       </div>
 
     </div>

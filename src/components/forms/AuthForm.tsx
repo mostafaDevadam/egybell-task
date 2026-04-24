@@ -7,6 +7,8 @@ import InputEmail from "./inputs/InputEmail";
 import Label from "./Label";
 import { useNavigate } from "react-router";
 import useLocale from "../../hooks/useLocale";
+import { useTranslation } from "react-i18next";
+import InputSelectRole from "./inputs/InputSelectRole";
 
 
 type Props = {
@@ -32,12 +34,12 @@ const AuthForm = ({ action, buttonTitle, formTitle, isConfirm = false, isRole = 
     const [isEmpty, setIsEmpty] = useState<boolean>(false);
     const [isValid, setIsValid] = useState<boolean>(false)
 
+    const { t } = useTranslation()
+
     const navigate = useNavigate()
     const locale = useLocale()
 
-    useEffect(() => {
 
-    }, [])
 
     useEffect(() => {
         if (state?.success) {
@@ -81,25 +83,21 @@ const AuthForm = ({ action, buttonTitle, formTitle, isConfirm = false, isRole = 
 
     return (
         <div className="w-full" id="main">
-            <h1 className="text-xl font-semibold mb-4 text-gray-800 dark:text-gray-100" data-testid="form-title">{formTitle}</h1>
+            <h1 className="text-xl font-semibold mb-4 text-gray-800 dark:text-gray-100" data-testid="form-title">{t(`form.${formTitle.toLowerCase()}`)}</h1>
             <form action={formAction} className="flex flex-col gap-5 mx-auto">
                 {isRole && <div className="flex flex-col gap-2">
-                    <Label htmlFor="role" className="block text-sm font-medium text-start" title="Role" />
-                    <select name="role" role="role" defaultValue={"admin"} className={`px-2 block w-full bg-white border border-gray-300 text-gray-700 py-2 rounded-lg leading-tight focus:outline-none focus:bg-white focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-colors duration-200 text-sm sm:text-base cursor-pointer`}>
-                        {/*<option value="0">Choose</option>*/}
-                        <option value="user">User</option>
-                        <option value="admin">Admin</option>
-                    </select>
+                    <Label htmlFor="role" className="block text-sm font-medium text-start" title={t("form.role")} />
+                    <InputSelectRole />
                 </div>}
                 <div className="flex flex-col gap-2">
-                    <Label htmlFor="email" className="block text-sm font-medium text-start" title="Email" />
+                    <Label htmlFor="email" className="block text-sm font-medium text-start" title={t("form.email")} />
                     <InputEmail onChange={handleChangeEmail} />
                 </div>
                 {showEmailError && <div>
                     <p className="text-red-500 px-2 py-1 rounded-lg">Email is required and Enter your  email,please!</p>
                 </div>}
                 <div className="flex flex-col gap-1.5 sm:gap-2">
-                    <Label htmlFor="password" className="text-sm sm:text-base font-medium text-gray-700 dark:text-gray-100 text-start" title={"Password"} />
+                    <Label htmlFor="password" className="text-sm sm:text-base font-medium text-gray-700 dark:text-gray-100 text-start" title={t("form.password")} />
                     <InputPassword value={password} name="password" onChange={handleChangePassword} minLength={6} />
                 </div>
 
@@ -112,7 +110,7 @@ const AuthForm = ({ action, buttonTitle, formTitle, isConfirm = false, isRole = 
                     (
                         <>
                             <div className="flex flex-col gap-1.5 sm:gap-2">
-                                <Label htmlFor="confirm" className="text-sm sm:text-base font-medium text-gray-700 dark:text-gray-100 text-start" title={"confirm"} />
+                                <Label htmlFor="confirm" className="text-sm sm:text-base font-medium text-gray-700 dark:text-gray-100 text-start" title={t("form.confirmPassword")} />
                                 <InputPassword value={confirmPassword} dataTestid="confirm-password" name="confirm" onChange={handleChangeConfirmPassword} />
                             </div>
                             {!isMatched && <div>
@@ -135,7 +133,7 @@ const AuthForm = ({ action, buttonTitle, formTitle, isConfirm = false, isRole = 
                      ${showError || showEmailError || showPasswordError || showConfirmPasswordError ? 'cursor-not-allowed' : ''} `}
                     disabled={showEmailError || showPasswordError || showConfirmPasswordError}
                 >
-                    {buttonTitle}
+                    {t(`form.${buttonTitle.toLowerCase()}`)}
                 </button>
             </form>
 

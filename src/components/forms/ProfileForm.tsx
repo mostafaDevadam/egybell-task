@@ -4,6 +4,8 @@ import Label from './Label'
 import InputEmail from './inputs/InputEmail'
 import { toast } from 'react-toastify'
 import InputHidden from './inputs/InputHidden'
+import { useTranslation } from 'react-i18next'
+import InputSelectRole from './inputs/InputSelectRole'
 
 type Props = {
      action: (prev: any, formData: FormData) => Promise<any>
@@ -13,6 +15,7 @@ type Props = {
 }
 const ProfileForm = ({buttonTitle, title, user, action}: Props) => {
      const [state, formAction] = useActionState(action, null)
+       const { t } = useTranslation()
 
       useEffect(() => {
              if (state?.success) {
@@ -25,19 +28,15 @@ const ProfileForm = ({buttonTitle, title, user, action}: Props) => {
 
   return (
       <div className="w-full">
-            <h1 className="text-xl font-semibold mb-4 text-gray-800 dark:text-gray-100">{title}</h1>
+            <h1 className="text-xl font-semibold mb-4 text-gray-800 dark:text-gray-100">{t(`form.${title.toLowerCase()}`)}</h1>
             <form action={formAction} className="flex flex-col gap-5 mx-auto">
                 {user && user.id && <InputHidden name="userId" value={user.id} />}
                <div className="flex flex-col gap-2">
-                    <Label htmlFor="role" className="block text-sm font-medium text-start" title="Role" />
-                    <select name="role" data-testid="role" defaultValue={user.role} required className={`px-2 block w-full bg-white border border-gray-300 text-gray-700 py-2 rounded-lg leading-tight focus:outline-none focus:bg-white focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-colors duration-200 text-sm sm:text-base cursor-pointer`}>
-                        {/*<option value="0">Choose</option>*/}
-                        <option value="user">User</option>
-                        <option value="admin">Admin</option>
-                    </select>
+                    <Label htmlFor="role" className="block text-sm font-medium text-start" title={t("form.role")} />
+                    <InputSelectRole />
                 </div>
                 <div className="flex flex-col gap-2">
-                    <Label htmlFor="email" className="block text-sm font-medium text-start" title="Email" />
+                    <Label htmlFor="email" className="block text-sm font-medium text-start" title={t("form.email")} />
                     <InputEmail defaultValue={user.email || null} />
                 </div>
 
@@ -48,7 +47,7 @@ const ProfileForm = ({buttonTitle, title, user, action}: Props) => {
                      hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 
                      dark:bg-blue-700 dark:hover:bg-blue-600 dark:focus:ring-offset-gray-800"
                 >
-                    {buttonTitle}
+                    {t(`form.${buttonTitle.toLowerCase()}`)}
                 </button>
             </form>
 
