@@ -7,7 +7,7 @@ import { getToken } from './lib/token'
 import { getID } from './lib/id'
 import { getRole } from './lib/role'
 import { useAppDispatch } from './store/store'
-import { getUserProfileAPI } from './api/user.api'
+import { getUserProfileAPI } from './api_/user.api'
 import { setAuth, setAuthToken, setRole, setUser } from './store/auth.reducer'
 import { APP_ACCESS_TOKEN } from './key'
 

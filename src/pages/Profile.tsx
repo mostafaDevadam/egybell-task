@@ -4,7 +4,7 @@ import ViewProfile from '../components/views/ViewProfile'
 import EditProfile from '../components/EditProfile'
 import { useAppSelector } from '../store/store'
 import { Role } from '../enums'
-import { getUserProfileAPI } from '../api/user.api'
+import { getUserProfileAPI } from '../api_/user.api'
 import { USER_TYPE } from '../types'
 
 const ProfilePage = () => {

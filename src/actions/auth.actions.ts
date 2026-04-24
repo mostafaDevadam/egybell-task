@@ -1,11 +1,11 @@
 "use server"
 
-import { loginAPI, registerAPI } from "../api/auth.api"
+import { loginAPI, registerAPI } from "../api_/auth.api"
 import { Role } from "../enums"
 import { getToken, removeToken, setToken } from "../lib/token"
 import { store } from "../store/store"
 import { clearAll, login, setAuth, setUser } from "../store/auth.reducer"
-import { getUserProfileAPI } from "../api/user.api"
+import { getUserProfileAPI } from "../api_/user.api"
 import { removeID, setID } from "../lib/id"
 import { removeRole, setRole } from "../lib/role"
 import { APP_ACCESS_TOKEN, APP_REFRESH_TOKEN } from "../key"

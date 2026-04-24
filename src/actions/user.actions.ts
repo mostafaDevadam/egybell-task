@@ -1,6 +1,6 @@
 "use server"
 
-import { updateUserProfileAPI } from "../api/user.api"
+import { updateUserProfileAPI } from "../api_/user.api"
 import { Role } from "../enums"
 
 

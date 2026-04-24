@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { LOG_TYPE } from '../types'
-import { getLogsAPI } from '../api/logs.api'
+import { getLogsAPI } from '../api_/logs.api'
 import Table from '../components/data-tables/Table'
 import Spinner from '../components/Spinner'
 

@@ -1,6 +1,6 @@
 import React, { Suspense, useEffect, useState } from 'react'
 import { USER_TYPE } from '../types'
-import { getUsersAPI } from '../api/user.api'
+import { getUsersAPI } from '../api_/user.api'
 import DataTable from '../components/data-tables/DataTable'
 import Spinner from '../components/Spinner'
 import Table from '../components/data-tables/Table'
