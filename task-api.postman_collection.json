@@ -256,13 +256,13 @@
               {
                 "key": "Authorization",
                 "value": "Bearer {{token}}",
-                "type": "text",
-                "disabled": true
+                "type": "text"
               },
               {
                 "key": "Authorization",
                 "value": "Bearer {{token_admin}}",
-                "type": "text"
+                "type": "text",
+                "disabled": true
               }
             ],
             "url": {
@@ -313,6 +313,39 @@
               "body": null
             }
           ]
+        },
+        {
+          "name": "refresh token",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_admin}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"refresh_token\": \"{{refresh_token}}\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{local}}/auth/refresh",
+              "host": [
+                "{{local}}"
+              ],
+              "path": [
+                "auth",
+                "refresh"
+              ]
+            }
+          },
+          "response": []
         }
       ]
     },
@@ -602,6 +635,10 @@
     },
     {
       "key": "token_admin",
+      "value": ""
+    },
+    {
+      "key": "refresh_token",
       "value": ""
     }
   ]
