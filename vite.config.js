@@ -2,24 +2,31 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import tailwindcss from "@tailwindcss/vite";
 
+const isProd = import.meta.env.VITE_NODE_ENV === 'production'
+
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [react(),tailwindcss(),],
-   test: {
+  plugins: [react(), tailwindcss(),],
+  test: {
     environment: 'jsdom',
     globals: true,
     setupFiles: './test/setup.ts',
     include: ['test/**/*.{test,spec}.{ts,tsx}']
   },
-   /*build: {
-    outDir: 'dist',
-    minify: 'esbuild',
-    terserOptions: undefined, // not used with esbuild
-    rollupOptions: {},
-    target: 'es2018',
-    // use esbuild's drop: ['console','debugger']
-    esbuild: {
-      drop: ['console', 'debugger']
+  server: {
+    proxy: {
+      '/api': { target: `${isProd ? import.meta.env.VITE_LIVE_API_URL : import.meta.env.VITE_API_URL}`, changeOrigin: true }
     }
-  }*/
+  }
+  /*build: {
+   outDir: 'dist',
+   minify: 'esbuild',
+   terserOptions: undefined, // not used with esbuild
+   rollupOptions: {},
+   target: 'es2018',
+   // use esbuild's drop: ['console','debugger']
+   esbuild: {
+     drop: ['console', 'debugger']
+   }
+ }*/
 })
