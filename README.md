@@ -7,12 +7,12 @@ Terminal: git clone https://github.com/mostafaDevadam/egybell-task.git
 
 In project folder:
 
-Using git switch to branch frontend: 
-Terminal: git switch frontend
-create .env file add a variable for api url in it
-Terminal: npm i 
+Using git switch to branch frontend: <br>
+Terminal: git switch frontend <br>
+create .env file add a variable for api url in it <br>
+Terminal: npm i  <br>
 
-Run frontend:
+Run frontend: <br>
 
 Terminal: npm run dev
 
@@ -21,14 +21,14 @@ test frontend:
 Terminal: npm run test
 
 
-Using git switch to branch backend:
-Terminal: git switch frontend
-create .env file and add PORT variable in it
+Using git switch to branch backend: <br>
+Terminal: git switch frontend <br>
+create .env file and add PORT variable in it. <br>
 
 Terminal: npm i 
 
-Run backend:
-Terminal: npm run start
+Run backend: <br>
+Terminal: npm run start <br>
 
 # Design decisions  
 
