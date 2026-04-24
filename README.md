@@ -8,13 +8,16 @@ Terminal: git clone <link-of-repo>
 In project folder:
 
 Using git switch to branch frontend: 
+
 create .env file add a variable for api url in it
 Terminal: npm i 
 
 Run frontend:
+
 Terminal: npm run dev
 
 test frontend:
+
 Terminal: npm run test
 
 
