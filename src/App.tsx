@@ -51,7 +51,7 @@ function App() {
   }, [token, id, role])
 
   return (
-    <div>
+    <div className={`${locale === "ar" ? "ar-font" : ""}`}>
       <header>
         <Navbar />
       </header>

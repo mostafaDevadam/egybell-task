@@ -1,4 +1,6 @@
 
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&family=Noto+Sans+Arabic:wght@100..900&display=swap');
+
 @import "tailwindcss";
 
 :root {
@@ -111,4 +113,9 @@ code {
   line-height: 135%;
   padding: 4px 8px;
   background: var(--code-bg);
+}
+
+
+.ar-font {
+  font-family: 'Cairo', 'Tajawal', 'Noto Sans Arabic', sans-serif;
 }
