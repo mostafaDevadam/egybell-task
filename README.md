@@ -84,7 +84,7 @@ Backend: <br>
 I developed a very simple Node.js/Express.js server  with restAPI and jwt <br>
 
 
-Backend/API: <br>
+# Backend/API: <br>
 
 EndPoint: "/auth/register" <br>
 Method: POST <br>
@@ -115,8 +115,8 @@ Method: GET <br>
 Params: id is mandatory <br>
 Token is mandatory in headers <br>
 body: <br>
-email is mandatory <br>
-password is mandatory <br>
+- email is mandatory <br>
+- password is mandatory <br>
 response: statusCode is number, data:[list of users], message is string <br>
 
 if current user role is admin then can get the response with data <br>
@@ -126,8 +126,8 @@ Token is mandatory in headers <br>
 response: statusCode is number, data:[list of logs], message is string. <br>
 
 
-If I have more time then I will develop and features themes and languages like arabic and english and handle direction on content from righ to left and <br>
-I will make more testing using vitest/react-test for everything and develop or add a refresh-token in the app. <br>
+If I have more time then I will develop and add features like themes and languages like arabic and english and handle direction on content from right to left and <br>
+I will make more testing using vitest and @testing-library/react for everything and develop or add a refresh-token in the app. <br>
 
 
 
