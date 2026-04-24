@@ -31,7 +31,7 @@ Run backend:
 
 Terminal: npm run start
 
-# Design 
+# Design decisions  
 
 Frontend folders:
 
