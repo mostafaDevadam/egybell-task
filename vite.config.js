@@ -11,15 +11,15 @@ export default defineConfig({
     setupFiles: './test/setup.ts',
     include: ['test/**/*.{test,spec}.{ts,tsx}']
   },
-   build: {
+   /*build: {
     outDir: 'dist',
-    /*minify: 'esbuild',
+    minify: 'esbuild',
     terserOptions: undefined, // not used with esbuild
     rollupOptions: {},
     target: 'es2018',
     // use esbuild's drop: ['console','debugger']
     esbuild: {
       drop: ['console', 'debugger']
-    }*/
-  }
+    }
+  }*/
 })
