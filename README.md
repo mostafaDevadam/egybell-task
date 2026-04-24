@@ -6,107 +6,128 @@ Install Node.js from
 Terminal: git clone <link-of-repo>
 
 In project folder:
+
 Using git switch to branch frontend: 
+
 create .env file add a variable for api url in it
 Terminal: npm i 
 
 Run frontend:
+
 Terminal: npm run dev
 
 test frontend:
+
 Terminal: npm run test
 
 
 Using git switch to branch backend:
+
 create .env file and add PORT variable in it
+
 Terminal: npm i 
 
 Run backend:
+
 Terminal: npm run start
 
+# Design 
+
 Frontend folders:
+
 ./src/
-actions
-api
-assets
-auth
-components/: buttons/, data-tables/, forms/, layouts/, view/
-lib
-pages
-routes
-store
+
+actions/
+
+api/
+
+assets/
+
+auth/
+
+components/: buttons/, data-tables/, forms/, layouts/, views/
+
+lib/
+
+pages/
+
+routes/
+
+store/
+
 App.tsx
 custom.d.ts: to impoting css/scss/sass files in react pages or components 
 enum.ts
 types.ts
 
-./test/auth: testing for auth files
+./test/ : auth/: testing for auth files and components/: testing for components
+I wrote testing using Vitest and react-testing-library. 
 
-I used tailwindcss for styling of App and react-toastify for displaying feedback by toast-ui
-I used redux-toolkit for auth and created reusable AuthForm component for login and register pages.
-I saved token in cookie using js-cookie library because react has not built-in api/lib for cookie.
+I used tailwindcss for styling of App and react-toastify for displaying feedback by toast-ui. <br>
+I used redux-toolkit for auth and created reusable AuthForm component for login and register pages. <br>
+I saved token in cookie using js-cookie library because react has not built-in api/lib for cookie. <br>
 
-Pages:
-auth/Login: use AuthForm with validation(email, password)
-auth/Register: useAuthForm with validation(role, email, password, confirm-password)
-pages/Dashboard: is default page when user/admin is logged-in 
-pages/Profile: display email and role
-pages/Users: for admin and when current role is admin and admin can view/edit user profile
-pages/ActivityLogs: for admin and current role is admin and admin can see the user activities
+Pages: <br>
+auth/Login: use AuthForm with validation(email, password) <br>
+auth/Register: useAuthForm with validation(role, email, password, confirm-password) <br>
+pages/Dashboard: is default page when user/admin is logged-in  <br>
+pages/Profile: display email and role <br>
+pages/Users: for admin and when current role is admin and admin can view/edit user profile <br>
+pages/ActivityLogs: for admin and current role is admin and admin can see the user activities <br>
 
-Routes:
-I created app-routes and protected routes based on current user and his role
+Routes: <br>
+I created app-routes and protected routes based on current user and his role <br>
 
-I created UI as responsive and with dark mode if browser is in dark mode
+I created UI as responsive and with dark mode if browser is in dark mode. <br>
 
-Backend:
-I developed a very simple Node.js/Express.js server  with restAPI and jwt
-
-
-Backend/API:
-
-EndPoint: "/auth/register"
-Method: POST
-body: 
-role is mandatory and it's enum("user"|"admin")
-email is mandatory
-password is mandatory
-response: statusCode is number, data, message is string
+Backend: <br>
+I developed a very simple Node.js/Express.js server  with restAPI and jwt <br>
 
 
-EndPoint: "/auth/login"
-Method: POST
-body: 
-email is mandatory
-password is mandatory
-response: statusCode is number, data has token and id, message is string
+# Backend/API: <br>
 
-EndPoint: "/users/id"
-Method: GET
-Params: id is mandatory
-Token is mandatory in headers
-response: statusCode is number, data: {user data}, message is string
+EndPoint: "/auth/register" <br>
+Method: POST <br>
+body:  <br>
+- role is mandatory and it's enum("user"|"admin") <br>
+- email is mandatory <br>
+- password is mandatory <br>
+response: statusCode is number, data, message is string <br>
 
 
-if current user role is admin then can get the response with data
-EndPoint: "/users"
-Method: GET
-Params: id is mandatory
-Token is mandatory in headers
-body: 
-email is mandatory
-password is mandatory
-response: statusCode is number, data:[list of users], message is string
+EndPoint: "/auth/login" <br>
+Method: POST <br>
+body:  <br>
+- email is mandatory <br>
+- password is mandatory <br>
+response: statusCode is number, data has token and id, message is string <br>
 
-if current user role is admin then can get the response with data
-EndPoint: "/logs"
-Method: GET
-Token is mandatory in headers
-response: statusCode is number, data:[list of logs], message is string
+EndPoint: "/users/id" <br>
+Method: GET <br>
+Params: id is mandatory <br>
+Token is mandatory in headers <br>
+response: statusCode is number, data: {user data}, message is string <br>
 
 
-If I have more time then I will develop and features themes and languages like arabic and english and handle direction on content from righ to left and 
-I will make more testing using vitest/react-test for everything and develop or add a refresh-token in the app.
+If current user role is admin then can get the response with data. <br>
+EndPoint: "/users" <br>
+Method: GET <br>
+Params: id is mandatory <br>
+Token is mandatory in headers <br>
+body: <br>
+- email is mandatory <br>
+- password is mandatory <br>
+response: statusCode is number, data:[list of users], message is string <br>
+
+if current user role is admin then can get the response with data <br>
+EndPoint: "/logs" <br>
+Method: GET <br>
+Token is mandatory in headers <br>
+response: statusCode is number, data:[list of logs], message is string. <br>
+
+#
+If I have more time then I will develop and add features like themes and languages like arabic and english and handle direction on content from right to left and <br>
+I will make more testing using vitest and @testing-library/react for everything and develop or add a refresh-token in the app. <br>
 
 
 
