@@ -3,15 +3,15 @@ import Cookie from 'js-cookie'
 
 
 
-export const getToken = () => {
-    return Cookie.get("app-token")
+export const getToken = (key: string) => {
+    return Cookie.get(key)
 }
 
 
-export const setToken = async (val: string) => {
-    Cookie.set("app-token",val, {secure: true, sameSite: 'strict', path: '/', })
+export const setToken = async (key: string,val: string) => {
+    Cookie.set(key, val, {secure: true, sameSite: 'strict', path: '/', })
 }
 
-export const removeToken = () => {
-    Cookie.remove("app-token")
+export const removeToken = (key: string) => {
+    Cookie.remove(key)
 }
