@@ -13,6 +13,7 @@ export default defineConfig({
     setupFiles: './test/setup.ts',
     include: ['test/**/*.{test,spec}.{ts,tsx}']
   },
+  server: {
    proxy: {
       '/api': {
         target: isProd
@@ -22,7 +23,8 @@ export default defineConfig({
         rewrite: (path) => path.replace(/^\/api/, ''), // forwards /api/:path -> /:path on target
         secure: true, // set to false only if target uses self-signed cert in dev
       },
-    },
+    }, 
+  }
   /*build: {
    outDir: 'dist',
    minify: 'esbuild',
