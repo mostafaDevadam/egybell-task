@@ -2,7 +2,7 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import tailwindcss from "@tailwindcss/vite";
 
-const isProd = import.meta.env.VITE_NODE_ENV === 'production'
+const isProd = process.env.VITE_NODE_ENV === 'production'
 
 // https://vite.dev/config/
 export default defineConfig({
@@ -13,11 +13,16 @@ export default defineConfig({
     setupFiles: './test/setup.ts',
     include: ['test/**/*.{test,spec}.{ts,tsx}']
   },
-  server: {
-    proxy: {
-      '/api': { target: `${isProd ? import.meta.env.VITE_LIVE_API_URL : import.meta.env.VITE_API_URL}`, changeOrigin: true }
-    }
-  }
+   proxy: {
+      '/api': {
+        target: isProd
+          ? process.env.VITE_LIVE_API_URL
+          : process.env.VITE_API_URL,
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, ''), // forwards /api/:path -> /:path on target
+        secure: true, // set to false only if target uses self-signed cert in dev
+      },
+    },
   /*build: {
    outDir: 'dist',
    minify: 'esbuild',
