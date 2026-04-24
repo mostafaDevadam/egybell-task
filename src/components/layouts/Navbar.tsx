@@ -1,10 +1,12 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router'
 import LogoutButton from '../buttons/LogoutButton'
 import { useAppSelector } from '../../store/store'
 import LanguageSwitcher from './LanguageSwitcher'
 import { useTranslation } from 'react-i18next'
 import useLocale from '../../hooks/useLocale'
+import ToggleSwitch from '../forms/inputs/ToggleSwitch'
+import { toast } from 'react-toastify'
 
 const Navbar = () => {
 
@@ -19,6 +21,23 @@ const Navbar = () => {
   const locale = useLocale()
 
   console.log("locale:", locale)
+
+  const tooggleTheme = () => {
+    document.documentElement.classList.toggle("dark");
+  }
+
+  const [isDark, setIsDark] = useState<boolean>(false)
+
+  const handleToggleModeChange = (val: boolean) => {
+    console.log("toggle:", val)
+    setIsDark(val)
+    if (val) {
+       document.documentElement.classList.toggle("dark")
+     } else {
+       document.documentElement.classList.remove("dark")
+     }
+  }
+
 
   return (
     <>
@@ -97,6 +116,13 @@ const Navbar = () => {
                   </Link>
                 </>}
               <LanguageSwitcher />
+              {/*<button className='px-4 py-1 border border-blue-500 rounded-lg test-button' onClick={() => tooggleTheme()}>Dark</button>*/}
+
+              <ToggleSwitch
+                label={isDark ? t("navbar.dark") : t("navbar.light")}
+                value={isDark}
+                onToggle={(val) => handleToggleModeChange(val)}
+              />
             </div>
 
             {/* Mobile Menu Button */}
