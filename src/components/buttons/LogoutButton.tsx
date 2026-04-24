@@ -17,7 +17,7 @@ const LogoutButton = ({ title, isMobile }: Props) => {
 
   return (
     <button
-
+      data-testid="logout-button"
       onClick={handleLogout}
       className={`
         ${isMobile ? 'block w-full px-3 py-2 rounded-md text-base font-medium' : 'px-5 py-2 text-sm font-medium'}

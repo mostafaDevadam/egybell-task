@@ -17,14 +17,14 @@ const ViewProfile = ({ user }: Props) => {
     }, [state, user])
     return (
         <div>
-            <p className='text-gray-500 text-2xl p-2'>Profile</p>
+            <p className='text-gray-500 text-2xl p-2' data-testid="title">Profile</p>
             {state &&
                 <div className='text-start px-4 flex flex-col gap-5'>
-                    <p className='bg-gray-50 dark:bg-gray-800 p-6 rounded-lg shadow-md border border-gray-200 dark:border-gray-700'>Email: {state!!.email}</p>
-                    <p className='bg-gray-50 dark:bg-gray-800 p-6 rounded-lg shadow-md border border-gray-200 dark:border-gray-700 sm:mt-10'>Role: {state!!.role}</p>
+                    <p className='bg-gray-50 dark:bg-gray-800 p-6 rounded-lg shadow-md border border-gray-200 dark:border-gray-700' data-testid="email">Email: {state!!.email}</p>
+                    <p className='bg-gray-50 dark:bg-gray-800 p-6 rounded-lg shadow-md border border-gray-200 dark:border-gray-700 sm:mt-10' data-testid="role">Role: {state!!.role}</p>
                     <div className='bg-gray-50 dark:bg-gray-800 p-6 rounded-lg shadow-md border border-gray-200 dark:border-gray-700 sm:mt-10'>
-                        <p>Bio</p>
-                        <p>{bio}</p>
+                        <p data-testid="bio">Bio</p>
+                        <p data-testid="bio-content">{bio}</p>
 
 
                     </div>
