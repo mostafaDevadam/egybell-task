@@ -55,24 +55,29 @@ const Navbar = () => {
                     <div className='mx-auto'>
                       <Link
                         to={`/`}
+                        data-testid="dashboard"
                         className="px-5 py-2 text-sm font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 rounded-lg transition-colors dark:text-gray-300 dark:hover:text-blue-400 dark:hover:bg-gray-700"
                       >
                         Dashboard
                       </Link>
                       {role === "admin" && <Link
                         to={`/users`}
+                        data-testid="users-link"
+                        role="users"
                         className="px-5 py-2 text-sm font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 rounded-lg transition-colors dark:text-gray-300 dark:hover:text-blue-400 dark:hover:bg-gray-700"
                       >
                         Users
                       </Link>}
                        {role === "admin" && <Link
                         to={`/logs`}
+                        data-testid="logs-link"
                         className="px-5 py-2 text-sm font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 rounded-lg transition-colors dark:text-gray-300 dark:hover:text-blue-400 dark:hover:bg-gray-700"
                       >
                         Activity Logs
                       </Link>}
                       <Link
                         to={`/profile`}
+                        data-testid="profile"
                         className="px-5 py-2 text-sm font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 rounded-lg transition-colors dark:text-gray-300 dark:hover:text-blue-400 dark:hover:bg-gray-700"
                       >
                         Profile
@@ -87,12 +92,14 @@ const Navbar = () => {
                 <>
                   <Link
                     to={`/login`}
+                    data-testid="login-link"
                     className="px-5 py-2 text-sm font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 rounded-lg transition-colors dark:text-gray-300 dark:hover:text-blue-400 dark:hover:bg-gray-700"
                   >
                     Login
                   </Link>
                   <Link
                     to={`/register`}
+                    data-testid="register-link"
                     className="px-5 py-2 text-sm font-medium bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors dark:bg-blue-700 dark:hover:bg-blue-600"
                   >
                     Register
@@ -140,6 +147,7 @@ const Navbar = () => {
                     </Link>
                     {role === "admin" && <Link
                       to={`/users`}
+                      data-testid="users-link"
                       className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 dark:text-gray-300 dark:hover:text-blue-400 dark:hover:bg-gray-700"
                     >
                       Users

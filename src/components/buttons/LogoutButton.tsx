@@ -1,4 +1,3 @@
-"use client";
 
 import { logoutAction } from "../../actions/auth.actions";
 
