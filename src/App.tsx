@@ -9,10 +9,11 @@ import { getRole } from './lib/role'
 import { useAppDispatch } from './store/store'
 import { getUserProfileAPI } from './api/user.api'
 import { setAuth, setAuthToken, setRole, setUser } from './store/auth.reducer'
+import { APP_ACCESS_TOKEN } from './key'
 
 function App() {
 
-  const token = getToken()
+  const token = getToken(APP_ACCESS_TOKEN)
   const id = getID()
   const role = getRole()
 
