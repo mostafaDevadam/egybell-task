@@ -5,7 +5,7 @@ import { callAPI } from "./callAPI"
 
 const prefix = "auth"
 export const loginAPI = async (body: AUTH_BODY_TYPE) => {
-    const resp = await fetch('/api/v1.1/auth/login', {
+    /*const resp = await fetch('/api/v1.1/auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ body })
@@ -19,7 +19,7 @@ export const loginAPI = async (body: AUTH_BODY_TYPE) => {
         body: JSON.stringify({ body })
     });
 
-     console.log("resp2:", resp2)
+     console.log("resp2:", resp2)*/
 
 
     const response = await callAPI<AUTH_RESPONSE_TYPE, AUTH_BODY_TYPE>({ url: `${prefix}/login`, method: Method.POST, body: body })
