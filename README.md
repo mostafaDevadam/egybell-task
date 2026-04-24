@@ -1,7 +1,7 @@
 
 # Setup
 
-Install Node.js from
+Install Node.js from [Link](https://nodejs.org/en/download)
 
 Terminal: git clone https://github.com/mostafaDevadam/egybell-task.git
 
