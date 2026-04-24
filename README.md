@@ -22,23 +22,37 @@ Terminal: npm run test
 
 
 Using git switch to branch backend:
+
 create .env file and add PORT variable in it
+
 Terminal: npm i 
 
 Run backend:
+
 Terminal: npm run start
 
 Frontend folders:
+
 ./src/
+
 actions
+
 api
+
 assets
+
 auth
+
 components/: buttons/, data-tables/, forms/, layouts/, view/
+
 lib
+
 pages
+
 routes
+
 store
+
 App.tsx
 custom.d.ts: to impoting css/scss/sass files in react pages or components 
 enum.ts
