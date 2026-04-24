@@ -122,14 +122,14 @@ EndPoint: "/users" <br>
   - email is mandatory <br>
   - password is mandatory <br>
   response: statusCode is number, data:[list of users], message is string <br>
-  description: If current user role is admin then can get the response with data. <br>
+description: If current user role is admin then can get the response with data. <br>
 
 
 EndPoint: "/logs" <br>
   Method: GET <br>
   Token is mandatory in headers <br>
   response: statusCode is number, data:[list of logs], message is string. <br>
-  description: if current user role is admin then can get the response with data <br>
+description: if current user role is admin then can get the response with data <br>
 
 ## What I would add or improve given more time? 
 If I have more time then I will develop and add features like themes and languages like arabic and english and handle direction on content from right to left and <br>
