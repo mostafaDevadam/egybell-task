@@ -42,7 +42,7 @@ const UsersPage = () => {
     <div>
       <p className='text-gray-500 text-2xl p-2 dark:text-gray-100'></p>
 
-      <div>
+      <div className='px-4'>
         {!users && isLoading && <div><Spinner title="Loading..." /> </div>}
         <Suspense fallback={<Spinner title="Loading..." />}>
            {users && <Table fields={["id", "email", "role", "actions"]} docs={users} isActions={true} />}

@@ -46,7 +46,7 @@ const ActivityLogsPage = () => {
 
 
     return (
-        <div>
+        <div className='px-4'>
             <p className='text-gray-500 text-2xl p-2'></p>
             {!logs && isLoading && <div><Spinner title="Loading..." /> </div>}
             {logs && <Table fields={["id", "action", "user", "timestamp" ]} docs={logs} isActions={false} />}
