@@ -1,5 +1,4 @@
 import React from 'react'
-import { USER_TYPE } from '../../types'
 import { Link } from 'react-router'
 import { useAppSelector } from '../../store/store'
 
@@ -18,9 +17,9 @@ function Table({ docs, fields, isActions }: Props) {
 
 
     return (
-        <div className="bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 rounded-lg  p-4">
-            <div className="flex flex-col md:flex-row justify-between gap-4 pb-5 px-4 " >
-                <table className="min-w-full table-fixed divide-y divide-gray-200 dark:divide-gray-700 shadow-sm">
+        <div className="bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 rounded-lg p-4" data-testid="container">
+            <div className="flex flex-col md:flex-row justify-between gap-4 pb-5 px-4 " data-testid="header">
+                <table data-testid="table" className="min-w-full table-fixed divide-y divide-gray-200 dark:divide-gray-700 shadow-sm">
                     <colgroup>
                         <col style={{ width: "5%" }} />
                         <col style={{ width: "50%", marginLeft: '50px' }} />
@@ -48,9 +47,9 @@ function Table({ docs, fields, isActions }: Props) {
                                                 : f === "role" ? m[f] : f === "timestamp" ? formatDate(m[f])
                                                     : isActions && role === 'admin' ? (
                                                         <div className="flex flex-col md:flex-row gap-2">
-                                                            <Link to={`/profile/${m.id}/view`}
+                                                            <Link to={`/profile/${m.id}/view`} data-testid="view"
                                                                 className="cursor-pointer text-blue-700 border border-blue-700 hover:border-0 hover:bg-blue-500 hover:text-white px-3 py-1 rounded">View</Link>
-                                                            <Link to={`/profile/${m.id}/edit`}
+                                                            <Link to={`/profile/${m.id}/edit`} data-testid="edit"
                                                                 className="cursor-pointer text-green-700 border border-green-700 hover:border-0 hover:bg-green-500 hover:text-white px-3 py-1 rounded">Edit</Link>
                                                         </div>
                                                     ) : m[f]}
