@@ -32,10 +32,10 @@ const Navbar = () => {
     console.log("toggle:", val)
     setIsDark(val)
     if (val) {
-       document.documentElement.classList.toggle("dark")
-     } else {
-       document.documentElement.classList.remove("dark")
-     }
+      document.documentElement.classList.toggle("dark")
+    } else {
+      document.documentElement.classList.remove("dark")
+    }
   }
 
 
@@ -94,12 +94,29 @@ const Navbar = () => {
                       </Link>
                     </div>
 
+                    <LanguageSwitcher />
+
+                    <ToggleSwitch
+                      isMobile={false}
+                      label={isDark ? t("navbar.dark") : t("navbar.light")}
+                      value={isDark}
+                      onToggle={(val) => handleToggleModeChange(val)}
+                    />
+
 
                     <LogoutButton isMobile={false} title={t("navbar.logout")} />
                   </>
                 )
                 :
                 <>
+                  <LanguageSwitcher />
+
+                  <ToggleSwitch
+                    isMobile={false}
+                    label={isDark ? t("navbar.dark") : t("navbar.light")}
+                    value={isDark}
+                    onToggle={(val) => handleToggleModeChange(val)}
+                  />
                   <Link
                     to={`/${locale}/login`}
                     data-testid="login-link"
@@ -115,14 +132,7 @@ const Navbar = () => {
                     {t("navbar.register")}
                   </Link>
                 </>}
-              <LanguageSwitcher />
-              {/*<button className='px-4 py-1 border border-blue-500 rounded-lg test-button' onClick={() => tooggleTheme()}>Dark</button>*/}
 
-              <ToggleSwitch
-                label={isDark ? t("navbar.dark") : t("navbar.light")}
-                value={isDark}
-                onToggle={(val) => handleToggleModeChange(val)}
-              />
             </div>
 
             {/* Mobile Menu Button */}
@@ -183,12 +193,30 @@ const Navbar = () => {
                       {t("navbar.profile")}
                     </Link>
 
-                    <LogoutButton isMobile={true} title="Logout" />
+                    
+                    <ToggleSwitch
+                      isMobile={true}
+                      label={isDark ? t("navbar.dark") : t("navbar.light")}
+                      value={isDark}
+                      onToggle={(val) => handleToggleModeChange(val)}
+                    />
+
+                    <LogoutButton isMobile={true} title={t("navbar.logout")} />
+
+                    <LanguageSwitcher />
 
                   </>
                 )
                 :
                 <>
+                  
+                  <ToggleSwitch
+                    isMobile={true}
+                    label={isDark ? t("navbar.dark") : t("navbar.light")}
+                    value={isDark}
+                    onToggle={(val) => handleToggleModeChange(val)}
+                  />
+                  <LanguageSwitcher />
                   <Link
                     to={`/${locale}/login`}
                     className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 dark:text-gray-300 dark:hover:text-blue-400 dark:hover:bg-gray-700"
@@ -202,7 +230,7 @@ const Navbar = () => {
                     {t("navbar.register")}
                   </Link>
                 </>}
-              <LanguageSwitcher />
+
             </div>
           </div>
         )}
