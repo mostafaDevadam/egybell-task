@@ -8,6 +8,7 @@ import { clearAll, login, setAuth, setUser } from "../store/auth.reducer"
 import { getUserProfileAPI } from "../api/user.api"
 import { removeID, setID } from "../lib/id"
 import { removeRole, setRole } from "../lib/role"
+import { APP_ACCESS_TOKEN, APP_REFRESH_TOKEN } from "../key"
 export const registerAction = async (prev: any, formData: FormData) => {
     console.log("formData:", formData)
 
@@ -27,8 +28,10 @@ export const loginAction = async (prev: any, formData: FormData) => {
 
     try {
         const response = await loginAPI({ email: formData.get("email") as string, password: formData.get("password") as string })
+        if(!response) return { error: "Failed to login", message: "Failed to login" }
         console.log("loginAction response:", response)
-        setToken(response.data.access_token)
+        setToken(APP_ACCESS_TOKEN,response.data.access_token)
+        setToken(APP_REFRESH_TOKEN,response.data.refresh_token)
         setID(response.data.id)
         setRole(response.data.role)
         const user = (await getUserProfileAPI(response.data.id)).data
@@ -45,7 +48,8 @@ export const loginAction = async (prev: any, formData: FormData) => {
 
 
 export const logoutAction = async () => {
-    removeToken()
+    removeToken(APP_ACCESS_TOKEN)
+     removeToken(APP_REFRESH_TOKEN)
     removeID()
     removeRole()
     store.dispatch(clearAll())
