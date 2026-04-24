@@ -10,6 +10,7 @@ import { useAppDispatch } from './store/store'
 import { getUserProfileAPI } from './api_/user.api'
 import { setAuth, setAuthToken, setRole, setUser } from './store/auth.reducer'
 import { APP_ACCESS_TOKEN } from './key'
+import { useTranslation } from 'react-i18next'
 
 function App() {
 
@@ -22,6 +23,18 @@ function App() {
   console.log("app role:", role)
 
   const dispatch = useAppDispatch()
+
+  const locale = localStorage.getItem("locale")
+  const { i18n} = useTranslation()
+
+  useEffect(() => {
+      document.dir = locale === "ar" ? "rtl" : "ltr"
+      i18n.changeLanguage(locale ?? "en")
+
+  }, [ locale])
+  if (locale) {
+    
+  }
 
   useEffect(() => {
     if (token && id && role) {
