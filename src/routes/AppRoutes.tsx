@@ -6,8 +6,6 @@ import ProfilePage from '../pages/Profile'
 import RegisterPage from '../auth/Register';
 import LoginPage from '../auth/Login';
 import { useAppSelector } from '../store/store';
-import { getToken } from '../lib/token';
-import { getRole } from '../lib/role';
 import ActivityLogsPage from '../pages/ActivityLogs';
 
 const ProtectedRoute = ({children, roles}: {children: ReactNode, roles: string[]}) => {
