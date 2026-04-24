@@ -6,6 +6,7 @@ import InputPassword from "./inputs/InputPassword";
 import InputEmail from "./inputs/InputEmail";
 import Label from "./Label";
 import { useNavigate } from "react-router";
+import useLocale from "../../hooks/useLocale";
 
 
 type Props = {
@@ -32,6 +33,7 @@ const AuthForm = ({ action, buttonTitle, formTitle, isConfirm = false, isRole = 
     const [isValid, setIsValid] = useState<boolean>(false)
 
     const navigate = useNavigate()
+    const locale = useLocale()
 
     useEffect(() => {
 
@@ -40,9 +42,9 @@ const AuthForm = ({ action, buttonTitle, formTitle, isConfirm = false, isRole = 
     useEffect(() => {
         if (state?.success) {
             toast.success(state.message)
-            if (state?.message.startsWith("Registration")) { navigate("/login") }
+            if (state?.message.startsWith("Registration")) { navigate(`/${locale}/login`) }
             if (state?.data?.access_token!!) {
-                navigate("/")
+                navigate(`/${locale}`)
             }
         } else if (state?.error) {
             toast.error(state.message)
