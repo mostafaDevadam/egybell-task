@@ -41,5 +41,6 @@
         "user": "User",
         "timestamp": "Timestamp" 
         
-    }
+    },
+    "bio": "Bio"
 }
