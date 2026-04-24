@@ -12,6 +12,7 @@ export default defineConfig({
     include: ['test/**/*.{test,spec}.{ts,tsx}']
   },
    build: {
+    outDir: 'dist',
     minify: 'esbuild',
     terserOptions: undefined, // not used with esbuild
     rollupOptions: {},
