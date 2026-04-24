@@ -21,6 +21,7 @@ export type AUTH_BODY_TYPE = {
 export type AUTH_RESPONSE_TYPE = {
     id: any
     access_token: string
+    refresh_token: string
     role: Role
 }
 export type USER_TYPE = {
