@@ -60,7 +60,7 @@ custom.d.ts: to impoting css/scss/sass files in react pages or components
 enum.ts
 types.ts
 
-task-api.postman_collection.json: postman collection for api/ednpoints [Link](https://github.com/mostafaDevadam/egybell-task/blob/frontend/task-api.postman_collection.json)
+[task-api.postman_collection.json](https://github.com/mostafaDevadam/egybell-task/blob/frontend/task-api.postman_collection.json): postman collection for api/ednpoints [Link](https://github.com/mostafaDevadam/egybell-task/blob/frontend/task-api.postman_collection.json)
 
 ./test/ : auth/: testing for auth files and components/: testing for components
 I wrote testing using Vitest and react-testing-library. 
