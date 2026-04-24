@@ -4,13 +4,11 @@
   "description": "",
   "main": "main.js",
   "scripts": {
-     "build": "webpack --config webpack.prod.js",
+    "build": "webpack --config webpack.prod.js",
     "start": "node dist/main.js",
     "start:dev": "nodemon main.js",
-    "postinstall": "npm run build",
     "clean": "rm -rf dist",
-    "prebuild": "npm run clean",
-    "build:prod": "NODE_ENV=production webpack --config webpack.prod.js"
+    "prebuild": "npm run clean"
   },
   "keywords": [],
   "author": "",
@@ -22,13 +20,11 @@
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
     "jsonwebtoken": "^9.0.3",
-    "nodemon": "^3.1.14"
+    "nodemon": "^3.1.14",
+    "webpack": "^5.106.2",
+    "webpack-cli": "^7.0.2"
   },
   "engines": {
     "node": ">=22.16.0"
-  },
-  "devDependencies": {
-    "webpack": "^5.106.2",
-    "webpack-cli": "^7.0.2"
   }
 }
