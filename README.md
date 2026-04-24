@@ -98,34 +98,34 @@ response: statusCode is number, data, message is string <br>
 
 
 EndPoint: "/auth/login" <br>
-Method: POST <br>
-. body:  <br>
+  Method: POST <br>
+  body:  <br>
 - email is mandatory <br>
 - password is mandatory <br>
-response: statusCode is number, data has token and id, message is string <br>
+  response: statusCode is number, data has token and id, message is string <br>
 
 EndPoint: "/users/id" <br>
-Method: GET <br>
-Params: id is mandatory <br>
-Token is mandatory in headers <br>
-response: statusCode is number, data: {user data}, message is string <br>
+ Method: GET <br>
+ Params: id is mandatory <br>
+ Token is mandatory in headers <br>
+ response: statusCode is number, data: {user data}, message is string <br>
 
 
 If current user role is admin then can get the response with data. <br>
 EndPoint: "/users" <br>
-Method: GET <br>
-Params: id is mandatory <br>
-Token is mandatory in headers <br>
-body: <br>
-- email is mandatory <br>
-- password is mandatory <br>
-response: statusCode is number, data:[list of users], message is string <br>
+  Method: GET <br>
+  Params: id is mandatory <br>
+  Token is mandatory in headers <br>
+  body: <br>
+  - email is mandatory <br>
+  - password is mandatory <br>
+  response: statusCode is number, data:[list of users], message is string <br>
 
 if current user role is admin then can get the response with data <br>
 EndPoint: "/logs" <br>
-Method: GET <br>
-Token is mandatory in headers <br>
-response: statusCode is number, data:[list of logs], message is string. <br>
+  Method: GET <br>
+  Token is mandatory in headers <br>
+  response: statusCode is number, data:[list of logs], message is string. <br>
 
 #
 If I have more time then I will develop and add features like themes and languages like arabic and english and handle direction on content from right to left and <br>
