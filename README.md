@@ -60,11 +60,11 @@ types.ts
 
 ./test/auth: testing for auth files
 
-I used tailwindcss for styling of App and react-toastify for displaying feedback by toast-ui
-I used redux-toolkit for auth and created reusable AuthForm component for login and register pages.
-I saved token in cookie using js-cookie library because react has not built-in api/lib for cookie.
+I used tailwindcss for styling of App and react-toastify for displaying feedback by toast-ui. <br>
+I used redux-toolkit for auth and created reusable AuthForm component for login and register pages. <br>
+I saved token in cookie using js-cookie library because react has not built-in api/lib for cookie. <br>
 
-Pages:
+Pages: <br>
 auth/Login: use AuthForm with validation(email, password)
 auth/Register: useAuthForm with validation(role, email, password, confirm-password)
 pages/Dashboard: is default page when user/admin is logged-in 
