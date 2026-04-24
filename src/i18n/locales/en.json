@@ -1,0 +1,12 @@
+{
+    "navbar": {
+        "app": "App",
+        "dashboard": "Dashboard",
+        "users": "Users",
+        "profile": "Profile",
+        "logs": "Activity Logs",
+        "login": "Login",
+        "register": "Register",
+        "logout": "Logout"
+    }
+}

@@ -2,11 +2,14 @@ import React, { useState } from 'react'
 import { Link } from 'react-router'
 import LogoutButton from '../buttons/LogoutButton'
 import { useAppSelector } from '../../store/store'
+import LanguageSwitcher from './LanguageSwitcher'
+import { useTranslation } from 'react-i18next'
 
 const Navbar = () => {
 
   //const isAuth = false
   const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false)
+   const {t, i18n} = useTranslation() 
 
   const { isAuth, role } = useAppSelector((state) => state.auth)
 
@@ -14,22 +17,6 @@ const Navbar = () => {
 
   return (
     <>
-
-      {/* <nav className='flex flex-row justify-between h-20 px-4'>
-      <div>
-        <h1 className='text-xl'>App</h1>
-      </div>
-      <ul className='flex flex-row gap-5'>
-        <li><Link to="/">Dashboard</Link></li>
-        <li><Link to="/users">Users</Link></li>
-        <li><Link to="/profile">Profile</Link></li>
-      </ul>
-      <ul className='flex flex-row gap-5'>
-        <li><Link to="/login">Login</Link></li>
-        <li><Link to="/register">Register</Link></li>
-        <li>Logout</li>
-      </ul>
-    </nav>*/}
 
       <nav className={`bg-white shadow-sm sticky top-0 z-50 dark:bg-gray-800 `}>
         <div className="max-w-screen mx-auto px-4 sm:px-6 lg:px-8">
@@ -40,25 +27,25 @@ const Navbar = () => {
                 to="/"
                 className="text-xl font-bold text-gray-700 hover:text-blue-600 dark:text-white dark:hover:text-blue-400 transition-colors"
               >
-                App
+                {t("navbar.app")}
               </Link>
             </div>
 
             {/* Desktop Navigation */}
             <div className="hidden md:flex items-center gap-x-3">
               {/* Language Switcher */}
-
+                
               {/* auth */}
               {isAuth ?
                 (
                   <>
-                    <div className='mx-auto'>
+                    <div className='mx-auto flex flex-row gap-5'>
                       <Link
                         to={`/`}
                         data-testid="dashboard"
                         className="px-5 py-2 text-sm font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 rounded-lg transition-colors dark:text-gray-300 dark:hover:text-blue-400 dark:hover:bg-gray-700"
                       >
-                        Dashboard
+                        {t("navbar.dashboard")}
                       </Link>
                       {role === "admin" && <Link
                         to={`/users`}
@@ -66,26 +53,26 @@ const Navbar = () => {
                         role="users"
                         className="px-5 py-2 text-sm font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 rounded-lg transition-colors dark:text-gray-300 dark:hover:text-blue-400 dark:hover:bg-gray-700"
                       >
-                        Users
+                        {t("navbar.users")}
                       </Link>}
                        {role === "admin" && <Link
                         to={`/logs`}
                         data-testid="logs-link"
                         className="px-5 py-2 text-sm font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 rounded-lg transition-colors dark:text-gray-300 dark:hover:text-blue-400 dark:hover:bg-gray-700"
                       >
-                        Activity Logs
+                        {t("navbar.logs")}
                       </Link>}
                       <Link
                         to={`/profile`}
                         data-testid="profile"
                         className="px-5 py-2 text-sm font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 rounded-lg transition-colors dark:text-gray-300 dark:hover:text-blue-400 dark:hover:bg-gray-700"
                       >
-                        Profile
+                        {t("navbar.profile")}
                       </Link>
                     </div>
 
 
-                    <LogoutButton isMobile={false} title="Logout" />
+                    <LogoutButton isMobile={false} title={t("navbar.logout")} />
                   </>
                 )
                 :
@@ -105,6 +92,7 @@ const Navbar = () => {
                     Register
                   </Link>
                 </>}
+                <LanguageSwitcher />
             </div>
 
             {/* Mobile Menu Button */}

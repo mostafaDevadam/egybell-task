@@ -13,6 +13,14 @@ export default defineConfig({
     setupFiles: './test/setup.ts',
     include: ['test/**/*.{test,spec}.{ts,tsx}']
   },
+   json: {
+    stringify: false, // Keep JSON as objects
+  },
+  resolve: {
+    alias: {
+      '@i18n': '/src/i18n',
+    },
+  },
   server: {
     proxy: {
       '/api': {
