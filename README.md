@@ -127,7 +127,7 @@ EndPoint: "/logs" <br>
   Token is mandatory in headers <br>
   response: statusCode is number, data:[list of logs], message is string. <br>
 
-#
+## What I would add or improve given more time? 
 If I have more time then I will develop and add features like themes and languages like arabic and english and handle direction on content from right to left and <br>
 I will make more testing using vitest and @testing-library/react for everything and develop or add a refresh-token in the app. <br>
 
