@@ -7,7 +7,9 @@
         "logs": "Activity Logs",
         "login": "Login",
         "register": "Register",
-        "logout": "Logout"
+        "logout": "Logout",
+        "light": "Light",
+        "dark": "Dark"
     },
     "form": {
         "email": "Email",
