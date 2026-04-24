@@ -20,6 +20,7 @@ export default function LanguageSwitcher() {
     setState(newLocale);
     i18n.changeLanguage(newLocale);
     document.dir = newLocale === "ar" ? "rtl" : "ltr"
+    localStorage.setItem("locale", newLocale);
     
   };
 
