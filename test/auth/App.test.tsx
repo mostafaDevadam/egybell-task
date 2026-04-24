@@ -14,11 +14,12 @@ import * as reduxHooks from '../../src/store/store'
 import { render, waitFor } from "@testing-library/react"
 import { loginAPI } from "../../src/api/auth.api"
 import * as UserAPIs from '../../src/api/user.api'
+import { APP_ACCESS_TOKEN } from "../../src/key"
 
 
 
 const TestComponent = () => {
-    const token = getToken()
+    const token = getToken(APP_ACCESS_TOKEN)
     const id = getID()
     const role = getRole()
     const dispatch = useAppDispatch()
@@ -42,12 +43,9 @@ const TestComponent = () => {
 
 beforeEach(() => {
     vi.restoreAllMocks()
-    TokenSelectors.setToken('123')
-    console.log("token:", TokenSelectors.getToken())
-    /*document.cookie = 'token=tok123; path=/;'
-    document.cookie = 'id=id123; path=/;'
-    document.cookie = 'role=admin; path=/'*/
-    console.log("token:", getToken())
+    TokenSelectors.setToken(APP_ACCESS_TOKEN,'123')
+    console.log("token:", TokenSelectors.getToken(APP_ACCESS_TOKEN))
+    console.log("token:", getToken(APP_ACCESS_TOKEN))
 })
 
 afterEach(() => {
