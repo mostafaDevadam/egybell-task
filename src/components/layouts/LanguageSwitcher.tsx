@@ -1,17 +1,20 @@
 "use client";
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import useSwitchLanguage from '../../hooks/useSwitchLanguage';
 
 export default function LanguageSwitcher() {
-  
+
 
   const [state, setState] = useState<string>();
 
-  const {t, i18n} = useTranslation() 
+  const { t, i18n } = useTranslation()
+
+  const sw = useSwitchLanguage()
 
   useEffect(() => {
- // setState();
-}, []);
+    // setState();
+  }, []);
 
 
   const handleChange = (newLocale: string) => {
@@ -21,7 +24,8 @@ export default function LanguageSwitcher() {
     i18n.changeLanguage(newLocale);
     document.dir = newLocale === "ar" ? "rtl" : "ltr"
     localStorage.setItem("locale", newLocale);
-    
+    sw(newLocale as "en" | "ar")
+
   };
 
 
