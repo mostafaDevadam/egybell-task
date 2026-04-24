@@ -2,7 +2,8 @@ import { APP_ACCESS_TOKEN, APP_REFRESH_TOKEN } from "../key";
 import { getToken, setToken } from "../lib/token";
 import { AUTH_RESPONSE_TYPE, REQUEST_PARAMS_TYPE, RESPONSE_TYPE } from "../types";
 
-const baseUrl = `${import.meta.env.VITE_API_URL}`
+const isProd = import.meta.env.VITE_NODE_ENV === 'production'
+const baseUrl = `${isProd ? import.meta.env.VITE_LIVE_API_URL : import.meta.env.VITE_API_URL}`
 
 const refresh = async (refresh_token: string) => {
     if (!refresh_token) throw new Error('No refresh token available');
