@@ -13,6 +13,14 @@ app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/logs", logRoutes);
 
+app.get("/api", (req,res) => {
+   
+  res.json({
+    statusCode: 200,
+    message: "API is working",
+    data: null
+  })
+})
 
 app.listen(process.env.PORT || 5000, () => {
   console.log(`Server running on port ${process.env.PORT}`);
