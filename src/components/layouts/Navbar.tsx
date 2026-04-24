@@ -4,27 +4,31 @@ import LogoutButton from '../buttons/LogoutButton'
 import { useAppSelector } from '../../store/store'
 import LanguageSwitcher from './LanguageSwitcher'
 import { useTranslation } from 'react-i18next'
+import useLocale from '../../hooks/useLocale'
 
 const Navbar = () => {
 
   //const isAuth = false
   const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false)
-   const {t, i18n} = useTranslation() 
+  const { t, i18n } = useTranslation()
 
   const { isAuth, role } = useAppSelector((state) => state.auth)
 
   console.log("state isAuth:", isAuth)
 
+  const locale = useLocale()
+
+  console.log("locale:", locale)
+
   return (
     <>
-
       <nav className={`bg-white shadow-sm sticky top-0 z-50 dark:bg-gray-800 `}>
         <div className="max-w-screen mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             {/* Left Side - App Logo/Name */}
             <div className="flex items-center">
               <Link
-                to="/"
+                to={`/${locale}`}
                 className="text-xl font-bold text-gray-700 hover:text-blue-600 dark:text-white dark:hover:text-blue-400 transition-colors"
               >
                 {t("navbar.app")}
@@ -34,36 +38,36 @@ const Navbar = () => {
             {/* Desktop Navigation */}
             <div className="hidden md:flex items-center gap-x-3">
               {/* Language Switcher */}
-                
+
               {/* auth */}
               {isAuth ?
                 (
                   <>
                     <div className='mx-auto flex flex-row gap-5'>
                       <Link
-                        to={`/`}
+                        to={`/${locale}`}
                         data-testid="dashboard"
                         className="px-5 py-2 text-sm font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 rounded-lg transition-colors dark:text-gray-300 dark:hover:text-blue-400 dark:hover:bg-gray-700"
                       >
                         {t("navbar.dashboard")}
                       </Link>
                       {role === "admin" && <Link
-                        to={`/users`}
+                        to={`/${locale}/users`}
                         data-testid="users-link"
                         role="users"
                         className="px-5 py-2 text-sm font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 rounded-lg transition-colors dark:text-gray-300 dark:hover:text-blue-400 dark:hover:bg-gray-700"
                       >
                         {t("navbar.users")}
                       </Link>}
-                       {role === "admin" && <Link
-                        to={`/logs`}
+                      {role === "admin" && <Link
+                        to={`/${locale}/logs`}
                         data-testid="logs-link"
                         className="px-5 py-2 text-sm font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 rounded-lg transition-colors dark:text-gray-300 dark:hover:text-blue-400 dark:hover:bg-gray-700"
                       >
                         {t("navbar.logs")}
                       </Link>}
                       <Link
-                        to={`/profile`}
+                        to={`/${locale}/profile`}
                         data-testid="profile"
                         className="px-5 py-2 text-sm font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 rounded-lg transition-colors dark:text-gray-300 dark:hover:text-blue-400 dark:hover:bg-gray-700"
                       >
@@ -78,21 +82,21 @@ const Navbar = () => {
                 :
                 <>
                   <Link
-                    to={`/login`}
+                    to={`/${locale}/login`}
                     data-testid="login-link"
                     className="px-5 py-2 text-sm font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 rounded-lg transition-colors dark:text-gray-300 dark:hover:text-blue-400 dark:hover:bg-gray-700"
                   >
-                    Login
+                    {t("navbar.login")}
                   </Link>
                   <Link
-                    to={`/register`}
+                    to={`/${locale}/register`}
                     data-testid="register-link"
                     className="px-5 py-2 text-sm font-medium bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors dark:bg-blue-700 dark:hover:bg-blue-600"
                   >
-                    Register
+                    {t("navbar.register")}
                   </Link>
                 </>}
-                <LanguageSwitcher />
+              <LanguageSwitcher />
             </div>
 
             {/* Mobile Menu Button */}
@@ -128,29 +132,29 @@ const Navbar = () => {
                 (
                   <>
                     <Link
-                      to={`/`}
+                      to={`/${locale}`}
                       className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 dark:text-gray-300 dark:hover:text-blue-400 dark:hover:bg-gray-700"
                     >
-                      Dashboard
+                      {t("navbar.dashboard")}
                     </Link>
                     {role === "admin" && <Link
-                      to={`/users`}
+                      to={`/${locale}/users`}
                       data-testid="users-link"
                       className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 dark:text-gray-300 dark:hover:text-blue-400 dark:hover:bg-gray-700"
                     >
-                      Users
+                      {t("navbar.users")}
                     </Link>}
-                     {role === "admin" && <Link
-                      to={`/logs`}
+                    {role === "admin" && <Link
+                      to={`/${locale}/logs`}
                       className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 dark:text-gray-300 dark:hover:text-blue-400 dark:hover:bg-gray-700"
                     >
-                      Activity Logs
+                      {t("navbar.logs")}
                     </Link>}
                     <Link
-                      to={`/profile`}
+                      to={`/${locale}/profile`}
                       className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 dark:text-gray-300 dark:hover:text-blue-400 dark:hover:bg-gray-700"
                     >
-                      Profile
+                      {t("navbar.profile")}
                     </Link>
 
                     <LogoutButton isMobile={true} title="Logout" />
@@ -160,18 +164,19 @@ const Navbar = () => {
                 :
                 <>
                   <Link
-                    to={`/login`}
+                    to={`/${locale}/login`}
                     className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 dark:text-gray-300 dark:hover:text-blue-400 dark:hover:bg-gray-700"
                   >
-                    Login
+                    {t("navbar.login")}
                   </Link>
                   <Link
-                    to={`/register`}
+                    to={`/${locale}/register`}
                     className="block px-3 py-2 rounded-md text-base font-medium bg-blue-600 text-white hover:bg-blue-700 dark:bg-blue-700 dark:hover:bg-blue-600"
                   >
-                    Register
+                    {t("navbar.register")}
                   </Link>
                 </>}
+              <LanguageSwitcher />
             </div>
           </div>
         )}
