@@ -2,7 +2,7 @@
 import fetch from 'node-fetch';
 export default async (req, res) => {
   const path = req.url.replace(/^\/api/, '');
-  const upstream = `${process.env.VITE_LIVE_API_URL}${path}`; // http://...
+  const upstream = `${process.env.VITE_LIVE_API_URL}/${path}`; // http://...
   const response = await fetch(upstream, {
     method: req.method,
     headers: Object.fromEntries(Object.entries(req.headers).filter(([k])=>k!=='host')),
