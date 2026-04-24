@@ -8,7 +8,7 @@ Terminal: git clone https://github.com/mostafaDevadam/egybell-task.git. <br>
 ## Repo branches:<br>
 - frontend: React
 - backend: NodeJS/ExpressJS
-- frontend-v2: has a new features like refresh-token and Internationalization (i18n) 
+- frontend-v2: has a new features like refresh-token, Internationalization (i18n) and Theme. <br>
 
 In project folder:
 
@@ -131,8 +131,8 @@ EndPoint: "/logs" <br>
   Method: GET <br>
   Token is mandatory in headers <br>
   response: statusCode is number, data:[list of logs], message is string. <br>
-description: if current user role is admin then can get the response with data <br>
+description: if current user role is admin then can get the response with data. <br>
 
 ## What I would add or improve given more time? 
-If I have more time then I will develop and add features like themes and languages like arabic and english and handle direction on content from right to left and <br>
+If I have more time then I will develop and add features like allow admin to create and assign permissions and roles for users <br>
 I will make more testing using vitest and @testing-library/react for everything and develop or add a refresh-token in the app. <br>
