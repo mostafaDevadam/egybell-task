@@ -16,20 +16,20 @@ const DashboardPage = () => {
   `
   return (
     <div>
-      <p className='text-gray-500 text-2xl p-2 dark:text-gray-100'></p>
+      <p className='text-gray-500 text-2xl p-2 dark:text-gray-100 test-title'></p>
 
     
 
-      <div className='text-start px-4 flex flex-col gap-5'>
-        <p className='bg-gray-50 dark:bg-gray-800 p-6 rounded-lg shadow-md border border-gray-200 dark:border-gray-700'>{locale === "en" &&<span>Email: </span>} {user!!.email}</p>
-        <p className='bg-gray-50 dark:bg-gray-800 p-6 rounded-lg shadow-md border border-gray-200 dark:border-gray-700 sm:mt-10'>{locale === "en" && "Role:"} {role}</p>
+      <div className='text-start px-4 flex flex-col gap-5 '>
+        <p className='bg-gray-50 dark:bg-gray-800 p-6 rounded-lg shadow-md border border-gray-200 dark:border-gray-700 test-content'>{locale === "en" &&<span>Email: </span>} {user!!.email}</p>
+        <p className='bg-gray-50 dark:bg-gray-800 p-6 rounded-lg shadow-md border border-gray-200 dark:border-gray-700 sm:mt-10 test-content'>{locale === "en" && "Role:"} {role}</p>
       </div>
 
         {[1,2,3,4].map((m,i) => (
         <div key={i} className="grid grid-cols-1 md:grid-cols-4 gap-5 px-4 mt-5" >
-        <div className="w-full max-w-md bg-gray-50 dark:bg-gray-800 p-6 rounded-lg shadow-md border border-gray-200 dark:border-gray-700 md:col-span-2 col-span-1 hover:border-blue-600 dark:hover:border-gray-100">
+        <div className="test-content w-full max-w-md bg-gray-50 dark:bg-gray-800 p-6 rounded-lg shadow-md border border-gray-200 dark:border-gray-700 md:col-span-2 col-span-1 hover:border-blue-600 dark:hover:border-gray-100">
           {locale === "ar" ? ar_lorem : lorem}</div>
-        <div className="w-full max-w-md bg-gray-50 dark:bg-gray-800 p-6 rounded-lg shadow-md border border-gray-200 dark:border-gray-700 md:col-span-2 col-span-1 hover:border-blue-600 dark:hover:border-gray-100">
+        <div className="test-content w-full max-w-md bg-gray-50 dark:bg-gray-800 p-6 rounded-lg shadow-md border border-gray-200 dark:border-gray-700 md:col-span-2 col-span-1 hover:border-blue-600 dark:hover:border-gray-100">
           {locale === "ar" ? ar_lorem : lorem}</div>
       </div>
       ))}

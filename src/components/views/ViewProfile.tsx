@@ -26,11 +26,11 @@ const ViewProfile = ({ user }: Props) => {
             <p className='text-gray-500 text-2xl p-2' data-testid="title"></p>
             {state &&
                 <div className='text-start px-4 flex flex-col gap-5' dir={locale === "ar" ? "rtl" : "ltr"}>
-                    <p className='bg-gray-50 dark:bg-gray-800 p-6 rounded-lg shadow-md border border-gray-200 dark:border-gray-700' data-testid="email" dir={locale === "ar" ? "rtl" : "ltr"}><span>{locale === "en" &&<span>Email: </span>} {state!!.email}</span> {locale === "ar" &&<span></span>} </p>
-                    <p className='bg-gray-50 dark:bg-gray-800 p-6 rounded-lg shadow-md border border-gray-200 dark:border-gray-700 sm:mt-10' data-testid="role">{locale === "en" && "Role:"} {state!!.role} </p>
+                    <p className='test-content bg-gray-50 dark:bg-gray-800 p-6 rounded-lg shadow-md border border-gray-200 dark:border-gray-700' data-testid="email" dir={locale === "ar" ? "rtl" : "ltr"}><span>{locale === "en" &&<span>Email: </span>} {state!!.email}</span> {locale === "ar" &&<span></span>} </p>
+                    <p className='test-content bg-gray-50 dark:bg-gray-800 p-6 rounded-lg shadow-md border border-gray-200 dark:border-gray-700 sm:mt-10' data-testid="role">{locale === "en" && "Role:"} {state!!.role} </p>
                     <div className='bg-gray-50 dark:bg-gray-800 p-6 rounded-lg shadow-md border border-gray-200 dark:border-gray-700 sm:mt-10'>
-                        <p data-testid="bio">{t("bio")}</p>
-                        <p data-testid="bio-content">{locale === "ar" ? ar_bio : bio}</p>
+                        <p data-testid="bio" className='test-content'>{t("bio")}</p>
+                        <p data-testid="bio-content" className='test-content'>{locale === "ar" ? ar_bio : bio}</p>
 
 
                     </div>
