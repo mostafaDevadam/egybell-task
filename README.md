@@ -4,6 +4,10 @@
 Install Node.js from [nodejs.org](https://nodejs.org/en/download)
 
 Terminal: git clone https://github.com/mostafaDevadam/egybell-task.git
+Repo branches:<br>
+- frontend
+- backend
+- frontend-v2: has a new features like refresh-token and Internationalization (i18n)
 
 In project folder:
 
