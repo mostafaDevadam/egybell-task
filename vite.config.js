@@ -14,17 +14,18 @@ export default defineConfig({
     include: ['test/**/*.{test,spec}.{ts,tsx}']
   },
   server: {
-   proxy: {
+    proxy: {
       '/api': {
         target: isProd
           ? process.env.VITE_LIVE_API_URL
           : process.env.VITE_API_URL,
         changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api/, ''), // forwards /api/:path -> /:path on target
-        secure: true, // set to false only if target uses self-signed cert in dev
-      },
-    }, 
+        rewrite: p => p.replace(/^\/api/, '')
+      }
+    }
   }
+
+
   /*build: {
    outDir: 'dist',
    minify: 'esbuild',
