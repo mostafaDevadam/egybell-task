@@ -13,8 +13,6 @@ dataTestid?: string
 
 const InputPassword = ({name, value, onChange, onBlur, minLength = 1, dataTestid}: Props) => {
     const [showPassword, setShowPassword] = useState(false);
-
-
     return (
        
             <div className="relative" > {/* Dynamische dir-Einstellung */}

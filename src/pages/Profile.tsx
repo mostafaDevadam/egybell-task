@@ -33,9 +33,7 @@ const ProfilePage = () => {
       getUserProfileAPI(id).then((th) => {
         setUser(th.data)
       })
-    } /*else if (role === Role.USER) {
-      setUser(currentUser)
-    }*/
+    } 
   }, [id, role])
 
   useEffect(() => { 

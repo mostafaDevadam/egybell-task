@@ -13,24 +13,6 @@ const Navbar = () => {
   console.log("state isAuth:", isAuth)
 
   return (
-    <>
-
-      {/* <nav className='flex flex-row justify-between h-20 px-4'>
-      <div>
-        <h1 className='text-xl'>App</h1>
-      </div>
-      <ul className='flex flex-row gap-5'>
-        <li><Link to="/">Dashboard</Link></li>
-        <li><Link to="/users">Users</Link></li>
-        <li><Link to="/profile">Profile</Link></li>
-      </ul>
-      <ul className='flex flex-row gap-5'>
-        <li><Link to="/login">Login</Link></li>
-        <li><Link to="/register">Register</Link></li>
-        <li>Logout</li>
-      </ul>
-    </nav>*/}
-
       <nav className={`bg-white shadow-sm sticky top-0 z-50 dark:bg-gray-800 `}>
         <div className="max-w-screen mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
@@ -44,11 +26,11 @@ const Navbar = () => {
               </Link>
             </div>
 
-            {/* Desktop Navigation */}
+            
             <div className="hidden md:flex items-center gap-x-3">
-              {/* Language Switcher */}
+             
 
-              {/* auth */}
+             
               {isAuth ?
                 (
                   <>
@@ -107,7 +89,7 @@ const Navbar = () => {
                 </>}
             </div>
 
-            {/* Mobile Menu Button */}
+            
             <div className="-mr-2 flex md:hidden">
               <button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -131,7 +113,7 @@ const Navbar = () => {
           </div>
         </div>
 
-        {/* Mobile Menu Content */}
+        
         {mobileMenuOpen && (
           <div className="md:hidden" id="mobile-menu">
             <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
@@ -188,10 +170,6 @@ const Navbar = () => {
           </div>
         )}
       </nav>
-    </>
-
-
-
   )
 }
 

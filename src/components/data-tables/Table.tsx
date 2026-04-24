@@ -60,8 +60,6 @@ function Table({ docs, fields, isActions }: Props) {
                         ))}
                     </tbody>
                 </table>
-
-
             </div>
         </div>
     )

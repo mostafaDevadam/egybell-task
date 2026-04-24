@@ -6,8 +6,6 @@ import ProfilePage from '../pages/Profile'
 import RegisterPage from '../auth/Register';
 import LoginPage from '../auth/Login';
 import { useAppSelector } from '../store/store';
-import { getToken } from '../lib/token';
-import { getRole } from '../lib/role';
 import ActivityLogsPage from '../pages/ActivityLogs';
 
 const ProtectedRoute = ({children, roles}: {children: ReactNode, roles: string[]}) => {
@@ -29,10 +27,6 @@ const ProtectedRoute = ({children, roles}: {children: ReactNode, roles: string[]
 
 const AppRoutes = () => {
     const {user, isAuth, token} = useAppSelector(state => state.auth)
-    //const token = getToken()
-    console.log("routes token:", isAuth, token)
-    console.log("routes user:", user)
-
     return (
         
         <Routes>
