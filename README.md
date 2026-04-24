@@ -3,12 +3,12 @@
 
 Install Node.js from
 
-Terminal: git clone <link-of-repo>
+Terminal: git clone https://github.com/mostafaDevadam/egybell-task.git
 
 In project folder:
 
 Using git switch to branch frontend: 
-
+Terminal: git switch frontend
 create .env file add a variable for api url in it
 Terminal: npm i 
 
@@ -22,13 +22,12 @@ Terminal: npm run test
 
 
 Using git switch to branch backend:
-
+Terminal: git switch frontend
 create .env file and add PORT variable in it
 
 Terminal: npm i 
 
 Run backend:
-
 Terminal: npm run start
 
 # Design decisions  
