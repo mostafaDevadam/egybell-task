@@ -1,3 +1,5 @@
+"use server"
+
 import React from 'react'
 import AuthForm from '../components/forms/AuthForm'
 import { registerAction } from '../actions/auth.actions'
