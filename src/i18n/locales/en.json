@@ -8,5 +8,38 @@
         "login": "Login",
         "register": "Register",
         "logout": "Logout"
+    },
+    "form": {
+        "email": "Email",
+        "password": "Password",
+        "confirmPassword": "Confirm Password",
+        "name": "Name",
+        "role": "Role",
+        "register": "Register",
+        "login": "Login",
+        "cancel": "Cancel",
+        "edit-profile": "Edit Profile",
+        "update": "Update",
+        "edit": "Edit",
+        "user": "User",
+        "admin": "Admin",
+        "placeholders": {
+            "enter-your-email": "Enter your email",
+            "enter-your-password": "Enter your password"
+        }
+        
+        
+    },
+    "table": {
+        "view": "View",
+        "edit": "Edit",
+        "id": "Id", 
+        "email": "Email",
+        "role": "Role",
+        "actions" : "Actions",
+        "action": "Action",
+        "user": "User",
+        "timestamp": "Timestamp" 
+        
     }
 }
