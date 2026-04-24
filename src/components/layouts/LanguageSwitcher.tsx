@@ -10,11 +10,7 @@ export default function LanguageSwitcher() {
 
   const { t, i18n } = useTranslation()
 
-  const sw = useSwitchLanguage()
-
-  useEffect(() => {
-    // setState();
-  }, []);
+  const switchLang = useSwitchLanguage()
 
 
   const handleChange = (newLocale: string) => {
@@ -24,20 +20,13 @@ export default function LanguageSwitcher() {
     i18n.changeLanguage(newLocale);
     document.dir = newLocale === "ar" ? "rtl" : "ltr"
     localStorage.setItem("locale", newLocale);
-    sw(newLocale as "en" | "ar")
+    switchLang(newLocale as "en" | "ar")
 
   };
 
 
-  function cutLocale(path: string) {
-    return path.replace(/^\/?(ar|en|de|fr)(?=\/|$)/, "");
-  }
-
-
-
   return (
     <div className="relative w-full sm:w-48 md:w-64 custom-700:w-90" dir={state === 'ar' ? 'rtl' : 'ltr'}>
-
       <select
         id="locale"
         value={state}
