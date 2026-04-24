@@ -9,11 +9,11 @@ const authRoutes = require("./routes/auth.routes");
 const logRoutes = require("./routes/log.routes");
 
 
-app.use("/api/auth", authRoutes);
-app.use("/api/users", userRoutes);
-app.use("/api/logs", logRoutes);
+app.use("/api/v1.1/auth", authRoutes);
+app.use("/api/v1.1/users", userRoutes);
+app.use("/api/v1.1/logs", logRoutes);
 
-app.get("/api", (req,res) => {
+app.get("/api/v1.1", (req,res) => {
    
   res.json({
     statusCode: 200,
