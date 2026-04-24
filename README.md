@@ -32,7 +32,8 @@ Terminal: npm run start <br>
 
 # Design decisions  
 
-Frontend folders:
+## Frontend 
+Folders:
 
 ./src/
 
