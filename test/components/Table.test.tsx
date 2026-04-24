@@ -69,21 +69,6 @@ describe("Table", () => {
     })
 
 })
-/*
-test('Table', async () => {
 
-    const users = [{ id: 1, email: "user1@gmail.com", role: Role.USER }]
-    const fields = ["id", "email", "role", "actions"]
-    render(<TestComponent fields={fields} docs={users} />)
-
-
-
-    expect(screen.getByTestId('container')).toBeTruthy()
-    expect(screen.getByTestId('header')).toBeTruthy()
-    expect(screen.getByTestId('table')).toBeTruthy()
-
-
-})
-*/
 
 

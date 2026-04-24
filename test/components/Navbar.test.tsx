@@ -16,26 +16,7 @@ vi.mock('../../src/store/store', () => {
 
 
 
-/*
-vi.mock('../../src/store/store', () => {
-    return {
-        useAppSelector: (fn: any) => fn(state),
-        // If you need to update state in tests:
-        __esModule: true,
-        setState: (newState: AuthState) => { state = newState }
-    }
-})*/
 
-
-/*
-vi.mock('../../src/store/store', () => {
-    let current = {isAuth: true, role: Role.ADMIN as const}
-    return {
-        __esModule: true,
-        useAppSelector_: (fn: any) => fn(current),
-        __setAuthState: (s: any) => { current = s}
-    }
-})*/
 
 //const mockLogoutAction = vi.fn().mockResolvedValue(undefined)
 vi.mock("../../src/components/buttons/LogoutButton", () => {
