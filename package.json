@@ -4,12 +4,12 @@
   "description": "",
   "main": "main.js",
   "scripts": {
-    "start": "node main.js",
+     "build": "webpack --config webpack.prod.js",
+    "start": "node dist/main.js",
     "start:dev": "nodemon main.js",
     "postinstall": "npm run build",
     "clean": "rm -rf dist",
     "prebuild": "npm run clean",
-    "build": "npm run build:prod",
     "build:prod": "NODE_ENV=production webpack --config webpack.prod.js"
   },
   "keywords": [],
@@ -26,5 +26,9 @@
   },
   "engines": {
     "node": ">=22.16.0"
+  },
+  "devDependencies": {
+    "webpack": "^5.106.2",
+    "webpack-cli": "^7.0.2"
   }
 }
