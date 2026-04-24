@@ -4,7 +4,13 @@
   "description": "",
   "main": "main.js",
   "scripts": {
-    "start": "nodemon main.js"
+    "start": "node main.js",
+    "start:dev": "nodemon main.js",
+    "postinstall": "npm run build",
+    "clean": "rm -rf dist",
+    "prebuild": "npm run clean",
+    "build": "npm run build:prod",
+    "build:prod": "NODE_ENV=production webpack --config webpack.prod.js"
   },
   "keywords": [],
   "author": "",
@@ -17,5 +23,8 @@
     "express": "^5.2.1",
     "jsonwebtoken": "^9.0.3",
     "nodemon": "^3.1.14"
+  },
+  "engines": {
+    "node": ">=22.16.0"
   }
 }
