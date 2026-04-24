@@ -37,23 +37,23 @@ Frontend folders:
 
 ./src/
 
-actions
+actions/
 
-api
+api/
 
-assets
+assets/
 
-auth
+auth/
 
-components/: buttons/, data-tables/, forms/, layouts/, view/
+components/: buttons/, data-tables/, forms/, layouts/, views/
 
-lib
+lib/
 
-pages
+pages/
 
-routes
+routes/
 
-store
+store/
 
 App.tsx
 custom.d.ts: to impoting css/scss/sass files in react pages or components 
