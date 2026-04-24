@@ -70,12 +70,12 @@ I used redux-toolkit for auth and created reusable AuthForm component for login 
 I saved token in cookie using js-cookie library because react has not built-in api/lib for cookie. <br>
 
 Pages: <br>
-auth/Login: use AuthForm with validation(email, password) <br>
-auth/Register: useAuthForm with validation(role, email, password, confirm-password) <br>
-pages/Dashboard: is default page when user/admin is logged-in  <br>
-pages/Profile: display email and role <br>
-pages/Users: for admin and when current role is admin and admin can view/edit user profile <br>
-pages/ActivityLogs: for admin and current role is admin and admin can see the user activities <br>
+- auth/Login: use AuthForm with validation(email, password) <br>
+- auth/Register: useAuthForm with validation(role, email, password, confirm-password) <br>
+- pages/Dashboard: is default page when user/admin is logged-in  <br>
+- pages/Profile: display email and role <br>
+- pages/Users: for admin and when current role is admin and admin can view/edit user profile <br>
+- pages/ActivityLogs: for admin and current role is admin and admin can see the user activities <br>
 
 Routes: <br>
 I created app-routes and protected routes based on current user and his role <br>
@@ -99,7 +99,7 @@ response: statusCode is number, data, message is string <br>
 
 EndPoint: "/auth/login" <br>
 Method: POST <br>
-body:  <br>
+. body:  <br>
 - email is mandatory <br>
 - password is mandatory <br>
 response: statusCode is number, data has token and id, message is string <br>
