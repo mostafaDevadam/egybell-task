@@ -15,6 +15,8 @@ In project folder:
 Using git switch to branch frontend: <br>
 Terminal: git switch frontend <br>
 create .env file add a variable for api url in it <br>
+Use variables like in ./src/env.d.ts <br>
+Define the same names of variables in .env like variables from ./src/env.d.ts <br>
 Terminal: npm i  <br>
 
 Run frontend: <br>
@@ -27,7 +29,7 @@ Terminal: npm run test
 
 
 Using git switch to branch backend: <br>
-Terminal: git switch frontend <br>
+Terminal: git switch backend <br>
 create .env file and add PORT variable in it. <br>
 
 Terminal: npm i 
