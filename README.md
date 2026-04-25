@@ -3,13 +3,20 @@
 
 Install Node.js from [nodejs.org](https://nodejs.org/en/download)
 
-Terminal: git clone https://github.com/mostafaDevadam/egybell-task.git
+Terminal: git clone https://github.com/mostafaDevadam/egybell-task.git. <br>
+
+## Repo branches:<br>
+- frontend: React
+- backend: NodeJS/ExpressJS
+- frontend-v2: has a new features like refresh-token, Internationalization (i18n) and Theme. <br>
 
 In project folder:
 
 Using git switch to branch frontend: <br>
 Terminal: git switch frontend <br>
 create .env file add a variable for api url in it <br>
+Use variables like in ./src/env.d.ts <br>
+Define the same names of variables in .env like variables from ./src/env.d.ts <br>
 Terminal: npm i  <br>
 
 Run frontend: <br>
@@ -22,8 +29,8 @@ Terminal: npm run test
 
 
 Using git switch to branch backend: <br>
-Terminal: git switch frontend <br>
-create .env file and add PORT variable in it. <br>
+Terminal: git switch backend <br>
+create .env file and add PORT and EXPRIES_IN variables in it. <br>
 
 Terminal: npm i 
 
@@ -96,7 +103,6 @@ body:  <br>
 - password is mandatory <br>
 response: statusCode is number, data, message is string <br>
 
-
 EndPoint: "/auth/login" <br>
   Method: POST <br>
   body:  <br>
@@ -110,8 +116,6 @@ EndPoint: "/users/id" <br>
  Token is mandatory in headers <br>
  response: statusCode is number, data: {user data}, message is string <br>
 
-
-If current user role is admin then can get the response with data. <br>
 EndPoint: "/users" <br>
   Method: GET <br>
   Params: id is mandatory <br>
@@ -120,13 +124,15 @@ EndPoint: "/users" <br>
   - email is mandatory <br>
   - password is mandatory <br>
   response: statusCode is number, data:[list of users], message is string <br>
+description: If current user role is admin then can get the response with data. <br>
 
-if current user role is admin then can get the response with data <br>
+
 EndPoint: "/logs" <br>
   Method: GET <br>
   Token is mandatory in headers <br>
   response: statusCode is number, data:[list of logs], message is string. <br>
+description: if current user role is admin then can get the response with data. <br>
 
 ## What I would add or improve given more time? 
-If I have more time then I will develop and add features like themes and languages like arabic and english and handle direction on content from right to left and <br>
+If I have more time then I will develop and add features like allow admin to create and assign permissions and roles for users <br>
 I will make more testing using vitest and @testing-library/react for everything and develop or add a refresh-token in the app. <br>
