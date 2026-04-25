@@ -40,6 +40,7 @@ function Table({ docs, fields, isActions }: Props) {
 
 
                         {docs && docs.map((m, index) => (
+                            m.id !== user?.id &&
                             <tr key={index} className="text-sm text-gray-500 dark:text-gray-300 hover:bg-gray-300 hover:text-gray-700">
                                 {
                                     fields && fields.map((f, index) => (
