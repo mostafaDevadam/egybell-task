@@ -1,7 +1,7 @@
 const express = require("express");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const { users } = require("../models/user.model");
+const { getAllUsers, getUserById, deleteUserById, updateUser } = require("../models/user.model");
 const auth = require("../middleware/auth");
 const role = require("../middleware/role");
 const { logs } = require("../models/log.model");
@@ -11,7 +11,7 @@ const router = express.Router();
 
 // ✅ Admin → get all users
 router.get("/", auth, role(["admin"]), (req, res) => {
-    res.json({ statusCode: 200, message: "All users", data: users });
+    res.json({ statusCode: 200, message: "All users", data: getAllUsers() });
 });
 
 // ✅ User → get own data by ID
@@ -23,7 +23,8 @@ router.get("/:id", auth, (req, res) => {
         return res.status(403).json({ message: "Access denied" });
     }
 
-    const user = users.find(u => u.id === userId);
+    //const user = users.find(u => u.id === userId);
+    const user = getUserById(userId)
     if (!user) return res.status(404).json({ message: "User not found" });
 
     res.json({ statusCode: 200, message: "User details", data: user });
@@ -38,14 +39,16 @@ router.patch("/:id", auth, (req, res) => {
         return res.status(403).json({ message: "Access denied" });
     }
 
-    const user = users.find(u => u.id === userId);
+    //const user = users.find(u => u.id === userId);
+    const user = getUserById(userId)
     if (!user) return res.status(404).json({ message: "User not found" });
 
     user.email = req.body.email || user.email;
     user.role = req.body.role || user.role;
 
-    const updated = users.map((m) => m.id === userId && (m = user));
-    console.log("updated:", updated)
+    //const updated = users.map((m) => m.id === userId && (m = user));
+    //console.log("updated:", updated)
+    const updated = updateUser(userId)
 
     if (req.body.role) {
         logs.push({
@@ -68,7 +71,7 @@ router.patch("/:id", auth, (req, res) => {
 
 
 
-    res.json({ statusCode: 200, message: "Updated User", data: user });
+    res.json({ statusCode: 200, message: "Updated User", data: updated });
 });
 
 
@@ -82,35 +85,28 @@ router.delete("/:id", auth, (req, res) => {
         return res.status(403).json({ message: "Access denied" });
     }
 
-    const user = users.find(u => u.id === userId);
+    //const user = users.find(u => u.id === userId);
+    const user = getUserById(userId)
     if (!user) return res.status(404).json({ statusCode: 404, message: "User not found" });
 
     let isDeleted = false;
-
+    let deletedUser = null;
     if (userId === req.user.id) {
-        deleteUserById(userId)
+        deletedUser = deleteUserById(userId)
         isDeleted = true
     }
 
     if (req.user.role === "admin") {
-        deleteUserById(userId)
+        deletedUser = deleteUserById(userId)
         isDeleted = true
     }
 
-    console.log("users after deleted:", users)
+    console.log("deletedUser:", deletedUser)
 
-    isDeleted ? res.json({ statusCode: 200, message: "Deleted User successfully", data: user }) : res.status(409).json({ statusCode: 500, message: "Delete user failed" });
-
-
+    isDeleted ? res.json({ statusCode: 200, message: "Deleted User successfully", data: deletedUser }) : res.status(409).json({ statusCode: 500, message: "Delete user failed" });
 
 })
 
-function deleteUserById(id) {
-    const index = users.findIndex(user => user.id === id);
 
-    if (index !== -1) {
-        users.splice(index, 1); // ✅ modifies array in place
-    }
-}
 
 module.exports = router;

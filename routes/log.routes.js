@@ -1,7 +1,7 @@
 const auth = require("../middleware/auth");
 const role = require("../middleware/role");
 const { logs } = require("../models/log.model");
-const { users } = require("../models/user.model");
+const { getUserById } = require("../models/user.model");
 const express = require("express");
 const router = express.Router();
 
@@ -11,7 +11,7 @@ router.get("/", auth, role(["admin"]), (req, res) => {
     }*/
 
     const ls = logs.map((l) => {
-        const user = users.find(u => u.id === l.user_id);
+        const user = getUserById(l.user_id)
         return { ...l, user };
     });
 

@@ -1,28 +1,13 @@
 const express = require("express");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const { users } = require("../models/user.model");
+const { addUser, getUserByEmail, getUserById } = require("../models/user.model");
 const auth = require("../middleware/auth");
 const role = require("../middleware/role");
 const { logs } = require("../models/log.model");
 
 const router = express.Router();
-function getNextId() {
-  if (users.length === 0) return 1;
 
-  return Math.max(...users.map(u => u.id)) + 1;
-}
-
-function addUser(email, role, password) {
-  const user = {
-    id: getNextId(),
-    email,
-    password,
-    role
-  };
-  users.push(user);
-  return user
-}
 
 
 // Register
@@ -33,7 +18,8 @@ router.post("/register", async (req, res) => {
     return res.status(400).json({ statusCode: 400, message: "Email, password and role are required", data: null });
   }
 
-  const existing = users.find(u => u.email === email);
+  //const existing = users.find(u => u.email === email);
+  const existing = getUserByEmail(email)
   if (existing) return res.status(404).json({ statusCode: 500, message: "Email is already exiting", data: null });
 
   const hashedPassword = await bcrypt.hash(password, 10);
@@ -48,7 +34,7 @@ router.post("/register", async (req, res) => {
   users.push(user);*/
   const user = addUser(email, userRole || "user", hashedPassword)
 
-  console.log("users:", users)
+  console.log("user:", user)
 
   res.json({ statusCode: 201, message: "User created/registered", data: user });
 });
@@ -57,7 +43,8 @@ router.post("/register", async (req, res) => {
 router.post("/login", async (req, res) => {
   const { email, password } = req.body;
 
-  const user = users.find(u => u.email === email);
+  // const user = users.find(u => u.email === email);
+  const user = getUserByEmail(email)
   if (!user) return res.status(404).json({ statusCode: 404, message: "User not found", data: null });
 
   const isMatch = await bcrypt.compare(password, user.password);
@@ -94,7 +81,8 @@ router.post("/logout/:id", auth, async (req, res) => {
     return res.status(403).json({ message: "Access denied" });
   }
 
-  const user = users.find(u => u.id === userId);
+  //const user = users.find(u => u.id === userId);
+  const user = getUserById(userId)
   if (!user) return res.status(404).json({ message: "User not found" });
 
 
@@ -114,8 +102,9 @@ router.post("/refresh", async (req, res) => {
   console.log('body', req.body);
 
   const v = verifyRefreshToken(refresh_token);
-  const user = users.find(u => u.id === v.id);
-  if (!user) return res.status(404).json({ message: "User not found" });
+  // const user = users.find(u => u.id === v.id);
+  const user = getUserById(userId)
+  if (!user) return res.status(404).json({ statusCode: 404, message: "User not found" });
   const re = generateRereshToken(user);
   const tk = generateAccessToken(user);
 
