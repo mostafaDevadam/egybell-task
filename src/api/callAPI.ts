@@ -5,7 +5,10 @@ const baseUrl = `${import.meta.env.VITE_API_URL}`
 export const callAPI = async <S, B>({url, method, body}: REQUEST_PARAMS_TYPE<B>) => {
     const token = getToken()
 
-    const response = await fetch(`${baseUrl}/${url}`, {
+    const apiUrl = `${baseUrl}/${url}`
+    console.log("apiUrl:", apiUrl)
+
+    const response = await fetch(apiUrl, {
         method,
         headers: {
             'Content-Type': 'application/json',
