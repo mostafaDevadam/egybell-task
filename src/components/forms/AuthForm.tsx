@@ -40,8 +40,14 @@ const AuthForm = ({ action, buttonTitle, formTitle, isConfirm = false, isRole = 
     useEffect(() => {
         if (state?.success) {
             toast.success(state.message)
-            if (state?.message.startsWith("Registration")) { navigate("/login") }
-            if (state?.data?.access_token!!) {
+            const register = formTitle.toLowerCase()
+            const login = formTitle.toLowerCase()
+            if (register === "register" && (state?.message.includes("Registration") || state?.message.includes("registered"))) { 
+                 toast.success("Registered successful")
+                 navigate("/login") 
+            
+            }
+            else if (login === "login" && state?.data?.access_token!!) {
                 navigate("/")
             }
         } else if (state?.error) {
