@@ -21,7 +21,7 @@ function DeleteDialog({ showDeleteModal, setShowDeleteModal, onConfirm, onCancel
 
   useEffect(() => {
     if (isConfirmed) {
-      toast.success(' deleted successfully.');
+      //toast.success(' deleted successfully.');
     }
 
     return () => {
