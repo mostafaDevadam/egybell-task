@@ -73,7 +73,7 @@ router.patch("/:id", auth, (req, res) => {
 
 
 // delete: if role is admin then delete user
-// if role is user then delete own account: 
+// delete: if role is user and param id is equal to current user id then delete own account: 
 router.delete("/:id", auth, (req, res) => {
     const userId = parseInt(req.params.id);
 
