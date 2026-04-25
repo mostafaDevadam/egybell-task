@@ -70,4 +70,47 @@ router.patch("/:id", auth, (req, res) => {
 
     res.json({ statusCode: 200, message: "Updated User", data: user });
 });
+
+
+// delete: if role is admin then delete user
+// if role is user then delete own account: 
+router.delete("/:id", auth, (req, res) => {
+    const userId = parseInt(req.params.id);
+
+    // user can only access himself
+    if (userId !== req.user.id && req.user.role !== "admin") {
+        return res.status(403).json({ message: "Access denied" });
+    }
+
+    const user = users.find(u => u.id === userId);
+    if (!user) return res.status(404).json({ statusCode: 404, message: "User not found" });
+
+    let isDeleted = false;
+
+    if (userId === req.user.id) {
+        deleteUserById(userId)
+        isDeleted = true
+    }
+
+    if (req.user.role === "admin") {
+        deleteUserById(userId)
+        isDeleted = true
+    }
+
+    console.log("users after deleted:", users)
+
+    isDeleted ? res.json({ statusCode: 200, message: "Deleted User successfully", data: user }) : res.status(409).json({ statusCode: 500, message: "Delete user failed" });
+
+
+
+})
+
+function deleteUserById(id) {
+    const index = users.findIndex(user => user.id === id);
+
+    if (index !== -1) {
+        users.splice(index, 1); // ✅ modifies array in place
+    }
+}
+
 module.exports = router;
