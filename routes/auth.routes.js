@@ -7,24 +7,46 @@ const role = require("../middleware/role");
 const { logs } = require("../models/log.model");
 
 const router = express.Router();
+function getNextId() {
+  if (users.length === 0) return 1;
+
+  return Math.max(...users.map(u => u.id)) + 1;
+}
+
+function addUser(email, role, password) {
+  const user = {
+    id: getNextId(),
+    email,
+    password,
+    role
+  };
+  users.push(user);
+  return user
+}
+
 
 // Register
 router.post("/register", async (req, res) => {
   const { email, password, role: userRole } = req.body;
+
+  if(!email || !password || !role){
+    return res.status(400).json({ statusCode: 400, message: "Email, password and role are required", data: null });
+  }
 
   const existing = users.find(u => u.email === email);
   if (existing) return res.status(404).json({ statusCode: 500, message: "Email is already exiting", data: null });
 
   const hashedPassword = await bcrypt.hash(password, 10);
 
-  const user = {
+  /*const user = {
     id: users.length + 1,
     email,
     password: hashedPassword,
     role: userRole || "user",
   };
 
-  users.push(user);
+  users.push(user);*/
+  const user = addUser(email, userRole || "user", hashedPassword)
 
   console.log("users:", users)
 
