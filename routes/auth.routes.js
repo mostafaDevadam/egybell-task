@@ -28,7 +28,7 @@ router.post("/register", async (req, res) => {
 
   console.log("users:", users)
 
-  res.json({ statusCode: 201, message: "User created", data: user });
+  res.json({ statusCode: 201, message: "User created/registered", data: user });
 });
 
 // Login
@@ -130,7 +130,7 @@ function generateAccessToken(user) {
   const token = jwt.sign(
     { id: user.id, role: user.role },
     process.env.JWT_SECRET,
-    { expiresIn: "30s" }
+    { expiresIn: process.env.EXPRIES_IN ?? "5m" }
   );
   return token
 }
