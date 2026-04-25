@@ -18,21 +18,15 @@ const DashboardPage = () => {
         <p className='bg-gray-50 dark:bg-gray-800 p-6 rounded-lg shadow-md border border-gray-200 dark:border-gray-700 sm:mt-10'>Role: {role}</p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-5 px-4 mt-5">
-        <div className="w-full max-w-md bg-gray-50 dark:bg-gray-800 p-6 rounded-lg shadow-md border border-gray-200 dark:border-gray-700 md:col-span-2 col-span-1 hover:border-blue-600 dark:hover:border-gray-100">{lorem}</div>
-        <div className="w-full max-w-md bg-gray-50 dark:bg-gray-800 p-6 rounded-lg shadow-md border border-gray-200 dark:border-gray-700 md:col-span-2 col-span-1 hover:border-blue-600 dark:hover:border-gray-100">{lorem}</div>
-      </div>
 
-       <div className="grid grid-cols-1 md:grid-cols-4 gap-5 px-4 mt-5">
-        <div className="w-full max-w-md bg-gray-50 dark:bg-gray-800 p-6 rounded-lg shadow-md border border-gray-200 dark:border-gray-700 md:col-span-2 col-span-1 hover:border-blue-600 dark:hover:border-gray-100">{lorem}</div>
-        <div className="w-full max-w-md bg-gray-50 dark:bg-gray-800 p-6 rounded-lg shadow-md border border-gray-200 dark:border-gray-700 md:col-span-2 col-span-1 hover:border-blue-600 dark:hover:border-gray-100">{lorem}</div>
+       {[1,2,3,4].map((m,i) => (
+        <div key={i} className="grid grid-cols-1 md:grid-cols-4 gap-5 px-4 mt-5" >
+        <div className="test-content w-full max-w-md bg-gray-50 dark:bg-gray-800 p-6 rounded-lg shadow-md border border-gray-200 dark:border-gray-700 md:col-span-2 col-span-1 hover:border-blue-600 dark:hover:border-gray-100">
+          {lorem}</div>
+        <div className="test-content w-full max-w-md bg-gray-50 dark:bg-gray-800 p-6 rounded-lg shadow-md border border-gray-200 dark:border-gray-700 md:col-span-2 col-span-1 hover:border-blue-600 dark:hover:border-gray-100">
+          {lorem}</div>
       </div>
-
-       <div className="grid grid-cols-1 md:grid-cols-4 gap-5 px-4 mt-5">
-        <div className="w-full max-w-md bg-gray-50 dark:bg-gray-800 p-6 rounded-lg shadow-md border border-gray-200 dark:border-gray-700 md:col-span-2 col-span-1 hover:border-blue-600 dark:hover:border-gray-100">{lorem}</div>
-        <div className="w-full max-w-md bg-gray-50 dark:bg-gray-800 p-6 rounded-lg shadow-md border border-gray-200 dark:border-gray-700 md:col-span-2 col-span-1 hover:border-blue-600 dark:hover:border-gray-100">{lorem}</div>
-      </div>
-
+      ))}
 
 
     </div>
