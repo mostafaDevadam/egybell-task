@@ -30,7 +30,7 @@ Terminal: npm run test
 
 Using git switch to branch backend: <br>
 Terminal: git switch backend <br>
-create .env file and add PORT variable in it. <br>
+create .env file and add PORT and EXPRIES_IN variables in it. <br>
 
 Terminal: npm i 
 
