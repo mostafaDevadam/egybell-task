@@ -69,8 +69,9 @@ types.ts
 
 [task-api.postman_collection.json](https://github.com/mostafaDevadam/egybell-task/blob/frontend/task-api.postman_collection.json): postman collection for api/ednpoints
 
-./test/ : auth/: testing for auth files and components/: testing for components
-I wrote testing using Vitest and react-testing-library. 
+## Testing: <br>
+./test/ : auth/: testing for auth files and components/: testing for components and based on auth and components in frontend branch. <br>
+I wrote testing using Vitest and react-testing-library. <br>
 
 I used tailwindcss for styling of App and react-toastify for displaying feedback by toast-ui. <br>
 I used redux-toolkit for auth and created reusable AuthForm component for login and register pages. <br>
@@ -89,11 +90,13 @@ I created app-routes and protected routes based on current user and his role <br
 
 I created UI as responsive and with dark mode if browser is in dark mode. <br>
 
-Backend: <br>
+
+
+# Backend: <br>
+
 I developed a very simple Node.js/Express.js server  with restAPI and jwt <br>
 
-
-# Backend/API: <br>
+## API: <br>
 
 EndPoint: "/auth/register" <br>
 Method: POST <br>
