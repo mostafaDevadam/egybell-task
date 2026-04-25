@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router'
 import { useAppSelector } from '../../store/store'
+import RenderActionButton from './RenderActionButton'
 
 type Props<T = any> = {
     docs: T[]
@@ -8,7 +9,7 @@ type Props<T = any> = {
     isActions: boolean
 }
 function Table({ docs, fields, isActions }: Props) {
-    const { role } = useAppSelector(state => state.auth)
+    const { role, user } = useAppSelector(state => state.auth)
 
     const formatDate = (cellValue: any) => {
         if (!cellValue) return cellValue
@@ -51,6 +52,12 @@ function Table({ docs, fields, isActions }: Props) {
                                                                 className="cursor-pointer text-blue-700 border border-blue-700 hover:border-0 hover:bg-blue-500 hover:text-white px-3 py-1 rounded">View</Link>
                                                             <Link to={`/profile/${m.id}/edit`} data-testid="edit"
                                                                 className="cursor-pointer text-green-700 border border-green-700 hover:border-0 hover:bg-green-500 hover:text-white px-3 py-1 rounded">Edit</Link>
+                                                               {user?.id !== m.id && /*<button
+                                                                className="cursor-pointer text-red-700 border border-red-700 hover:border-0 hover:bg-red-500 hover:text-white px-3 py-1 rounded">
+                                                                    Delete</button> */
+                                                                    <RenderActionButton row={m} title={"Delete"} className="" />
+                                                                    
+                                                                    }
                                                         </div>
                                                     ) : m[f]}
                                         </td>
