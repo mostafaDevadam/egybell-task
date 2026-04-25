@@ -18,3 +18,8 @@ export const updateUserProfileAPI = async (id: any, data: USER_TYPE) => {
    const response = await callAPI<USER_TYPE , USER_TYPE>({url: `${prefix}/${id}`, method: Method.PATCH, body: data})
        return response
 }
+
+export const deleteUserAPI = async (id: any) => {
+     const response = await callAPI<USER_TYPE, any>({url: `${prefix}/${id}`, method: Method.DELETE})
+     return response
+}
