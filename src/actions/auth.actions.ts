@@ -16,7 +16,7 @@ export const registerAction = async (prev: any, formData: FormData) => {
         const response = await registerAPI({ role: formData.get("role") as Role, email: formData.get("email") as string, password: formData.get("password") as string })
         console.log("registerAction response:", response)
 
-        return { success: true, data: response, message: response.message || "Registration successful" }
+        return { success: true, data: response, message: response.message || "Registration successful", message_ar: response.message_ar || "تم التسجيل بنجاح" }
     } catch (error) {
         return { error: "Failed to Registration", message: "Failed to Registration" }
     }
@@ -38,7 +38,7 @@ export const loginAction = async (prev: any, formData: FormData) => {
         console.log("in login Action user:", user)
         store.dispatch(login({ user: user, token: response.data.access_token, role: response.data.role }))
         //store.dispatch(setAuth(true))
-        return { success: true, data: response, message: response.message || "Login successful" }
+        return { success: true, data: response, message: response.message || "Login successful", message_ar: response.message_ar || "تم تسجيل الدخول بنجاح" }
     } catch (error) {
         return { error: "Failed to login", message: "Failed to login" }
     }
