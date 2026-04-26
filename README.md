@@ -1,7 +1,8 @@
 
 # Setup
 
-Install Node.js from [nodejs.org](https://nodejs.org/en/download)
+Download Node.js from [nodejs.org](https://nodejs.org/en/download) and install it.
+Download Git from and [git-scm.com](https://git-scm.com/install/windows) install it.
 
 Terminal: git clone https://github.com/mostafaDevadam/egybell-task.git. <br>
 
