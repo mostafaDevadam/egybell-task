@@ -130,6 +130,22 @@ EndPoint: "/users" <br>
   response: statusCode is number, data:[list of users], message is string <br>
 description: If current user role is admin then can get the response with data. <br>
 
+EndPoint: "/users/id" <br>
+  Method: PATCH <br>
+  Params: id is mandatory <br>
+  Token is mandatory in headers <br>
+  body: <br>
+  - role is mandatory <br>
+  response: statusCode is number, data: updated-user, message is string <br>
+  description: Admin can update role of user
+
+EndPoint: "/users/id" <br>
+  Method: DELETE <br>
+  Params: id is mandatory <br>
+  Token is mandatory in headers <br>
+  response: statusCode is number, data: deleted-user, message is string. <br>
+  description: Admin can delete user or user to delete their own profile. <br>
+
 
 EndPoint: "/logs" <br>
   Method: GET <br>
@@ -138,5 +154,5 @@ EndPoint: "/logs" <br>
 description: if current user role is admin then can get the response with data. <br>
 
 ## What I would add or improve given more time? 
-If I have more time then I will develop and add features like allow admin to create and assign permissions and roles for users <br>
+If I have more time then I will develop and add features like allow admin to create and assign permissions and roles for users and <br>
 I will make more testing using vitest and @testing-library/react for everything and develop or add a refresh-token in the app. <br>
