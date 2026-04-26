@@ -28,6 +28,13 @@
         "placeholders": {
             "enter-your-email": "Enter your email",
             "enter-your-password": "Enter your password"
+        },
+        "validation": {
+            "password-length": "Password must be at least 6 characters long",
+            "password-not-matched": "Password is not matched",
+            "confirm-password-required": "Confirm Password is required",
+            "password-required": "Password is required",
+            "email-required": "Email is required and Enter your email,please!"
         }
     },
     "table": {

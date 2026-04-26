@@ -28,6 +28,13 @@
         "placeholders": {
             "enter-your-email": "أدخل بريدك الإلكتروني",
             "enter-your-password": "أدخل كلمة المرور"
+        },
+         "validation": {
+            "password-length": "كلمة المرور يجب أن تكون على الأقل 6 حروف",
+            "password-not-matched": "كلمة المرور غير متطابقة",
+            "confirm-password-required": "تأكيد كلمة المرور مطلوب",
+            "password-required": "كلمة المرور مطلوب",
+            "email-required": "البريد الإلكتروني مطلوب"
         }
     },
     "table": {

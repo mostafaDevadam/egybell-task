@@ -94,7 +94,7 @@ const AuthForm = ({ action, buttonTitle, formTitle, isConfirm = false, isRole = 
                     <InputEmail onChange={handleChangeEmail} />
                 </div>
                 {showEmailError && <div>
-                    <p className="text-red-500 px-2 py-1 rounded-lg">Email is required and Enter your  email,please!</p>
+                    <p className="text-red-500 px-2 py-1 rounded-lg">{t("form.validation.email-required")}</p>
                 </div>}
                 <div className="flex flex-col gap-1.5 sm:gap-2">
                     <Label htmlFor="password" className="text-sm sm:text-base font-medium text-gray-700 dark:text-gray-100 text-start" title={t("form.password")} />
@@ -102,8 +102,8 @@ const AuthForm = ({ action, buttonTitle, formTitle, isConfirm = false, isRole = 
                 </div>
 
                 {showPasswordError && <div>
-                    <p className="text-red-500 px-2 py-1 rounded-lg hover:bg-red-400 hover:text-gray-100">Password is required</p>
-                    <p className="text-red-500 px-2 py-1 rounded-lg hover:bg-red-400 hover:text-gray-100">Password must be at least 6 characters long </p>
+                    <p className="text-red-500 px-2 py-1 rounded-lg hover:bg-red-400 hover:text-gray-100">{t("form.validation.password-required")}</p>
+                    <p className="text-red-500 px-2 py-1 rounded-lg hover:bg-red-400 hover:text-gray-100">{t("form.validation.password-length")} </p>
                 </div>}
 
                 {isConfirm &&
@@ -114,10 +114,10 @@ const AuthForm = ({ action, buttonTitle, formTitle, isConfirm = false, isRole = 
                                 <InputPassword value={confirmPassword} dataTestid="confirm-password" name="confirm" onChange={handleChangeConfirmPassword} />
                             </div>
                             {!isMatched && <div>
-                                <p className="text-red-500 px-2 py-1 rounded-lg hover:bg-red-400 hover:text-gray-100">Password is not matched</p>
+                                <p className="text-red-500 px-2 py-1 rounded-lg hover:bg-red-400 hover:text-gray-100">{t("form.validation.password-not-matched")}</p>
                             </div>}
                             {showConfirmPasswordError && <div>
-                                <p className="text-red-500 px-2 py-1 rounded-lg hover:bg-red-400 hover:text-gray-100">Confirm Password is required</p>
+                                <p className="text-red-500 px-2 py-1 rounded-lg hover:bg-red-400 hover:text-gray-100">{t("form.validation.confirm-password-required")}</p>
                             </div>}
                         </>
                     )
