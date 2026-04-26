@@ -22,7 +22,7 @@ app.use(cors())
 
 // Optional: set locale manually (from header, query, etc.)
 app.use((req, res, next) => {
-  const lang = req.headers['accept-language'] || 'en'
+  const lang = req.headers['Accept-Language'] || 'en'
   req.setLocale(lang)
   next()
 })
