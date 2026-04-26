@@ -156,3 +156,20 @@ description: if current user role is admin then can get the response with data. 
 ## What I would add or improve given more time? 
 If I have more time then I will develop and add features like to make app support an offline and allow admin to create and assign permissions and roles for users and <br>
 I will make more testing using vitest and @testing-library/react for everything and develop or add a refresh-token in the app. <br>
+
+
+# Screens <br>
+
+<img width="1059" height="831" alt="register page" src="https://github.com/user-attachments/assets/9436cdd9-1809-476a-a3ab-f9ee8bfd664c" />
+<img width="940" height="806" alt="register ar" src="https://github.com/user-attachments/assets/d13c4d4a-4da6-408f-9148-ac36800e9683" />
+<img width="1272" height="842" alt="profile-page" src="https://github.com/user-attachments/assets/ba037c38-3d87-47f0-8ad4-5e633cb19360" />
+<img width="1271" height="799" alt="logs-page" src="https://github.com/user-attachments/assets/8917d186-e949-4749-9441-fd2092cdc803" />
+<img width="1264" height="788" alt="login page" src="https://github.com/user-attachments/assets/c4a2910c-7cc7-4d8e-907e-5df97fb9fcc6" />
+<img width="1408" height="813" alt="login ar" src="https://github.com/user-attachments/assets/3f3ca6bb-44ca-4758-9a5a-46e0f7024d69" />
+<img width="1407" height="867" alt="locale" src="https://github.com/user-attachments/assets/a803869d-ec14-4a45-a908-d6dbfd17bc3d" />
+<img width="1409" height="745" alt="locale users ar" src="https://github.com/user-attachments/assets/ee38fec5-f6ce-4fa7-8aa6-ac873b089894" />
+<img width="1408" height="792" alt="locale logs ar" src="https://github.com/user-attachments/assets/1a839835-6c13-4ad0-926a-57355a1296f2" />
+<img width="1411" height="857" alt="dialog delete" src="https://github.com/user-attachments/assets/db74830b-2353-44e5-a5fc-0cb6d30f1206" />
+<img width="1412" height="844" alt="dark mode" src="https://github.com/user-attachments/assets/c45eb82b-db56-46ba-a603-66e298bcef4c" />
+<img width="1259" height="754" alt="users-page" src="https://github.com/user-attachments/assets/a3116dcd-5769-4c72-b6da-fb83f7c9b57b" />
+
