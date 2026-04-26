@@ -3,14 +3,14 @@ app = "egybell-task-empty-hill-1223"
 [build]
 
 [env]
-  PORT = "8080"
+  PORT = "80"
 
 [http_service]
-  internal_port = 8080
+  internal_port = 80
   force_https = true
 
 [[services]]
-  internal_port = 8080
+  internal_port = 80
   protocol = "tcp"
 
   [[services.ports]]
