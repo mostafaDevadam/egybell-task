@@ -8,7 +8,7 @@ Terminal: git clone https://github.com/mostafaDevadam/egybell-task.git. <br>
 ## Repo branches:<br>
 - frontend: React
 - backend: NodeJS/ExpressJS
-- frontend-v2: has a new features like refresh-token, Internationalization (i18n) and Theme. <br>
+- frontend-v2(Bonus): has a new features like refresh-token, Internationalization (i18n) and Theme. <br>
 
 In project folder:
 
@@ -69,15 +69,11 @@ types.ts
 
 [task-api.postman_collection.json](https://github.com/mostafaDevadam/egybell-task/blob/frontend/task-api.postman_collection.json): postman collection for api/ednpoints
 
-## Testing: <br>
-./test/ : auth/: testing for auth files and components/: testing for components and based on auth and components in frontend branch. <br>
-I wrote testing using Vitest and react-testing-library. <br>
-
 I used tailwindcss for styling of App and react-toastify for displaying feedback by toast-ui. <br>
 I used redux-toolkit for auth and created reusable AuthForm component for login and register pages. <br>
 I saved token in cookie using js-cookie library because react has not built-in api/lib for cookie. <br>
 
-Pages: <br>
+## Pages: <br>
 - auth/Login: use AuthForm with validation(email, password) <br>
 - auth/Register: useAuthForm with validation(role, email, password, confirm-password) <br>
 - pages/Dashboard: is default page when user/admin is logged-in  <br>
@@ -89,6 +85,11 @@ Routes: <br>
 I created app-routes and protected routes based on current user and his role <br>
 
 I created UI as responsive and with dark mode if browser is in dark mode. <br>
+
+## Testing: <br>
+./test/auth/: testing for auth files. <br>
+./test/components/: testing for components and based on auth and components in frontend branch. <br>
+I wrote testing using Vitest and react-testing-library. <br>
 
 
 
