@@ -136,8 +136,8 @@ EndPoint: "/users/id" <br>
   Token is mandatory in headers <br>
   body: <br>
   - role is mandatory <br>
-  response: statusCode is number, data: updated-user, message is string <br>
-  description: Admin can update role of user
+response: statusCode is number, data: updated-user, message is string <br>
+description: Admin can update role of user
 
 EndPoint: "/users/id" <br>
   Method: DELETE <br>
