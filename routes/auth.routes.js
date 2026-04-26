@@ -36,7 +36,7 @@ router.post("/register", async (req, res) => {
 
   console.log("user:", user)
 
-  res.json({ statusCode: 201, message: "User created/registered", data: user });
+  res.json({ statusCode: 201, message: "User created or registered successfully", message_ar: "تم إنشاء المستخدم أو تسجيله بنجاح", data: user });
 });
 
 // Login
@@ -68,7 +68,7 @@ router.post("/login", async (req, res) => {
     role: user.role,
   }
 
-  res.json({ statusCode: 201, message: "Login successful", data: obj});
+  res.json({ statusCode: 201, message: "Login successful", message_ar: "تم تسجيل الدخول بنجاح", data: obj});
 });
 
 
