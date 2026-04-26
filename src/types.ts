@@ -9,6 +9,7 @@ export type REQUEST_PARAMS_TYPE<T = any> = {
 export type RESPONSE_TYPE<T = any> = {
     statusCode: number
     message: string
+    message_ar?: string
     data: T
 }
 
