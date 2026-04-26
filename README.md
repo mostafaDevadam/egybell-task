@@ -71,7 +71,7 @@ types.ts
 
 I used tailwindcss for styling of App and react-toastify for displaying feedback by toast-ui. <br>
 I used redux-toolkit for auth and created reusable AuthForm component for login and register pages. <br>
-I saved token in cookie using js-cookie library because react has not built-in api/lib for cookie. <br>
+I saved token in cookie. <br>
 
 ## Pages: <br>
 - auth/Login: use AuthForm with validation(email, password) <br>
