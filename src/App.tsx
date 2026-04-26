@@ -32,9 +32,7 @@ function App() {
       i18n.changeLanguage(locale ?? "en")
 
   }, [ locale])
-  if (locale) {
-    
-  }
+ 
 
   useEffect(() => {
     if (token && id && role) {
@@ -62,13 +60,13 @@ function App() {
 
       <ToastContainer
         transition={Slide}
-        position={"top-right"}
+        position={locale === "ar" ? "top-left": "top-right"}
         className={""}
         autoClose={5000} // false
         hideProgressBar={false}
         newestOnTop={false}
         closeOnClick={false}
-        rtl={false}
+        rtl={locale === "ar" ? true : false}
         pauseOnFocusLoss
         draggable
         pauseOnHover
