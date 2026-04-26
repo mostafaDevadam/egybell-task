@@ -14,6 +14,11 @@ const i18n = new I18n({
   directory: path.join(__dirname, 'locales'),
   defaultLocale: "en",
   objectNotation: true,
+  register: global,
+  api: {
+    __: 't',
+    __n: 'tn'
+  }
 })
 
 app.use(i18n.init)
@@ -31,10 +36,10 @@ app.use("/api/v1.1/auth", authRoutes);
 app.use("/api/v1.1/users", userRoutes);
 app.use("/api/v1.1/logs", logRoutes);
 
-app.get("/api/v1.1", (req,res) => {
+app.get("/api/v1.1", (req, res) => {
   res.json({
     statusCode: 200,
-    message: req.__("main.api"),
+    message: req.t("main.api"),
     data: null
   })
 })
