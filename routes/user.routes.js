@@ -35,13 +35,13 @@ router.patch("/:id", auth, (req, res) => {
     const userId = parseInt(req.params.id);
 
     // user can only access himself
-    if (req.user.role !== "admin") {
-        return res.status(403).json({ message: "Access denied" });
+    if (userId !== req.user.id && req.user.role !== "admin") {
+        return res.status(403).json({ statusCode: 403, message: "Access denied" });
     }
 
     //const user = users.find(u => u.id === userId);
     const user = getUserById(userId)
-    if (!user) return res.status(404).json({ message: "User not found" });
+    if (!user) return res.status(404).json({ statusCode: 404, message: "User not found" });
 
     user.email = req.body.email || user.email;
     user.role = req.body.role || user.role;
@@ -58,16 +58,6 @@ router.patch("/:id", auth, (req, res) => {
             timestamp: new Date().toISOString(),
         });
     }
-
-    /*users = users.map((m) => {
-         if (m.id === userId) {
-             m = user
-         }
-         return m
-     }
-     );
- 
-     console.log("users:", users)*/
 
 
 
