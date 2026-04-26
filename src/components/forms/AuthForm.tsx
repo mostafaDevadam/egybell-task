@@ -43,13 +43,13 @@ const AuthForm = ({ action, buttonTitle, formTitle, isConfirm = false, isRole = 
 
     useEffect(() => {
         if (state?.success) {
-            toast.success(state.message)
+            toast.success(locale === "ar" ? state.message_ar : state.message)
             if (state?.message.startsWith("Registration")) { navigate(`/${locale}/login`) }
             if (state?.data?.access_token!!) {
                 navigate(`/${locale}`)
             }
         } else if (state?.error) {
-            toast.error(state.message)
+           toast.success(locale === "ar" ? state.message_ar : state.message)
         }
     }, [state])
 

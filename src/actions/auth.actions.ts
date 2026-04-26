@@ -18,7 +18,7 @@ export const registerAction = async (prev: any, formData: FormData) => {
 
         return { success: true, data: response, message: response.message || "Registration successful", message_ar: response.message_ar || "تم التسجيل بنجاح" }
     } catch (error) {
-        return { error: "Failed to Registration", message: "Failed to Registration" }
+        return { error: "Failed to Registration", message: "Failed to Registration", message_ar: "فشل التسجيل" }
     }
 }
 
@@ -40,7 +40,7 @@ export const loginAction = async (prev: any, formData: FormData) => {
         //store.dispatch(setAuth(true))
         return { success: true, data: response, message: response.message || "Login successful", message_ar: response.message_ar || "تم تسجيل الدخول بنجاح" }
     } catch (error) {
-        return { error: "Failed to login", message: "Failed to login" }
+        return { error: "Failed to login", message: "Failed to login", message_ar: "فشل تسجيل الدخول" }
     }
 
 }
