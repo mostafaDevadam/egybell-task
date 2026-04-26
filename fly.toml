@@ -1,15 +1,15 @@
-# fly.toml app configuration file generated for egybell-task on 2026-04-26T08:28:07Z
+# fly.toml app configuration file generated for egybell-task-empty-hill-1223 on 2026-04-26T12:34:15+01:00
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
-app = 'egybell-task'
+app = 'egybell-task-empty-hill-1223'
 primary_region = 'ams'
 
 [build]
 
 [http_service]
-  internal_port = 8080
+  internal_port = 80
   force_https = true
   auto_stop_machines = 'stop'
   auto_start_machines = true
