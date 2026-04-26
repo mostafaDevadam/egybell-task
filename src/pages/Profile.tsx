@@ -34,6 +34,8 @@ const ProfilePage = () => {
         setUser(th.data)
       })
     } 
+
+    
   }, [id, role])
 
   useEffect(() => { 
@@ -56,6 +58,8 @@ const ProfilePage = () => {
         {!isView && role === Role.ADMIN && user && id && <EditProfile user={user} />}
         {isView && role === Role.ADMIN && user && id && <ViewProfile user={user} />}
         {!id && <ViewProfile user={currentUser} />}
+        {(id && isOwn && role == Role.USER ) && <EditProfile user={currentUser!!} /> }
+
 
       
     </div>

@@ -28,7 +28,7 @@ const ViewProfile = ({ user }: Props) => {
             <p className='text-gray-500 text-2xl p-2' data-testid="title">Profile</p>
             {state &&
                 <div className='text-start px-4 flex flex-col gap-5'>
-                    <div className='flex justify-end'>
+                    <div className='flex justify-end gap-5 '>
                         {role === Role.ADMIN || currentUser?.id === state.id ? <RenderActionButton row={state} title={"Delete"} className="" /> : null}
                         {role === Role.USER || currentUser?.id === state.id ? <Link to={`/profile/${state.id}/edit`} data-testid="edit"
                             className="cursor-pointer text-green-700 border border-green-700 hover:border-0 hover:bg-green-500 hover:text-white px-3 py-1 rounded">Edit</Link> : null}
