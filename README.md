@@ -112,13 +112,13 @@ EndPoint: "/auth/login" <br>
   body:  <br>
 - email is mandatory <br>
 - password is mandatory <br>
-  response: statusCode is number, data has token and id, message is string <br>
+response: statusCode is number, data has token and id, message is string <br>
 
 EndPoint: "/users/id" <br>
  Method: GET <br>
  Params: id is mandatory <br>
  Token is mandatory in headers <br>
- response: statusCode is number, data: {user data}, message is string <br>
+response: statusCode is number, data: {user data}, message is string <br>
 
 EndPoint: "/users" <br>
   Method: GET <br>
@@ -127,7 +127,7 @@ EndPoint: "/users" <br>
   body: <br>
   - email is mandatory <br>
   - password is mandatory <br>
-  response: statusCode is number, data:[list of users], message is string <br>
+response: statusCode is number, data:[list of users], message is string <br>
 description: If current user role is admin then can get the response with data. <br>
 
 EndPoint: "/users/id" <br>
@@ -143,14 +143,14 @@ EndPoint: "/users/id" <br>
   Method: DELETE <br>
   Params: id is mandatory <br>
   Token is mandatory in headers <br>
-  response: statusCode is number, data: deleted-user, message is string. <br>
-  description: Admin can delete user or user to delete their own profile. <br>
+response: statusCode is number, data: deleted-user, message is string. <br>
+description: Admin can delete user or user to delete their own profile. <br>
 
 
-EndPoint: "/logs" <br>
+EndPoint : "/logs" <br>
   Method: GET <br>
   Token is mandatory in headers <br>
-  response: statusCode is number, data:[list of logs], message is string. <br>
+response: statusCode is number, data:[list of logs], message is string. <br>
 description: if current user role is admin then can get the response with data. <br>
 
 ## What I would add or improve given more time? 
