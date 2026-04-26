@@ -8,381 +8,75 @@
   },
   "item": [
     {
-      "name": "auth",
+      "name": "local",
       "item": [
         {
-          "name": "register",
-          "request": {
-            "method": "POST",
-            "header": [],
-            "body": {
-              "mode": "raw",
-              "raw": "{\r\n    \"role\": \"user\",\r\n    \"email\": \"user1@gmail.com\",\r\n    \"password\": \"123123\"\r\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            },
-            "url": {
-              "raw": "{{local}}/auth/register",
-              "host": [
-                "{{local}}"
-              ],
-              "path": [
-                "auth",
-                "register"
-              ]
-            }
-          },
-          "response": [
+          "name": "logs",
+          "item": [
             {
-              "name": "register",
-              "originalRequest": {
-                "method": "POST",
-                "header": [],
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\r\n    \"role\": \"user\",\r\n    \"email\": \"user1@gmail.com\",\r\n    \"password\": \"123123\"\r\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                },
-                "url": {
-                  "raw": "{{local}}/auth/register",
-                  "host": [
-                    "{{local}}"
-                  ],
-                  "path": [
-                    "auth",
-                    "register"
-                  ]
-                }
-              },
-              "_postman_previewlanguage": null,
-              "header": null,
-              "cookie": [],
-              "body": null
-            }
-          ]
-        },
-        {
-          "name": "register admin",
-          "request": {
-            "method": "POST",
-            "header": [],
-            "body": {
-              "mode": "raw",
-              "raw": "{\r\n    \"role\": \"admin\",\r\n    \"email\": \"admin@gmail.com\",\r\n    \"password\": \"123123\"\r\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            },
-            "url": {
-              "raw": "{{local}}/auth/register",
-              "host": [
-                "{{local}}"
-              ],
-              "path": [
-                "auth",
-                "register"
-              ]
-            }
-          },
-          "response": [
-            {
-              "name": "register admin",
-              "originalRequest": {
-                "method": "POST",
-                "header": [],
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\r\n    \"role\": \"admin\",\r\n    \"email\": \"admin@gmail.com\",\r\n    \"password\": \"123123\"\r\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                },
-                "url": {
-                  "raw": "{{local}}/auth/register",
-                  "host": [
-                    "{{local}}"
-                  ],
-                  "path": [
-                    "auth",
-                    "register"
-                  ]
-                }
-              },
-              "_postman_previewlanguage": null,
-              "header": null,
-              "cookie": [],
-              "body": null
-            }
-          ]
-        },
-        {
-          "name": "login",
-          "request": {
-            "method": "POST",
-            "header": [],
-            "body": {
-              "mode": "raw",
-              "raw": "{\r\n    \"email\": \"user1@gmail.com\",\r\n    \"password\": \"123123\"\r\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            },
-            "url": {
-              "raw": "{{local}}/auth/login",
-              "host": [
-                "{{local}}"
-              ],
-              "path": [
-                "auth",
-                "login"
-              ]
-            }
-          },
-          "response": [
-            {
-              "name": "login",
-              "originalRequest": {
-                "method": "POST",
-                "header": [],
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\r\n    \"email\": \"user1@gmail.com\",\r\n    \"password\": \"123123\"\r\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                },
-                "url": {
-                  "raw": "{{local}}/auth/login",
-                  "host": [
-                    "{{local}}"
-                  ],
-                  "path": [
-                    "auth",
-                    "login"
-                  ]
-                }
-              },
-              "_postman_previewlanguage": "",
-              "header": [],
-              "cookie": [
-                {
-                  "expires": "Invalid Date",
-                  "domain": "",
-                  "path": ""
-                }
-              ],
-              "body": ""
-            }
-          ]
-        },
-        {
-          "name": "login admin",
-          "request": {
-            "method": "POST",
-            "header": [],
-            "body": {
-              "mode": "raw",
-              "raw": "{\r\n     \"email\": \"admin@gmail.com\",\r\n    \"password\": \"123123\"\r\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            },
-            "url": {
-              "raw": "{{local}}/auth/login",
-              "host": [
-                "{{local}}"
-              ],
-              "path": [
-                "auth",
-                "login"
-              ]
-            }
-          },
-          "response": [
-            {
-              "name": "login admin",
-              "originalRequest": {
-                "method": "POST",
-                "header": [],
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\r\n     \"email\": \"admin@gmail.com\",\r\n    \"password\": \"123123\"\r\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                },
-                "url": {
-                  "raw": "{{local}}/auth/login",
-                  "host": [
-                    "{{local}}"
-                  ],
-                  "path": [
-                    "auth",
-                    "login"
-                  ]
-                }
-              },
-              "_postman_previewlanguage": null,
-              "header": null,
-              "cookie": [],
-              "body": null
-            }
-          ]
-        },
-        {
-          "name": "logout",
-          "request": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{token}}",
-                "type": "text"
-              },
-              {
-                "key": "Authorization",
-                "value": "Bearer {{token_admin}}",
-                "type": "text",
-                "disabled": true
-              }
-            ],
-            "url": {
-              "raw": "{{local}}/auth/logout/2",
-              "host": [
-                "{{local}}"
-              ],
-              "path": [
-                "auth",
-                "logout",
-                "2"
-              ]
-            }
-          },
-          "response": [
-            {
-              "name": "logout",
-              "originalRequest": {
-                "method": "POST",
+              "name": "get logs",
+              "request": {
+                "method": "GET",
                 "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token_admin}}",
+                    "type": "text"
+                  },
                   {
                     "key": "Authorization",
                     "value": "Bearer {{token}}",
                     "type": "text",
                     "disabled": true
-                  },
-                  {
-                    "key": "Authorization",
-                    "value": "Bearer {{token_admin}}",
-                    "type": "text"
                   }
                 ],
                 "url": {
-                  "raw": "{{local}}/auth/logout/1",
+                  "raw": "{{local}}/logs",
                   "host": [
                     "{{local}}"
                   ],
                   "path": [
-                    "auth",
-                    "logout",
-                    "1"
+                    "logs"
                   ]
                 }
               },
-              "_postman_previewlanguage": null,
-              "header": null,
-              "cookie": [],
-              "body": null
+              "response": [
+                {
+                  "name": "get logs",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Authorization",
+                        "value": "Bearer {{token}}",
+                        "type": "text"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{local}}/logs",
+                      "host": [
+                        "{{local}}"
+                      ],
+                      "path": [
+                        "logs"
+                      ]
+                    }
+                  },
+                  "_postman_previewlanguage": null,
+                  "header": null,
+                  "cookie": [],
+                  "body": null
+                }
+              ]
             }
           ]
         },
         {
-          "name": "refresh token",
-          "request": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{token_admin}}",
-                "type": "text"
-              }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{\r\n    \"refresh_token\": \"{{refresh_token}}\"\r\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            },
-            "url": {
-              "raw": "{{local}}/auth/refresh",
-              "host": [
-                "{{local}}"
-              ],
-              "path": [
-                "auth",
-                "refresh"
-              ]
-            }
-          },
-          "response": []
-        }
-      ]
-    },
-    {
-      "name": "users",
-      "item": [
-        {
-          "name": "get all users",
-          "request": {
-            "method": "GET",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{token}}",
-                "type": "text",
-                "disabled": true
-              },
-              {
-                "key": "Authorization",
-                "value": "Bearer {{token_admin}}",
-                "type": "text"
-              }
-            ],
-            "url": {
-              "raw": "{{local}}/users",
-              "host": [
-                "{{local}}"
-              ],
-              "path": [
-                "users"
-              ]
-            }
-          },
-          "response": [
+          "name": "users",
+          "item": [
             {
               "name": "get all users",
-              "originalRequest": {
+              "request": {
                 "method": "GET",
                 "header": [
                   {
@@ -407,45 +101,114 @@
                   ]
                 }
               },
-              "_postman_previewlanguage": "",
-              "header": [],
-              "cookie": [
+              "response": [
                 {
-                  "expires": "Invalid Date",
-                  "domain": "",
-                  "path": ""
+                  "name": "get all users",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Authorization",
+                        "value": "Bearer {{token}}",
+                        "type": "text",
+                        "disabled": true
+                      },
+                      {
+                        "key": "Authorization",
+                        "value": "Bearer {{token_admin}}",
+                        "type": "text"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{local}}/users",
+                      "host": [
+                        "{{local}}"
+                      ],
+                      "path": [
+                        "users"
+                      ]
+                    }
+                  },
+                  "_postman_previewlanguage": "",
+                  "header": [],
+                  "cookie": [
+                    {
+                      "expires": "Invalid Date",
+                      "domain": "",
+                      "path": ""
+                    }
+                  ],
+                  "body": ""
                 }
-              ],
-              "body": ""
-            }
-          ]
-        },
-        {
-          "name": "get user profile",
-          "request": {
-            "method": "GET",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{token}}",
-                "type": "text"
-              }
-            ],
-            "url": {
-              "raw": "{{local}}/users/1",
-              "host": [
-                "{{local}}"
-              ],
-              "path": [
-                "users",
-                "1"
               ]
-            }
-          },
-          "response": [
+            },
+            {
+              "name": "delete user",
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text",
+                    "disabled": true
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token_admin}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{local}}/users/1",
+                  "host": [
+                    "{{local}}"
+                  ],
+                  "path": [
+                    "users",
+                    "1"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "delete user",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Authorization",
+                        "value": "Bearer {{token}}",
+                        "type": "text"
+                      },
+                      {
+                        "key": "Authorization",
+                        "value": "Bearer {{token_admin}}",
+                        "type": "text",
+                        "disabled": true
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{local}}/users/3",
+                      "host": [
+                        "{{local}}"
+                      ],
+                      "path": [
+                        "users",
+                        "3"
+                      ]
+                    }
+                  },
+                  "_postman_previewlanguage": null,
+                  "header": null,
+                  "cookie": [],
+                  "body": null
+                }
+              ]
+            },
             {
               "name": "get user profile",
-              "originalRequest": {
+              "request": {
                 "method": "GET",
                 "header": [
                   {
@@ -465,48 +228,39 @@
                   ]
                 }
               },
-              "_postman_previewlanguage": null,
-              "header": null,
-              "cookie": [],
-              "body": null
-            }
-          ]
-        },
-        {
-          "name": "update user profile",
-          "request": {
-            "method": "PATCH",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{token_admin}}",
-                "type": "text"
-              }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{\r\n    \"role\": \"admin\"\r\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
+              "response": [
+                {
+                  "name": "get user profile",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Authorization",
+                        "value": "Bearer {{token}}",
+                        "type": "text"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{local}}/users/1",
+                      "host": [
+                        "{{local}}"
+                      ],
+                      "path": [
+                        "users",
+                        "1"
+                      ]
+                    }
+                  },
+                  "_postman_previewlanguage": null,
+                  "header": null,
+                  "cookie": [],
+                  "body": null
                 }
-              }
-            },
-            "url": {
-              "raw": "{{local}}/users/2",
-              "host": [
-                "{{local}}"
-              ],
-              "path": [
-                "users",
-                "2"
               ]
-            }
-          },
-          "response": [
+            },
             {
               "name": "update user profile",
-              "originalRequest": {
+              "request": {
                 "method": "PATCH",
                 "header": [
                   {
@@ -525,53 +279,640 @@
                   }
                 },
                 "url": {
-                  "raw": "{{local}}/users/1",
+                  "raw": "{{local}}/users/2",
                   "host": [
                     "{{local}}"
                   ],
                   "path": [
                     "users",
-                    "1"
+                    "2"
                   ]
                 }
               },
-              "_postman_previewlanguage": null,
-              "header": null,
-              "cookie": [],
-              "body": null
+              "response": [
+                {
+                  "name": "update user profile",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Authorization",
+                        "value": "Bearer {{token_admin}}",
+                        "type": "text"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"role\": \"admin\"\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{local}}/users/1",
+                      "host": [
+                        "{{local}}"
+                      ],
+                      "path": [
+                        "users",
+                        "1"
+                      ]
+                    }
+                  },
+                  "_postman_previewlanguage": null,
+                  "header": null,
+                  "cookie": [],
+                  "body": null
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "auth",
+          "item": [
+            {
+              "name": "register",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"role\": \"user\",\r\n    \"email\": \"user1@gmail.com\",\r\n    \"password\": \"123123\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{local}}/auth/register",
+                  "host": [
+                    "{{local}}"
+                  ],
+                  "path": [
+                    "auth",
+                    "register"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "register",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"role\": \"user\",\r\n    \"email\": \"user1@gmail.com\",\r\n    \"password\": \"123123\"\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{local}}/auth/register",
+                      "host": [
+                        "{{local}}"
+                      ],
+                      "path": [
+                        "auth",
+                        "register"
+                      ]
+                    }
+                  },
+                  "_postman_previewlanguage": null,
+                  "header": null,
+                  "cookie": [],
+                  "body": null
+                }
+              ]
+            },
+            {
+              "name": "register admin",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"role\": \"admin\",\r\n    \"email\": \"admin@gmail.com\",\r\n    \"password\": \"123123\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{local}}/auth/register",
+                  "host": [
+                    "{{local}}"
+                  ],
+                  "path": [
+                    "auth",
+                    "register"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "register admin",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"role\": \"admin\",\r\n    \"email\": \"admin@gmail.com\",\r\n    \"password\": \"123123\"\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{local}}/auth/register",
+                      "host": [
+                        "{{local}}"
+                      ],
+                      "path": [
+                        "auth",
+                        "register"
+                      ]
+                    }
+                  },
+                  "_postman_previewlanguage": null,
+                  "header": null,
+                  "cookie": [],
+                  "body": null
+                }
+              ]
+            },
+            {
+              "name": "login",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"email\": \"user2@gmail.com\",\r\n    \"password\": \"123123\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{local}}/auth/login",
+                  "host": [
+                    "{{local}}"
+                  ],
+                  "path": [
+                    "auth",
+                    "login"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "login",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"email\": \"user1@gmail.com\",\r\n    \"password\": \"123123\"\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{local}}/auth/login",
+                      "host": [
+                        "{{local}}"
+                      ],
+                      "path": [
+                        "auth",
+                        "login"
+                      ]
+                    }
+                  },
+                  "_postman_previewlanguage": "",
+                  "header": [],
+                  "cookie": [
+                    {
+                      "expires": "Invalid Date",
+                      "domain": "",
+                      "path": ""
+                    }
+                  ],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "name": "login admin",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n     \"email\": \"admin@gmail.com\",\r\n    \"password\": \"123123\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{local}}/auth/login",
+                  "host": [
+                    "{{local}}"
+                  ],
+                  "path": [
+                    "auth",
+                    "login"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "login admin",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n     \"email\": \"admin@gmail.com\",\r\n    \"password\": \"123123\"\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{local}}/auth/login",
+                      "host": [
+                        "{{local}}"
+                      ],
+                      "path": [
+                        "auth",
+                        "login"
+                      ]
+                    }
+                  },
+                  "_postman_previewlanguage": null,
+                  "header": null,
+                  "cookie": [],
+                  "body": null
+                }
+              ]
+            },
+            {
+              "name": "logout",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token_admin}}",
+                    "type": "text",
+                    "disabled": true
+                  }
+                ],
+                "url": {
+                  "raw": "{{local}}/auth/logout/2",
+                  "host": [
+                    "{{local}}"
+                  ],
+                  "path": [
+                    "auth",
+                    "logout",
+                    "2"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "logout",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Authorization",
+                        "value": "Bearer {{token}}",
+                        "type": "text",
+                        "disabled": true
+                      },
+                      {
+                        "key": "Authorization",
+                        "value": "Bearer {{token_admin}}",
+                        "type": "text"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{local}}/auth/logout/1",
+                      "host": [
+                        "{{local}}"
+                      ],
+                      "path": [
+                        "auth",
+                        "logout",
+                        "1"
+                      ]
+                    }
+                  },
+                  "_postman_previewlanguage": null,
+                  "header": null,
+                  "cookie": [],
+                  "body": null
+                }
+              ]
+            },
+            {
+              "name": "refresh token",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token_admin}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"refresh_token\": \"{{refresh_token}}\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{local}}/auth/refresh",
+                  "host": [
+                    "{{local}}"
+                  ],
+                  "path": [
+                    "auth",
+                    "refresh"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "refresh token",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Authorization",
+                        "value": "Bearer {{token_admin}}",
+                        "type": "text"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"refresh_token\": \"{{refresh_token}}\"\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{local}}/auth/refresh",
+                      "host": [
+                        "{{local}}"
+                      ],
+                      "path": [
+                        "auth",
+                        "refresh"
+                      ]
+                    }
+                  },
+                  "_postman_previewlanguage": null,
+                  "header": null,
+                  "cookie": [],
+                  "body": null
+                }
+              ]
             }
           ]
         }
       ]
     },
     {
-      "name": "logs",
+      "name": "live",
       "item": [
         {
-          "name": "get logs",
-          "request": {
-            "method": "GET",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{token_admin}}",
-                "type": "text"
-              }
-            ],
-            "url": {
-              "raw": "{{local}}/logs",
-              "host": [
-                "{{local}}"
-              ],
-              "path": [
-                "logs"
-              ]
-            }
-          },
-          "response": [
+          "name": "logs",
+          "item": [
             {
               "name": "get logs",
-              "originalRequest": {
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token_admin}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text",
+                    "disabled": true
+                  }
+                ],
+                "url": {
+                  "raw": "{{live}}/logs",
+                  "host": [
+                    "{{live}}"
+                  ],
+                  "path": [
+                    "logs"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "get logs",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Authorization",
+                        "value": "Bearer {{token_admin}}",
+                        "type": "text"
+                      },
+                      {
+                        "key": "Authorization",
+                        "value": "Bearer {{token}}",
+                        "type": "text",
+                        "disabled": true
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{live}}/logs",
+                      "host": [
+                        "{{live}}"
+                      ],
+                      "path": [
+                        "logs"
+                      ]
+                    }
+                  },
+                  "_postman_previewlanguage": null,
+                  "header": null,
+                  "cookie": [],
+                  "body": null
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "users",
+          "item": [
+            {
+              "name": "get all users",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text",
+                    "disabled": true
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token_admin}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{live}}/users",
+                  "host": [
+                    "{{live}}"
+                  ],
+                  "path": [
+                    "users"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "get all users",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Authorization",
+                        "value": "Bearer {{token}}",
+                        "type": "text",
+                        "disabled": true
+                      },
+                      {
+                        "key": "Authorization",
+                        "value": "Bearer {{token_admin}}",
+                        "type": "text"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{live}}/users",
+                      "host": [
+                        "{{live}}"
+                      ],
+                      "path": [
+                        "users"
+                      ]
+                    }
+                  },
+                  "_postman_previewlanguage": null,
+                  "header": null,
+                  "cookie": [],
+                  "body": null
+                }
+              ]
+            },
+            {
+              "name": "delete user",
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text",
+                    "disabled": true
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token_admin}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{live}}/users/2",
+                  "host": [
+                    "{{live}}"
+                  ],
+                  "path": [
+                    "users",
+                    "2"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "delete user",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Authorization",
+                        "value": "Bearer {{token}}",
+                        "type": "text",
+                        "disabled": true
+                      },
+                      {
+                        "key": "Authorization",
+                        "value": "Bearer {{token_admin}}",
+                        "type": "text"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{live}}/users/2",
+                      "host": [
+                        "{{live}}"
+                      ],
+                      "path": [
+                        "users",
+                        "2"
+                      ]
+                    }
+                  },
+                  "_postman_previewlanguage": null,
+                  "header": null,
+                  "cookie": [],
+                  "body": null
+                }
+              ]
+            },
+            {
+              "name": "get user profile",
+              "request": {
                 "method": "GET",
                 "header": [
                   {
@@ -581,19 +922,488 @@
                   }
                 ],
                 "url": {
-                  "raw": "{{local}}/logs",
+                  "raw": "{{live}}/users/1",
                   "host": [
-                    "{{local}}"
+                    "{{live}}"
                   ],
                   "path": [
-                    "logs"
+                    "users",
+                    "1"
                   ]
                 }
               },
-              "_postman_previewlanguage": null,
-              "header": null,
-              "cookie": [],
-              "body": null
+              "response": [
+                {
+                  "name": "get user profile",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Authorization",
+                        "value": "Bearer {{token}}",
+                        "type": "text"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{live}}/users/1",
+                      "host": [
+                        "{{live}}"
+                      ],
+                      "path": [
+                        "users",
+                        "1"
+                      ]
+                    }
+                  },
+                  "_postman_previewlanguage": null,
+                  "header": null,
+                  "cookie": [],
+                  "body": null
+                }
+              ]
+            },
+            {
+              "name": "update user profile",
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token_admin}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"role\": \"admin\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{live}}/users/2",
+                  "host": [
+                    "{{live}}"
+                  ],
+                  "path": [
+                    "users",
+                    "2"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "update user profile",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Authorization",
+                        "value": "Bearer {{token_admin}}",
+                        "type": "text"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"role\": \"admin\"\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{live}}/users/2",
+                      "host": [
+                        "{{live}}"
+                      ],
+                      "path": [
+                        "users",
+                        "2"
+                      ]
+                    }
+                  },
+                  "_postman_previewlanguage": null,
+                  "header": null,
+                  "cookie": [],
+                  "body": null
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "auth",
+          "item": [
+            {
+              "name": "register",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"role\": \"user\",\r\n    \"email\": \"user1@gmail.com\",\r\n    \"password\": \"123123\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{live}}/auth/register",
+                  "host": [
+                    "{{live}}"
+                  ],
+                  "path": [
+                    "auth",
+                    "register"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "register",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"role\": \"user\",\r\n    \"email\": \"user1@gmail.com\",\r\n    \"password\": \"123123\"\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{live}}/auth/register",
+                      "host": [
+                        "{{live}}"
+                      ],
+                      "path": [
+                        "auth",
+                        "register"
+                      ]
+                    }
+                  },
+                  "_postman_previewlanguage": null,
+                  "header": null,
+                  "cookie": [],
+                  "body": null
+                }
+              ]
+            },
+            {
+              "name": "register admin",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"role\": \"admin\",\r\n    \"email\": \"admin@gmail.com\",\r\n    \"password\": \"123123\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{live}}/auth/register",
+                  "host": [
+                    "{{live}}"
+                  ],
+                  "path": [
+                    "auth",
+                    "register"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "register admin",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"role\": \"admin\",\r\n    \"email\": \"admin@gmail.com\",\r\n    \"password\": \"123123\"\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{live}}/auth/register",
+                      "host": [
+                        "{{live}}"
+                      ],
+                      "path": [
+                        "auth",
+                        "register"
+                      ]
+                    }
+                  },
+                  "_postman_previewlanguage": null,
+                  "header": null,
+                  "cookie": [],
+                  "body": null
+                }
+              ]
+            },
+            {
+              "name": "login",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"email\": \"user1@gmail.com\",\r\n    \"password\": \"123123\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{live}}/auth/login",
+                  "host": [
+                    "{{live}}"
+                  ],
+                  "path": [
+                    "auth",
+                    "login"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "login",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"email\": \"user1@gmail.com\",\r\n    \"password\": \"123123\"\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{live}}/auth/login",
+                      "host": [
+                        "{{live}}"
+                      ],
+                      "path": [
+                        "auth",
+                        "login"
+                      ]
+                    }
+                  },
+                  "_postman_previewlanguage": null,
+                  "header": null,
+                  "cookie": [],
+                  "body": null
+                }
+              ]
+            },
+            {
+              "name": "login admin",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n     \"email\": \"admin@gmail.com\",\r\n    \"password\": \"123123\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{live}}/auth/login",
+                  "host": [
+                    "{{live}}"
+                  ],
+                  "path": [
+                    "auth",
+                    "login"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "login admin",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n     \"email\": \"admin@gmail.com\",\r\n    \"password\": \"123123\"\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{live}}/auth/login",
+                      "host": [
+                        "{{live}}"
+                      ],
+                      "path": [
+                        "auth",
+                        "login"
+                      ]
+                    }
+                  },
+                  "_postman_previewlanguage": null,
+                  "header": null,
+                  "cookie": [],
+                  "body": null
+                }
+              ]
+            },
+            {
+              "name": "logout",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token_admin}}",
+                    "type": "text",
+                    "disabled": true
+                  }
+                ],
+                "url": {
+                  "raw": "{{live}}/auth/logout/2",
+                  "host": [
+                    "{{live}}"
+                  ],
+                  "path": [
+                    "auth",
+                    "logout",
+                    "2"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "logout",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Authorization",
+                        "value": "Bearer {{token}}",
+                        "type": "text"
+                      },
+                      {
+                        "key": "Authorization",
+                        "value": "Bearer {{token_admin}}",
+                        "type": "text",
+                        "disabled": true
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{live}}/auth/logout/2",
+                      "host": [
+                        "{{live}}"
+                      ],
+                      "path": [
+                        "auth",
+                        "logout",
+                        "2"
+                      ]
+                    }
+                  },
+                  "_postman_previewlanguage": null,
+                  "header": null,
+                  "cookie": [],
+                  "body": null
+                }
+              ]
+            },
+            {
+              "name": "refresh token",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token_admin}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"refresh_token\": \"{{refresh_token}}\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{live}}/auth/refresh",
+                  "host": [
+                    "{{live}}"
+                  ],
+                  "path": [
+                    "auth",
+                    "refresh"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "refresh token",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Authorization",
+                        "value": "Bearer {{token_admin}}",
+                        "type": "text"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"refresh_token\": \"{{refresh_token}}\"\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{live}}/auth/refresh",
+                      "host": [
+                        "{{live}}"
+                      ],
+                      "path": [
+                        "auth",
+                        "refresh"
+                      ]
+                    }
+                  },
+                  "_postman_previewlanguage": null,
+                  "header": null,
+                  "cookie": [],
+                  "body": null
+                }
+              ]
             }
           ]
         }
@@ -639,6 +1449,10 @@
     },
     {
       "key": "refresh_token",
+      "value": ""
+    },
+    {
+      "key": "live",
       "value": ""
     }
   ]
