@@ -1,0 +1,9 @@
+{
+	"auth": {},
+	"user": {},
+	"log": {},
+	"main": {
+		"api": "API is working"
+	},
+	"main.api": "main.api"
+}
