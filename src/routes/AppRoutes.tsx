@@ -36,7 +36,7 @@ const AppRoutes = () => {
             <Route path="/logs" element={<ProtectedRoute roles={['admin']}><ActivityLogsPage /></ProtectedRoute>} />
             <Route path="/profile" element={<ProtectedRoute roles={['admin', 'user']}><ProfilePage /></ProtectedRoute>} />
             <Route path="/profile/:id/view" element={<ProtectedRoute roles={['admin']}><ProfilePage /></ProtectedRoute>} />
-            <Route path="/profile/:id/edit" element={<ProtectedRoute roles={['admin']}><ProfilePage /></ProtectedRoute>} />
+            <Route path="/profile/:id/edit" element={<ProtectedRoute roles={['user','admin']}><ProfilePage /></ProtectedRoute>} />
             <Route path="/login" element={isAuth || token ? <Navigate to="/" /> : <LoginPage />} />
             <Route path="/register" element={isAuth || token ? <Navigate to="/" /> : <RegisterPage />} />
         </Routes>
