@@ -8,7 +8,7 @@ Terminal: git clone https://github.com/mostafaDevadam/egybell-task.git. <br>
 ## Repo branches:<br>
 - frontend: React
 - backend: NodeJS/ExpressJS
-- frontend-v2: has a new features like refresh-token, Internationalization (i18n) and Theme. <br>
+- frontend-v2(Bonus): has a new features like refresh-token, Internationalization (i18n) and Theme. <br>
 
 In project folder:
 
