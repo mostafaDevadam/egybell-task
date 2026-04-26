@@ -1,7 +1,9 @@
 import { getToken } from "../lib/token";
 import { REQUEST_PARAMS_TYPE, RESPONSE_TYPE } from "../types";
 
-const baseUrl = `${import.meta.env.VITE_API_URL}`
+const isProd = import.meta.env.VITE_NODE_ENV === 'production'
+
+const baseUrl = `${isProd ? import.meta.env.VITE_LIVE_API_URL : import.meta.env.VITE_API_URL}`
 export const callAPI = async <S, B>({url, method, body}: REQUEST_PARAMS_TYPE<B>) => {
     const token = getToken()
 
