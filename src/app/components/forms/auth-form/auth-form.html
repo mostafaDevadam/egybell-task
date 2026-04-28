@@ -1,0 +1,43 @@
+<form  (submit)="handleOnSubmit($event)" 
+
+class="mx-auto border flex flex-col gap-5 px-4 py-2 rounded-lg w-80">
+    <div class="text-center">
+        <span class="text-3xl">{{title()}}</span>
+    </div>
+    @if(isConfirm()){
+    <div class="flex flex-col gap-3">
+        <label for="role">Role</label>
+        <select class="px-2 py-2 border rounded-lg" id="role" [formField]="authForm.role!!">
+            <option value="admin">Admin</option>
+            <option value="user">User</option>
+        </select>
+    </div>
+    }
+    <div class="flex flex-col gap-3">
+        <label for="email">Email</label>
+        <input type="email" id="email" [formField]="authForm.email" placeholder="Enter Email" class="px-2 py-2 border rounded-lg"/>
+    </div>
+    @if(emailError()){ 
+        <div class="text-red-500">
+            Email is required
+        </div>
+   }
+    <div class="flex flex-col gap-3">
+        <label for="password">Password</label>
+        <input type="password" id="password" [formField]="authForm.password" placeholder="*****" class="px-2 py-2 border rounded-lg"/>
+    </div>
+    @if(passwordError()){<div class="text-red-500">
+           Password is required
+    </div>}
+    @if(isConfirm()){
+         <div class="flex flex-col gap-3">
+        <label for="confirm-password">Confirm Password</label>
+        <input type="password" id="confirm-password" name="confirm-password" placeholder="*****" class="px-2 py-2 border rounded-lg"/>
+    </div>
+     }
+    <div class="flex justify-end">
+        <button type="submit" class="bg-blue-500 rounded-lg p-2 text-white" 
+        >{{title()}}</button>
+    </div>
+
+</form>
