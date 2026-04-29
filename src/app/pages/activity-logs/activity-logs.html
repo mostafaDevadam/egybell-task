@@ -1,1 +1,3 @@
-<p>activity-logs works!</p>
+@if(logs()){
+    <app-table [data]="logs()" [fields]="fields" [showActions]="false"></app-table>
+}

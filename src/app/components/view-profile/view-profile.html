@@ -1,0 +1,37 @@
+<div>
+    <p class='text-gray-500 text-2xl p-2' data-testid="title"></p>
+    @let userData = user();
+    @if(userData) {
+        <div class='text-start px-4 flex flex-col gap-5'>
+            <div class='flex justify-end'>
+                <!-- delete button-->
+                 @if((role | async) === "admin" || (id | async) === userData.id) {
+                   <app-delete-button (onDelete)="openDeleteDialog($event)"></app-delete-button>
+                   @if(isDelete){
+                    <app-delete-dialog (onClose)="closeModal()" (onDelete)="handleOnDelete($event)"></app-delete-dialog>
+                   }
+                   
+                 }
+            </div>
+            
+            <p class='test-content bg-gray-50 dark:bg-gray-800 p-6 rounded-lg shadow-md border border-gray-200 dark:border-gray-700'
+                data-testid="email">
+                <span>Email: {{userData.email}}</span>
+            </p>
+            
+            <p class='test-content bg-gray-50 dark:bg-gray-800 p-6 rounded-lg shadow-md border border-gray-200 dark:border-gray-700 sm:mt-10'
+                data-testid="role">
+                Role: {{userData.role}}
+            </p>
+            
+            <div class='bg-gray-50 dark:bg-gray-800 p-6 rounded-lg shadow-md border border-gray-200 dark:border-gray-700 sm:mt-10'>
+                <p data-testid="bio" class='test-content'>Bio</p>
+                <p data-testid="bio-content" class='test-content'>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat eligendi iure, illo saepe quam quos optio adipisci suscipit dolorum magni excepturi molestias ullam fugiat libero! Voluptatum delectus soluta neque aspernatur!
+                </p>
+            </div>
+        </div>
+    } @else {
+        <p>Loading user data...</p>
+    }
+</div>

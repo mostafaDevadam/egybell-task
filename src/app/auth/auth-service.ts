@@ -1,10 +1,19 @@
 import { HttpClient } from '@angular/common/http';
 import { computed, effect, inject, Injectable, signal } from '@angular/core';
-import { environment } from '../../environments/environment';
+import { environment } from '../../environments/environment.development';
 import { Router } from '@angular/router';
-import { AUTH_LOGIN_RESPONSE_TYPE, RESPONSE_TYPE } from '../shared/types';
+import { AUTH_LOGIN_RESPONSE_TYPE, RESPONSE_TYPE, USER_TYPE } from '../shared/types';
 import { Role } from '../shared/enums';
 import { CookieService } from 'ngx-cookie-service';
+import { Observable, throwError, of } from 'rxjs';
+import { catchError, map, tap } from 'rxjs/operators';
+
+
+export interface IRefreshTokenResponse {
+  access_token: string;
+  refresh_token: string;
+}
+
 
 @Injectable({
   providedIn: 'root',
@@ -12,9 +21,10 @@ import { CookieService } from 'ngx-cookie-service';
 export class AuthService {
 
   private http = inject(HttpClient)
-  private url = environment.apiUrl
+  private apiUrl = environment.apiUrl
   private router = inject(Router)
   private cookie = inject(CookieService)
+  private keys = environment.keys
 
   //isAuth = computed(() => this.getFromCookie('ng_accessToken') ? true : false)
   //isAuth = signal<boolean>(this.isLoggedIn())
@@ -25,7 +35,11 @@ export class AuthService {
   //role = signal<string | null>(null)
   role = this.userRole.asReadonly();
   private accessToken = signal<string | null>(null);
+  accessToken$ = this.accessToken.asReadonly();
   private refreshToken = signal<string | null>(null);
+  refreshToken$ = this.refreshToken.asReadonly();
+  private userID = signal<string | null>(null);
+  userID$ = this.userID.asReadonly();
 
 
   // Role check helpers
@@ -59,14 +73,51 @@ export class AuthService {
   }
 
   async register(email: string, password: string, role: Role) {
-    return await this.http.post<RESPONSE_TYPE<any>>(`${this.url}/auth/register`, { role, email, password })
+    return await this.http.post<RESPONSE_TYPE<any>>(`${this.apiUrl}/auth/register`, { role, email, password })
   }
 
   async login(email: string, password: string) {
-    return await this.http.post<RESPONSE_TYPE<AUTH_LOGIN_RESPONSE_TYPE>>(`${this.url}/auth/login`, { email, password })
+    return await this.http.post<RESPONSE_TYPE<AUTH_LOGIN_RESPONSE_TYPE>>(`${this.apiUrl}/auth/login`, { email, password })
   }
 
-  private initCookieMonitoring() {
+    login$(email: string, password: string) {
+    return this.http.post<RESPONSE_TYPE<AUTH_LOGIN_RESPONSE_TYPE>>(`${this.apiUrl}/auth/login`, { email, password })
+  }
+
+   refreshTokenAPI(): Observable<IRefreshTokenResponse | null> {
+    const refreshToken = this.getRefreshTokenFromCookie();
+    
+    if (!refreshToken) {
+      console.log('No refresh token available');
+      return of(null);
+    }
+    
+    console.log('Refreshing tokens...');
+    return this.http.post<RESPONSE_TYPE<IRefreshTokenResponse>>(`${this.apiUrl}/auth/refresh`, { refresh_token: refreshToken }).pipe(
+      map(response => response.data), // Extract the data from RESPONSE_TYPE
+      tap((data) => {
+        if (data.access_token && data.refresh_token) {
+          // Save both new tokens
+          //this.saveTokens(response.access_token, response.refresh_token);
+          this.saveAccessTokenInCookie(data.access_token)
+          this.saveRefreshTokenInCookie(data.refresh_token)
+          console.log('Tokens refreshed successfully:', data);
+        }
+      }),
+      catchError(error => {
+        console.error('Refresh token failed:', error);
+        this.logout();
+        return of(null);
+      })
+    );
+  }
+
+
+  async fetchAuthUser() {
+     return await this.http.get<RESPONSE_TYPE<USER_TYPE>>(`${this.apiUrl}/auth/me`)
+  }
+
+  public initCookieMonitoring() {
     // Initial sync
     this.syncFromCookies();
 
@@ -100,14 +151,16 @@ export class AuthService {
   }
 
   private checkToken() {
-    const token = this.getFromCookie('ng_accessToken');
+    const token = this.getFromCookie(this.keys.NG_ACCESSTOKEN);
     this.isAuth.set(token !== null);
   }
 
   private syncFromCookies() {
-    const access_token = this.getFromCookie('ng_accessToken');
-    const refresh_token = this.getFromCookie('ng_refreshToken');
-    const role = this.getFromCookie('ng_userRole') as 'user' | 'admin' | null;
+    const access_token = this.getFromCookie(this.keys.NG_ACCESSTOKEN);
+    const refresh_token = this.getFromCookie(this.keys.NG_REFRESHTOKEN);
+    const role = this.getFromCookie(this.keys.NG_USERROLE) as 'user' | 'admin' | null;
+    const user_id = this.getUserIDFromCookie();
+
 
     if (this.accessToken() !== access_token) {
       this.accessToken.set(access_token);
@@ -118,9 +171,52 @@ export class AuthService {
       this.refreshToken.set(refresh_token);
     }
 
+    if(this.userID() !== user_id){
+      this.userID.set(user_id)
+    }
+
     if (this.userRole() !== role) {
       this.userRole.set(role);
     }
+  }
+
+  getAccessToken(){
+    return this.accessToken()
+  }
+  getRefreshToken(){
+    return this.refreshToken()
+  }
+
+  getUserRole(){
+    return this.userRole()
+  }
+
+  getUserID(){
+    return this.userID()
+  }
+
+  saveAccessTokenInCookie(value: string){
+       this.saveInCookie(this.keys.NG_ACCESSTOKEN, value)
+  }
+
+   saveRefreshTokenInCookie(value: string){
+       this.saveInCookie(this.keys.NG_REFRESHTOKEN, value)
+  }
+
+  getAccessTokenFromCookie(){
+    return this.getFromCookie(this.keys.NG_ACCESSTOKEN)
+  }
+
+  getRefreshTokenFromCookie(){
+    return this.getFromCookie(this.keys.NG_REFRESHTOKEN)
+  }
+
+  getUserRoleFromCookie(): 'user' | 'admin' | null {
+    return this.getFromCookie(this.keys.NG_USERROLE) as 'user' | 'admin' | null
+  }
+
+  getUserIDFromCookie(){
+    return this.getFromCookie(this.keys.NG_USERID)
   }
 
 
@@ -130,7 +226,7 @@ export class AuthService {
     //localStorage.removeItem('userRole')
     this.clearAll()
     console.log("logout:", this.isAuth())
-    //this.router.navigate(['/login'])
+    this.router.navigate(['/login'])
   }
 
   saveInCookie(key: string, value: string, daysExpire: number = 7) {
@@ -146,14 +242,14 @@ export class AuthService {
   }
 
   isLoggedIn() {
-    return this.getFromCookie('ng_accessToken') !== null
+    return this.getFromCookie(this.keys.NG_ACCESSTOKEN) !== null
   }
 
   clearAll() {
-    this.removeFromCookie('ng_accessToken')
-    this.removeFromCookie('ng_refreshToken')
-    this.removeFromCookie('ng_userId')
-    this.removeFromCookie('ng_userRole')
+    this.removeFromCookie(this.keys.NG_ACCESSTOKEN)
+    this.removeFromCookie(this.keys.NG_REFRESHTOKEN)
+    this.removeFromCookie(this.keys.NG_USERID)
+    this.removeFromCookie(this.keys.NG_USERROLE)
     this.isAuth.set(false)
   }
 

@@ -1,1 +1,27 @@
-<p>dashboard works!</p>
+<div>
+    <p class='text-gray-500 text-2xl p-2 dark:text-gray-100 test-title'></p>
+
+    <div class='text-start px-4 flex flex-col gap-5'>
+        <p
+            class='bg-gray-50 dark:bg-gray-800 p-6 rounded-lg shadow-md border border-gray-200 dark:border-gray-700 test-content'>
+            Email: {{email()}}
+        </p>
+        <p
+            class='bg-gray-50 dark:bg-gray-800 p-6 rounded-lg shadow-md border border-gray-200 dark:border-gray-700 sm:mt-10 test-content'>
+            Role: {{role()}}
+        </p>
+    </div>
+
+    @for (item of [1,2,3,4]; track $index) {
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-5 px-4 mt-5">
+        <div
+            class="test-content w-full max-w-md bg-gray-50 dark:bg-gray-800 p-6 rounded-lg shadow-md border border-gray-200 dark:border-gray-700 md:col-span-2 col-span-1 hover:border-blue-600 dark:hover:border-gray-100">
+            {{ lorem }}
+        </div>
+        <div
+            class="test-content w-full max-w-md bg-gray-50 dark:bg-gray-800 p-6 rounded-lg shadow-md border border-gray-200 dark:border-gray-700 md:col-span-2 col-span-1 hover:border-blue-600 dark:hover:border-gray-100">
+            {{ lorem }}
+        </div>
+    </div>
+    }
+</div>

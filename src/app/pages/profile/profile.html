@@ -1,1 +1,24 @@
-<p>profile works!</p>
+@switch(state()){
+@case ('view'){
+@if((role | async) === ROLE.ADMIN){
+@if(user()){
+<app-view-profile [user]="user()"></app-view-profile>
+}
+}
+}
+@case ('edit') {
+@if((role | async) === ROLE.ADMIN){
+@if(user(); as USER_TYPE){
+<app-edit-profile [user]="user()"></app-edit-profile>
+}
+}
+}
+@case ('own'){
+@if(user()){
+<app-view-profile [user]="user()"></app-view-profile>
+}
+}
+@default {
+<p>Cannot View Profile</p>
+}
+}

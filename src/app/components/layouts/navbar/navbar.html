@@ -1,6 +1,5 @@
 <nav class="flex flex-row gap-5 justify-between px-4 py-2 bg-gray-300">
     <span class="font-bold text-3xl">Logo</span>
-    {{ isAuth() }} {{ role() }} , role: {{ isAdmin() ? "admin" : null}} {{ isUser() ? "user" : null}}
     <ul class="flex flex-row gap-5 ">
         @if(isAuth()){
         <li class=" cursor-pointer px-2 py-2 hover:bg-white rounded-lg"><a routerLink="/">Dashboard</a></li>
@@ -9,14 +8,12 @@
         <li class=" cursor-pointer px-2 py-2 hover:bg-white rounded-lg"><a routerLink="/logs">Activity Logs</a></li>
         }
         <li class=" cursor-pointer px-2 py-2 hover:bg-white rounded-lg"><a routerLink="/profile">Profile</a></li>
+        <li class=" cursor-pointer  hover:bg-white rounded-lg bg-white text-red-500 ">
+            <app-logout-button></app-logout-button>
+        </li>
         } @else {
         <li class=" cursor-pointer px-2 py-2 hover:bg-white rounded-lg"><a routerLink="/register">Register</a></li>
         <li class=" cursor-pointer px-2 py-2 hover:bg-white rounded-lg"><a routerLink="/login">Login</a></li>
         }
-
-
-        <li class=" cursor-pointer  hover:bg-white rounded-lg bg-white text-red-500 ">
-            <app-logout-button></app-logout-button>
-        </li>
     </ul>
 </nav>

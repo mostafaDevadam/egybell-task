@@ -17,16 +17,18 @@ export const roleGuard: CanActivateFn = (route, state) => {
   }
 
   if(requiredRole && userRole !== requiredRole){
+     console.log('Access denied - wrong role');
     router.navigate(['/unauthorized']);
     return false;
   }
 
   if(allowedRoles && !allowedRoles.includes(userRole || '')){
+    console.log('Access denied - role not allowed');
     router.navigate(['/unauthorized']);
     return false;
   }
 
 
-
+  console.log('Access granted');
   return true;
 };
