@@ -1,4 +1,4 @@
-import { Component, computed, effect, inject, input, output, signal } from '@angular/core';
+import { Component, computed, effect, inject, input, model, OnChanges, output, signal } from '@angular/core';
 import { AuthService } from '../../../auth/auth-service';
 import { AUTH_BODY_TYPE } from '../../../shared/types';
 import { Role } from '../../../shared/enums';
@@ -15,33 +15,58 @@ import { Router } from '@angular/router';
     ngSkipHydration: 'true'
   }*/
 })
-export class AuthForm {
+export class AuthForm implements OnChanges {
   public title = input.required<string>()
   public isConfirm = input<boolean>(false)
   onSubmit = output<any>()
-
+  confirmPassword = model()
+  isMatched = signal<boolean | null>(null)
+  router = inject(Router)
   //private service = inject(AuthService)
   //private router = inject(Router)
 
 
-  authModel = signal<AUTH_BODY_TYPE>({
+  authModel = signal<AUTH_BODY_TYPE & { confirmPassword: string }>({
     email: '',
     password: '',
     role: '',
+    confirmPassword: '',
   })
 
+  // Inside your component class
   public authForm = form(this.authModel, (schemaPath) => {
     required(schemaPath.email);
     email(schemaPath.email);
+
     required(schemaPath.password);
     minLength(schemaPath.password, 6);
-    if (this.isConfirm()) required(schemaPath.role!!);
 
-  })
+    // Ensure this block is reactive to the input signal
+    if (this.isConfirm()) {
+      required(schemaPath.role!!);
+      required(schemaPath.confirmPassword);
+      minLength(schemaPath.confirmPassword, 6);
+    }
+  });
 
   constructor() {
     effect(() => {
       const registerMode = this.isConfirm();
+
+    const password = this.authForm.password().value();
+    const confirmPassword = this.authForm.confirmPassword().value();
+
+    if (password && confirmPassword) {
+      this.isMatched.set(password === confirmPassword);
+    } else {
+      // Reset to null if one of the fields is empty to hide the error
+      this.isMatched.set(null);
+    }
+
+
+
+
+
 
       /*if (!registerMode) {
         const roleControl = this.authForm.role!!
@@ -60,6 +85,11 @@ export class AuthForm {
     })
   }
 
+  ngOnChanges() {
+    console.log("ngOnChanges:", (this.confirmPassword()))
+  }
+
+  cp = signal(this.confirmPassword())
 
   isSubmitting = signal(false)
 
@@ -71,36 +101,42 @@ export class AuthForm {
     return this.authForm.password().errors().find(err => err.kind === "required" || err.kind === "minLength")
   })
 
-  handleOnSubmit(event: Event): void {
-    const submitEvent = event as SubmitEvent;
-    submitEvent.preventDefault();
+  /*confirmPasswordError = computed(() => {
+    return this.authForm.confirmPassword().errors().find(err => err.kind === "required" || err.kind === "minLength")
+  })*/
 
-    console.log('Form submitted ', this.authForm().value());
+  confirmPasswordError = computed(() => {
+  // Finds the first error where the kind is 'required'
+  return this.authForm.confirmPassword().errors().find(err => err.kind === "required");
+});
 
-
-
-    this.authForm().markAsTouched();
-
-    if (this.isConfirm()) {
-      this.onSubmit.emit(this.authForm().value())
-    } else {
-      this.onSubmit.emit({ email: this.authForm().value().email, password: this.authForm().value().password })
-    }
-
-
-
-    if (this.authForm().invalid()) {
-      console.log("auth-form is invalid")
-
-    }
-
-    /*await submit(this.authForm, async (root) => {
-      console.log(root().value());
-    });*/
-
-    this.isSubmitting.set(true)
-
-
+  // Add this computed property
+formIsInvalid = computed(() => {
+  const formInvalid = this.authForm().invalid();
+  // If in register mode, also check if passwords match
+  if (this.isConfirm()) {
+    return formInvalid || !this.isMatched();
   }
+  return formInvalid;
+});
+
+  handleOnSubmit(event: Event): void {
+  event.preventDefault();
+
+  // 1. Mark everything as touched to show errors
+  this.authForm().markAsTouched();
+
+  // 2. Check both the form's internal validity AND your custom match logic
+  const passwordsMatch = this.isConfirm() ? this.isMatched() : true;
+
+  if (this.authForm().valid() && passwordsMatch) {
+    console.log("Form is valid and passwords match. Submitting...");
+    this.onSubmit.emit(this.authForm().value());
+    this.isSubmitting.set(true);
+  } else {
+    console.log("Validation failed");
+    // Optionally focus the first error or show a toast
+  }
+}
 
 }

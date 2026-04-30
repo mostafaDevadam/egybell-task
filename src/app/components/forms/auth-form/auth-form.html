@@ -1,15 +1,11 @@
-<form  (submit)="handleOnSubmit($event)" 
-
-class="mx-auto border flex flex-col gap-5 px-4 py-2 rounded-lg w-80">
+<form (submit)="handleOnSubmit($event)" class="mx-auto border flex flex-col gap-5 px-4 py-2 rounded-lg w-80">
     <div class="text-center">
         <span class="text-3xl test-title">{{title()}}</span>
     </div>
     @if(isConfirm()){
     <div class="flex flex-col gap-3">
         <label for="role" class="test-title">Role</label>
-        <select 
-        class="px-2 py-2 border rounded-lg test-input-select " id="role" 
-        [formField]="authForm.role!!">
+        <select class="px-2 py-2 border rounded-lg test-input-select " id="role" [formField]="authForm.role!!">
             <option value="admin">Admin</option>
             <option value="user">User</option>
         </select>
@@ -17,32 +13,76 @@ class="mx-auto border flex flex-col gap-5 px-4 py-2 rounded-lg w-80">
     }
     <div class="flex flex-col gap-3">
         <label for="email" class="test-title">Email</label>
-        <input type="email" id="email" [formField]="authForm.email" placeholder="Enter Email" 
-        class="px-2 py-2 border rounded-lg test-input"/>
+        <input type="email" id="email" [formField]="authForm.email" placeholder="Enter Email"
+            class="px-2 py-2 border rounded-lg test-input" />
     </div>
-    @if(emailError()){ 
-        <div class="text-red-500">
-            Email is required
-        </div>
-   }
+    @if(emailError()){
+    <div class="text-red-500">
+        Email is required
+    </div>
+    }
     <div class="flex flex-col gap-3">
         <label for="password" class="test-title">Password</label>
-        <input type="password" id="password" [formField]="authForm.password" placeholder="*****" 
-        class="px-2 py-2 border rounded-lg test-input"/>
+        <input type="password" id="password" [formField]="authForm.password" placeholder="*****"
+            class="px-2 py-2 border rounded-lg test-input" />
     </div>
     @if(passwordError()){<div class="text-red-500">
-           Password is required
+        Password is required
     </div>}
     @if(isConfirm()){
-         <div class="flex flex-col gap-3">
+    <div class="flex flex-col gap-3">
         <label for="confirm-password " class="text--color-text test-title">Confirm Password</label>
-        <input type="password" id="confirm-password" name="confirm-password" placeholder="*****" 
-        class="px-2 py-2 border rounded-lg test-input"/>
+        <input type="password" [formField]="authForm.confirmPassword" id="confirm-password" placeholder="*****"
+            class="px-2 py-2 border rounded-lg test-input" />
     </div>
-     }
+
+    <!-- Only show error if the field is invalid AND the user has touched/clicked it -->
+    @if(confirmPasswordError() && authForm.confirmPassword().touched()){
+    <div class="text-red-500 text-sm">
+        Confirm password is required
+    </div>
+    }
+
+     @if(authForm.password().touched() && !authForm.confirmPassword().touched()){
+    <div class="text-red-500 text-sm">
+        Confirm password is required
+    </div>
+    }
+
+    @if(confirmPasswordError()){
+    <div class="text-red-500">
+        Confirm Password is required
+    </div>
+    }
+
+    @if(!this.isMatched() && this.isMatched() !== null){
+    <div class="text-red-500  animate-pulse">
+        Confirm Password is not matched
+    </div>}
+
+
+    @if (isMatched() === false && authForm.confirmPassword().touched()) {
+    <div class="text-red-500 text-sm mt-1 animate-pulse">
+        ⚠ Passwords do not match
+    </div>
+    }
+
+    }
+
+    <!-- 1. Check for Required/MinLength Errors -->
+    @if(confirmPasswordError() && authForm.confirmPassword().touched()){
+    <div class="text-red-500 text-sm">
+        Confirm Password is required
+    </div>
+    }
+
+
+
+
     <div class="flex justify-end">
-        <button type="submit" class="bg-blue-500 rounded-lg p-2 text-white test-title " 
-        >{{title()}}</button>
+        <button type="submit" [disabled]="formIsInvalid()"
+            [class]="'bg-blue-500 disabled:bg-gray-400 rounded-lg p-2 text-white test-title ' + (formIsInvalid() ? 'cursor-not-allowed' : 'cursor-pointer')">
+            {{title()}}</button>
     </div>
 
 </form>
