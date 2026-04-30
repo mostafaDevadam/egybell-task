@@ -2,7 +2,7 @@ import { Component, inject, OnInit, signal } from '@angular/core';
 import { UsersService } from '../../services/users';
 import { IActionEvent, ITabelField, Table } from '../../components/data-tables/table/table';
 import { USER_TYPE } from '../../shared/types';
-import { firstValueFrom, from, fromEvent, map, Observable } from 'rxjs';
+import { firstValueFrom, from, fromEvent, lastValueFrom, map, Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { DeleteButton } from '../../components/buttons/delete-button/delete-button';
 import { CloseButton } from '../../components/buttons/close-button/close-button';
@@ -62,14 +62,19 @@ export class Users implements OnInit {
   }
 
   fetchUsers = async () => {
-    try {
-      const response = (await this.service.fetchAllUsers()).toPromise()
-      response.then(users => this.users.set(users?.data ?? []))
-    } catch (error) {
-      console.log("fetchAllUsers error:", error)
-    }
+  try {
+    // 1. Wait for the initial promise from the service
+    const observable = await this.service.fetchAllUsers();
+    
+    // 2. Convert observable to promise and wait for the HTTP result
+    // Note: use firstValueFrom(observable) in modern Angular instead of .toPromise()
+    const users = await lastValueFrom(observable)
+    
+    this.users.set(users?.data ?? []);
+  } catch (error) {
+    console.error("fetchAllUsers error:", error);
   }
-
+}
   closeModal() {
     this.isDelete = false;
   }
