@@ -12,11 +12,14 @@
   "private": true,
   "packageManager": "npm@11.12.1",
   "dependencies": {
+    "@analogjs/vite-plugin-angular": "^2.5.0",
+    "@angular/animations": "^21.2.10",
     "@angular/common": "^21.2.0",
     "@angular/compiler": "^21.2.0",
     "@angular/core": "^21.2.0",
     "@angular/forms": "^21.2.0",
     "@angular/platform-browser": "^21.2.0",
+    "@angular/platform-browser-dynamic": "^21.2.10",
     "@angular/platform-server": "^21.2.0",
     "@angular/router": "^21.2.0",
     "@angular/ssr": "^21.2.7",
@@ -26,6 +29,8 @@
     "@ngrx/store-devtools": "^21.1.0",
     "express": "^5.1.0",
     "ngx-cookie-service": "^21.3.1",
+    "ngx-signal-toast": "^1.1.4",
+    "ngx-toastr": "^20.0.5",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0"
   },
