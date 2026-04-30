@@ -56,4 +56,5 @@ export const routes: Routes = [
     { path: '**', loadComponent: () => import('./pages/not-found/not-found').then(m => m.NotFound) },
     { path: 'unauthorized', loadComponent: () => import('./pages/unauthorized/unauthorized').then(m => m.Unauthorized) },
     { path: 'error', loadComponent: () => import('./pages/error/error').then(m => m.Error) },
+     { path: 'notfound', loadComponent: () => import('./pages/not-found/not-found').then(m => m.NotFound) },
 ];
