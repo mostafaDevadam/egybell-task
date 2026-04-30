@@ -1,10 +1,40 @@
-
 <div class="flex flex-row gap-5 justify-center">
     <div>
-        Signal: {{ name() }}
-        <button class="bg-blue-500 text-white px-2 py-2 rounded-lg" (click)="updateName()">change name</button>
-    </div>
-<app-auth-form title="Login" [isConfirm]="false" (onSubmit)="login($event)"  ></app-auth-form>
+       
 
-<!--<app-auth-form title="Login" [isConfirm]="false" (onSubmit)="login($event)"  ></app-auth-form>-->
+
+      
+
+         <div class="fixed top-4 right-4 z-50 mt-10">
+        <!--<button
+          
+          class="px-6 py-3 bg-purple-600 text-white font-semibold rounded-lg shadow-lg hover:bg-purple-700 transition-all duration-200 transform hover:scale-105"
+        >
+          🚀 Show Temporary Message
+        </button>-->
+      </div>
+
+        <!--<div>
+            <button (click)="showTemporaryMessage()" [disabled]="isMessageVisible"
+                class="px-6 py-2 text-base font-semibold text-white bg-blue-600 rounded-md transition-all duration-200 hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed disabled:hover:bg-gray-400">
+                {{ isMessageVisible ? 'Message Active' : 'Click Me' }}
+            </button>
+
+            @if(isMessageVisible){
+            <div class="mt-4 px-4 py-3 bg-green-100 border border-green-400 rounded-md shadow-sm">
+                <p class="text-green-800 font-bold text-lg">
+                    {{ displayText }} {{ secondsRemaining }}s
+                </p>
+            </div>
+            }
+
+
+        </div>-->
+
+       
+    </div>
+    <app-auth-form title="Login" [isConfirm]="false" (onSubmit)="login($event)"></app-auth-form>
+
+    <!--<app-auth-form title="Login" [isConfirm]="false" (onSubmit)="login($event)"  ></app-auth-form>-->
 </div>
+

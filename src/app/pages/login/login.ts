@@ -1,4 +1,4 @@
-import { Component, computed, inject, signal } from '@angular/core';
+import { Component, computed, inject, OnInit, signal, ViewChild } from '@angular/core';
 import { AuthForm } from '../../components/forms/auth-form/auth-form';
 import { email, form, FormField, minLength, required } from '@angular/forms/signals';
 import { AuthService } from '../../auth/auth-service';
@@ -7,6 +7,12 @@ import { environment } from '../../../environments/environment.development';
 import { Observable, tap } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { loadAuthFromCookiesAction, loginAction, selectUserId$, setAuthFromCookiesAction } from '../../store/auth.store';
+import { UserSignalStore } from '../../signal-store/user-signal.store';
+import { ToastService } from 'ngx-signal-toast';
+import { ToastrService } from 'ngx-toastr';
+import { MessageService } from '../../components/toast-uis/message/message-service';
+import { PositionedMessages } from "../../components/toast-uis/positioned-messages/positioned-messages";
+import { StackedMessages } from "../../components/toast-uis/stacked-messages/stacked-messages";
 
 interface ILoginModel {
   email: string
@@ -18,12 +24,12 @@ interface ILoginModel {
 
 @Component({
   selector: 'app-login',
-  imports: [AuthForm],
+  imports: [AuthForm,],
   standalone: true,
   templateUrl: './login.html',
   styleUrl: './login.css',
 })
-export class Login {
+export class Login implements OnInit {
   private service = inject(AuthService)
   router = inject(Router)
   keys = environment.keys
@@ -41,6 +47,42 @@ export class Login {
   co = computed(() => this.count() + 1)
   c = 0
 
+  readonly uStore = inject(UserSignalStore)
+  toast = inject(ToastService);
+  toastr = inject(ToastrService);
+  messageService = inject(MessageService)
+
+
+
+  showSuccess() {
+    this.toastr.success('Hello world!', 'Toastr fun!');
+    /* this.toast.success('Operation completed successfully!', {
+       styles: {
+         borderColor: '#333',
+         background: '#fff',
+         messageColor: '#333',
+         titleColor: '#333',
+       },
+     });*/
+  }
+
+  //@ViewChild(Message) tempMessageComponent!: Message;
+
+  /*triggerTempMessage(text: string): void {
+    if (this.tempMessageComponent) {
+      this.tempMessageComponent.showTemporaryMessage(text ?? "Temporary Message");
+    } else {
+      console.error('TempMessageComponent not found!');
+    }
+  }*/
+
+
+
+  saveInfo() {
+    this.c++
+    this.uStore.updateUser({ name: 'mostafa', age: 55 + this.c })
+  }
+
   updateName() {
     this.c++
     let c = this.count()
@@ -53,11 +95,55 @@ export class Login {
     //if(this.service.getAccessTokenFromCookie()) this.router.navigate(['/'])
     this.loading$ = this.store.select(state => state.auth.loading)
     this.error$ = this.store.select(state => state.auth.error)
+    // Access components after view init
+    setTimeout(() => {
+
+    });
 
 
   }
 
+  ngOnInit() {
+
+
+  }
+
+
+
+
+
+
+
   async login(e: { email: string, password: string }) {
+    //this.triggerTempMessage("Login Success!")
+    //this.messageService.showSuccess(`Login Success`);
+    //this.messageService.showError(`Login Error`);
+    /*this.messageService.showMessage(`Login Success 1`, 'success', 10);
+   this.messageService.showMessage(`Login Success 2`, 'success', 10);
+    this.messageService.showMessage(`Login Success 1`, 'error', 10);
+   this.messageService.showMessage(`Login Success 2`, 'error', 10);*/
+
+    // Show success messages
+    /*this.messageService.showSuccess$(
+      `Welcome back, You have successfully logged in.`,
+      5,
+      'top-right'
+    );
+    
+    this.messageService.showInfo(
+      'You have 3 new notifications waiting for you.',
+      5,
+      'top-right'
+    );*/
+
+
+
+    //this.messageService.showLoginSuccess("mostafa");
+
+
+
+
+
     console.log("login: ", e)
       /*this.store.dispatch(
         loginAction(e)
@@ -82,12 +168,36 @@ export class Login {
             userId: Number(res.data.id),
             isAuth: Boolean(res.data.access_token)
           }))
-          this.router.navigate(['/'])
+
+          this.messageService.showStacked(
+            'Login recorded from Chrome on Windows',
+            4
+          );
+
+          // Navigate to dashboard after showing messages
+          setTimeout(() => {
+            this.router.navigate(['/']);
+            // Show another message after navigation
+            setTimeout(() => {
+              this.messageService.showSuccess$(
+                'Dashboard loaded successfully!',
+                4,
+                'bottom-left'
+              );
+            }, 500);
+          }, 1000);
+
+
         }
+      }, error => {
+        console.log("login page error:", error)
+        this.messageService.showStacked(
+          'Login failed',
+          4
+        );
       })
 
   }
-
 
 
 
