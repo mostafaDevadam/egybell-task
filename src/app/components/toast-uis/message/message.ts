@@ -1,6 +1,4 @@
 import { Component, computed, inject, signal } from '@angular/core';
-import { triggerAsyncId } from 'async_hooks';
-import { trigger, transition, style, animate, state } from '@angular/animations';
 import { MessageService, IToastMessage } from './message-service';
 import { Subscription } from 'rxjs';
 
