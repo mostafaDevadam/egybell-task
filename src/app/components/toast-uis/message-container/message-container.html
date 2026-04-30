@@ -1,0 +1,70 @@
+<div class="fixed top-4 right-4 z-50 space-y-3 max-w-md">
+      @for (message of messages(); track message.id) {
+        <div 
+          class="transform transition-all duration-300 animate-in fade-in slide-in-from-top-2"
+          [class]="getMessageClasses(message.type)"
+        >
+          <div class="px-4 py-3 rounded-lg shadow-lg min-w-[320px]">
+            <div class="flex items-start gap-3">
+              <!-- Icon -->
+              <div class="flex-shrink-0 mt-0.5">
+                @switch(message.type) {
+                  @case('success') {
+                    <svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                  }
+                  @case('error') {
+                    <svg class="w-5 h-5 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                  }
+                  @case('warning') {
+                    <svg class="w-5 h-5 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+                    </svg>
+                  }
+                  @case('info') {
+                    <svg class="w-5 h-5 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                  }
+                }
+              </div>
+              
+              <!-- Content -->
+              <div class="flex-1">
+                <p class="text-sm font-medium text-gray-900">{{ message.text }}</p>
+                <p class="text-xs text-gray-500 mt-1">
+                  {{ message.timestamp | date:'HH:mm:ss' }}
+                </p>
+                
+                <!-- Progress Bar -->
+                <div class="mt-2">
+                  <div class="w-full bg-gray-200 rounded-full h-1 overflow-hidden">
+                    <div 
+                      class="h-1 rounded-full transition-all duration-100 ease-linear"
+                      [class.bg-green-500]="message.type === 'success'"
+                      [class.bg-red-500]="message.type === 'error'"
+                      [class.bg-yellow-500]="message.type === 'warning'"
+                      [class.bg-blue-500]="message.type === 'info'"
+                      [style.width.%]="message.progressPercentage"
+                    ></div>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Close Button -->
+              <button 
+                (click)="removeMessage(message.id)"
+                class="flex-shrink-0 text-gray-400 hover:text-gray-600"
+              >
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      }
+    </div>
