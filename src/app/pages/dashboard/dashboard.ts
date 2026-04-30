@@ -25,15 +25,13 @@ export class Dashboard implements OnInit {
 
   ngOnInit(){
     console.log("Dashboard")
-    this.user.pipe(tap(user => console.log("tap user#:", user)))
+    this.user.pipe(tap(user => console.log("tap user##:", user)))
     .subscribe(user =>{ 
       if(user){
          console.log("user#:", user)
         this.email.set(user.email!! as string)
         this.role.set(user.role!! as Role)
       }
-     
-    
     })
   }
 
