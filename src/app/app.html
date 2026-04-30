@@ -1,4 +1,3 @@
-
 <style>
   :host {
     --bright-blue: oklch(51.01% 0.274 263.83);
@@ -12,19 +11,15 @@
     --gray-700: oklch(36.98% 0.014 302.71);
     --gray-400: oklch(70.9% 0.015 304.04);
 
-    --red-to-pink-to-purple-vertical-gradient: linear-gradient(
-      180deg,
-      var(--orange-red) 0%,
-      var(--vivid-pink) 50%,
-      var(--electric-violet) 100%
-    );
+    --red-to-pink-to-purple-vertical-gradient: linear-gradient(180deg,
+        var(--orange-red) 0%,
+        var(--vivid-pink) 50%,
+        var(--electric-violet) 100%);
 
-    --red-to-pink-to-purple-horizontal-gradient: linear-gradient(
-      90deg,
-      var(--orange-red) 0%,
-      var(--vivid-pink) 50%,
-      var(--electric-violet) 100%
-    );
+    --red-to-pink-to-purple-horizontal-gradient: linear-gradient(90deg,
+        var(--orange-red) 0%,
+        var(--vivid-pink) 50%,
+        var(--electric-violet) 100%);
 
     --pill-accent: var(--bright-blue);
 
@@ -128,9 +123,11 @@
   .pill-group .pill:nth-child(6n + 1) {
     --pill-accent: var(--bright-blue);
   }
+
   .pill-group .pill:nth-child(6n + 2) {
     --pill-accent: var(--electric-violet);
   }
+
   .pill-group .pill:nth-child(6n + 3) {
     --pill-accent: var(--french-violet);
   }
@@ -180,9 +177,13 @@
   <app-navbar></app-navbar>
 </header>
 
-<main class="">
+<main [class]="isDark() ? 'bg-black' : ''">
   <div class="border p-5 rounded-lg w-full h-3/4">
     <router-outlet />
   </div>
-</main>
+  <!-- Message Components -->
 
+  <app-message />
+  <app-message-container />
+   <app-global-message-container />
+</main>
