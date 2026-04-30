@@ -1,10 +1,10 @@
-/* You can add global styles to this file, and also import other style files */
+@use "tailwindcss";
+/*@use "tailwind.scss";*/
 
-@import 'tailwindcss';
-@import 'ngx-toastr/toastr';
-@import 'ngx-toastr/toastr-bs5-alert';
+// @import 'ngx-toastr/toastr';
+// @import 'ngx-toastr/toastr-bs5-alert';
 
-/* Smooth transitions */
+// Smooth transitions
 * {
   transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
 }
@@ -13,9 +13,6 @@
   --font-poppins: Poppins, sans-serif;
   --color-mtext: #fff;
   --color-text: #fff;
-  
-  
-  
 }
 
 :root {
@@ -28,12 +25,24 @@
   --accent-bg: rgba(170, 59, 255, 0.1);
   --accent-border: rgba(170, 59, 255, 0.5);
   --social-bg: rgba(244, 243, 236, 0.5);
-  --shadow:
-    rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
-
+  --shadow: rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
   --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
   --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
   --mono: ui-monospace, Consolas, monospace;
+  --mText: #333;
+  --mTitle: #333;
+  --mContent: #333;
+  --mTitleButton: #333;
+  --mButton-title: #fff;
+  --mButton-bg: #333;
+  --mToggle-title: #333;
+  --color-text: #fff;
+  --input-select-bg: #fff;
+  --input-select-border: #333;
+  --input-select-text: #333;
+  --input-bg: #fff;
+  --input-border: #333;
+  --input-text: #333;
 
   font: 18px/145% var(--sans);
   letter-spacing: 0.18px;
@@ -45,44 +54,19 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-  --mText: #333;
-  --mTitle: #333;
-  --mContent: #333;
-  --mTitleButton: #333;
-  --mButton-title: #fff;
-  --mButton-bg: #333;
-  --mToggle-title: #333;
-
-  --color-text: #fff;
-
-  --input-select-bg: #fff;
-  --input-select-border: #333;
-  --input-select-text: #333;
-
-  --input-bg: #fff;
-  --input-border: #333;
-  --input-text: #333;
-
   @media (max-width: 1024px) {
     font-size: 16px;
   }
 }
 
-
 body {
   margin: 0;
-}
-
-body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
-}
 
-
-/* Dark mode body styles */
-body {
-  /*@apply bg-gray-50 dark:bg-gray-900;*/
+  // Dark mode body styles (commented)
+  // @apply bg-gray-50 dark:bg-gray-900;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -91,20 +75,17 @@ body {
     --foreground: #ededed;
     --mText: #fff;
     --color-text: #fff;
-      --input-select-bg: #333;
-  --input-select-border: #fff;
-  --input-select-text: #fff;
-  --input-bg: #333;
-  --input-border: #fff;
-  --input-text: #fff;
-
-
-
+    --input-select-bg: #333;
+    --input-select-border: #fff;
+    --input-select-text: #fff;
+    --input-bg: #333;
+    --input-border: #fff;
+    --input-text: #fff;
   }
 }
 
 .test-text {
-    color: var(--mText);
+  color: var(--mText);
 }
 
 .test-title {
@@ -121,26 +102,29 @@ body {
   background-color: var(--input-bg);
   border-color: var(--input-border);
   color: var(--input-text);
-}
 
-.test-input::placeholder {
-  color: var(--mText);
+  &::placeholder {
+    color: var(--mText);
+  }
 }
 
 .text-var-mtext {
   color: var(--mText);
 }
 
-.placeholder-var-mtext::placeholder {
-  color: var(--mText);
+.placeholder-var-mtext {
+  &::placeholder {
+    color: var(--mText);
+  }
 }
 
 .dark {
   @apply dark:bg-gray-900;
-   --background: #111827;
-   --mText: #fff;
-   --color-text: #fff;
-   --input-select-bg: #333;
+  
+  --background: #111827;
+  --mText: #fff;
+  --color-text: #fff;
+  --input-select-bg: #333;
   --input-select-border: #fff;
   --input-select-text: #fff;
   --input-bg: #333;
