@@ -1,0 +1,29 @@
+<label 
+  [class]="containerClasses"
+  [class.opacity-50]="disabled"
+>
+  <input
+    type="checkbox"
+    class="sr-only peer"
+    [checked]="value()"
+    [name]="name()"
+    [disabled]="disabled"
+    readonly
+  />
+
+  <div
+    (click)="handleToggle()"
+    [class]="toggleClasses"
+    [class.bg-blue-600]="value()"
+    [class.bg-gray-300]="!value()"
+    [class.cursor-not-allowed]="disabled"
+  >
+    <div [class]="knobClasses" ></div>
+  </div>
+
+  @if (label()) {
+    <span class="text-xs sm:text-sm md:text-base text-gray-700 select-none">
+      {{ label() }}
+    </span>
+  }
+</label>
