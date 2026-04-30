@@ -40,8 +40,16 @@
                 "input": "public"
               }
             ],
-            "styles": ["src/styles.css", "node_modules/ngx-toastr/toastr.css"],
-
+            "styles": [
+              "src/styles.scss",
+              "node_modules/ngx-toastr/toastr.css",
+              "src/tailwind.scss"
+            ],
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "src/styles"
+              ]
+            },
             "security": {
               "allowedHosts": []
             },
@@ -93,7 +101,12 @@
           "defaultConfiguration": "development"
         },
         "test": {
-          "builder": "@angular/build:unit-test"
+          "builder": "@angular/build:unit-test",
+          "options": {
+             "styles": [
+              "src/styles.scss", "src/tailwind.scss"
+            ]
+          }
         }
       }
     }
