@@ -42,34 +42,23 @@ export class Profile implements OnInit {
     console.log('ownId:', this.ownId())
 
     if (this.router.url.endsWith('view') && this.id()) {
-      //this.isView.set(true)
-      //this.isOwn.set(false)
       this.state.set("view")
       // fetch user
       this.fetchProfile(Number(this.id()!!))
     } else if (this.router.url.endsWith('edit') && this.id()) {
-      //this.isView.set(false)
-      //this.isOwn.set(false)
       this.state.set("edit")
       // fetch user
       this.fetchProfile(Number(this.id()!!))
     } else if (this.router.url.endsWith('profile') && this.ownId()) {
-      //this.isOwn.set(true)
-      //this.isView.set(false)
       this.state.set("own")
       // fetch user
       this.fetchProfile(this.ownId())
     } else {
-      //this.isView.set(false)
-      //this.isOwn.set(false)
       this.state.set(null)
+      this.router.navigate(['/notfound'])
     }
 
-    /*if (this.id()) {
-      this.fetchProfile(Number(this.id()!!))
-    } else if (this.ownId()) {
-      this.fetchProfile(this.ownId())
-    }*/
+  
   }
 
 
