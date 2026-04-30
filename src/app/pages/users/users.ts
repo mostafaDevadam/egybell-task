@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { DeleteButton } from '../../components/buttons/delete-button/delete-button';
 import { CloseButton } from '../../components/buttons/close-button/close-button';
 import { DeleteDialog } from '../../components/dialogs/delete-dialog/delete-dialog';
+import { MessageService } from '../../components/toast-uis/message/message-service';
 
 @Component({
   selector: 'app-users',
@@ -30,6 +31,8 @@ export class Users implements OnInit {
     { key: 'role', label: 'Role' },
 
   ]
+
+  messageService = inject(MessageService)
 
 
 
@@ -76,11 +79,19 @@ export class Users implements OnInit {
       case 'view':
         console.log('View:', event.item);
         //alert(`View User: ${event.item.email}`);
+          this.messageService.showStacked(
+            'View User Profile is ready',
+            4
+          );
         this.router.navigate([`/profile/${event.item.id}/view`])
         break;
       case 'edit':
         console.log('Edit:', event.item);
         //alert(`Edit User: ${event.item.email}`);
+         this.messageService.showStacked(
+            'Edit User Profile is ready',
+            4
+          );
         this.router.navigate([`/profile/${event.item.id}/edit`])
         break;
       case 'delete':
@@ -88,6 +99,10 @@ export class Users implements OnInit {
         if (event.item) {
           console.log('Delete:', event.item);
           this.selectedUserId.set(event.item.id)
+           this.messageService.showStacked(
+            'Delete User is ready',
+            4
+          );
         }
 
         // if (confirm(`Delete ${event.item.email}?`)) {
@@ -106,6 +121,10 @@ export class Users implements OnInit {
         if (res) {
           console.log("deleteUser res:", res)
           this.fetchUsers()
+           this.messageService.showStacked(
+            'Deleted User is successfully',
+            4
+          );
         }
 
       })
