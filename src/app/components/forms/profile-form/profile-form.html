@@ -6,20 +6,21 @@
 
 class="mx-auto border flex flex-col gap-5 px-4 py-2 rounded-lg w-80">
     <div class="text-center">
-        <span class="text-3xl">{{title()}}</span>
+        <span class="text-3xl test-title">{{title()}}</span>
     </div>
     
     <div class="flex flex-col gap-3">
-        <label for="role">Role</label>
-        <select class="px-2 py-2 border rounded-lg" id="role" [formField]="profileForm.role">
+        <label for="role" class="test-title">Role</label>
+        <select class="px-2 py-2 border rounded-lg test-input-select" id="role" [formField]="profileForm.role">
             <option value="admin">Admin</option>
             <option value="user">User</option>
         </select>
     </div>
     
     <div class="flex flex-col gap-3">
-        <label for="email">Email</label>
-        <input type="email" id="email" [formField]="profileForm.email" placeholder="Enter Email" class="px-2 py-2 border rounded-lg"/>
+        <label for="email" class="test-title">Email</label>
+        <input type="email" id="email" [formField]="profileForm.email" placeholder="Enter Email" 
+        class="px-2 py-2 border rounded-lg test-input"/>
     </div>
    
    
