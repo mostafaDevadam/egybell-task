@@ -17,7 +17,7 @@ export class Register {
   private messageService = inject(MessageService)
 
 
-  async register(e: AUTH_BODY_TYPE) {
+  async register(e: any) {
     console.log("register: ", e)
       ; (await this.service.register(e.email, e.password, e.role as Role)).subscribe(res => {
         console.log("register page res:", res)
@@ -26,9 +26,13 @@ export class Register {
           4
         );
       }, error => {
-        console.log("register page error:", error)
+        console.log("register page error:", error.error)
         this.messageService.showStacked(
           'Register failed',
+          4
+        );
+         this.messageService.showStacked(
+           error.error.message,
           4
         );
       })
