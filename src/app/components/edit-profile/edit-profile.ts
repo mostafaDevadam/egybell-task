@@ -3,6 +3,7 @@ import { USER_TYPE } from '../../shared/types';
 import { ProfileForm } from '../forms/profile-form/profile-form';
 import { UsersService } from '../../services/users';
 import { firstValueFrom } from 'rxjs';
+import { MessageService } from '../toast-uis/message/message-service';
 
 @Component({
   selector: 'app-edit-profile',
@@ -14,17 +15,30 @@ export class EditProfile implements OnInit {
 
   service = inject(UsersService)
   user = input<USER_TYPE | null>()
+  messageService = inject(MessageService)
 
   ngOnInit(): void {
     console.log("Edit Profile data:", this.user())
   }
 
 
-  async update(e: any){
-      console.log("update:", e)
-      const res = firstValueFrom(await this.service.updateUser(e.id, e))
-      res.then(res => console.log("updated user res:", res))
-     
+  async update(e: any) {
+    console.log("update:", e)
+    const res = firstValueFrom(await this.service.updateUser(e.id, e))
+    res.then(res => {
+      console.log("updated user res:", res)
+       this.messageService.showStacked(
+            'Updated User is successfully',
+            4
+          );
+    }).catch(err => {
+      console.log("updateUser error:", err)
+       this.messageService.showStacked(
+            'Updated User is failed',
+            4
+          );
+    })
+
 
   }
 
