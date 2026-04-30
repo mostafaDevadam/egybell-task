@@ -10,6 +10,7 @@ import { Role } from '../../shared/enums';
 import { Router } from '@angular/router';
 import { AuthService } from '../../auth/auth-service';
 import { DeleteDialog } from '../dialogs/delete-dialog/delete-dialog';
+import { MessageService } from '../toast-uis/message/message-service';
 
 @Component({
   selector: 'app-view-profile',
@@ -30,6 +31,9 @@ export class ViewProfile implements OnInit {
   role$ = signal<Role>(Role.USER)
   router = inject(Router)
   authService = inject(AuthService)
+
+    messageService = inject(MessageService)
+  
 
 
   ngOnInit(): void {
@@ -73,6 +77,11 @@ export class ViewProfile implements OnInit {
       if (res) {
         console.log("deleteUser res:", res)
 
+         this.messageService.showStacked(
+            'Deleted Profile is successfully',
+            4
+          );
+
         if (this.role$() === Role.ADMIN) {
           /*this.store.dispatch({
             type: 'DELETE_USER',
@@ -91,6 +100,12 @@ export class ViewProfile implements OnInit {
 
       }
 
+    }).catch(err => {
+      console.log("deleteUser err:", err)
+       this.messageService.showStacked(
+            'Delete Profile is failed',
+            4
+          );
     })
   }
 }
