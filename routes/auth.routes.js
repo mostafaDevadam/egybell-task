@@ -5,6 +5,8 @@ const { addUser, getUserByEmail, getUserById } = require("../models/user.model")
 const auth = require("../middleware/auth");
 const role = require("../middleware/role");
 const { logs } = require("../models/log.model");
+const { SocketService } = require("../services/socket.service");
+const { NotificationsService } = require("../services/notifications.service");
 
 const router = express.Router();
 
@@ -14,13 +16,13 @@ const router = express.Router();
 router.post("/register", async (req, res) => {
   const { email, password, role: userRole } = req.body;
 
-  if(!email || !password || !role){
+  if (!email || !password || !role) {
     return res.status(400).json({ statusCode: 400, message: "Email, password and role are required", data: null });
   }
 
   //const existing = users.find(u => u.email === email);
   const existing = getUserByEmail(email)
-  if (existing) return res.status(404).json({ statusCode: 500, message: "Email is already exiting", data: null });
+  if (existing) return res.status(422).json({ statusCode: 422, message: "Email is already exiting", data: null });
 
   const hashedPassword = await bcrypt.hash(password, 10);
 
@@ -36,6 +38,16 @@ router.post("/register", async (req, res) => {
 
   console.log("user:", user)
 
+  if (!user) return res.status(500).json({ statusCode: 500, message: "Cannot register user", data: null });
+
+  // send notification: new user is registered
+  //SocketService.sendNotification({ msg: "register is successfully", date: new Date(), state: "register", data: user });
+  //SocketService.sendNotification({ statusCode: 201, message: "register successful", data: {type: 'success', date: new Date(), state: "register", user} });
+  const userObj = { id: user.id, email: user.email, role: user.role }
+  const notify = NotificationsService.addNotification({ type: 'success', date: new Date(), message: "User created or registered successfully", state: "register", user: userObj })
+  SocketService.sendNotification(notify);
+  SocketService.sendAllNotifications(NotificationsService.findAll());
+
   res.json({ statusCode: 201, message: "User created or registered successfully", message_ar: "تم إنشاء المستخدم أو تسجيله بنجاح", data: user });
 });
 
@@ -50,7 +62,7 @@ router.post("/login", async (req, res) => {
   const isMatch = await bcrypt.compare(password, user.password);
   if (!isMatch) return res.status(400).json({ statusCode: 400, message: "Wrong password", data: null });
 
-  
+
 
   console.log("user:", user)
 
@@ -68,8 +80,36 @@ router.post("/login", async (req, res) => {
     role: user.role,
   }
 
-  res.json({ statusCode: 201, message: "Login successful", message_ar: "تم تسجيل الدخول بنجاح", data: obj});
+  // send notification: user is logged-in
+  //SocketService.sendNotification({ statusCode: 201, message: "Login successful", data: {type: 'success', date: new Date(), state: "logged-in",user} });
+  const userObj = { id: user.id, email: user.email, role: user.role }
+  const notify = NotificationsService.addNotification({ type: 'success', date: new Date(), message: "User logged-in successfully", state: "login", user: userObj })
+  SocketService.sendNotification(notify);
+  SocketService.sendAllNotifications(NotificationsService.findAll());
+
+
+  res.json({ statusCode: 201, message: "Login successful", message_ar: "تم تسجيل الدخول بنجاح", data: obj });
 });
+
+router.post("/refresh", async (req, res) => {
+  const { refresh_token } = req.body
+  console.log('body', req.body);
+
+  const v = verifyRefreshToken(refresh_token);
+  // const user = users.find(u => u.id === v.id);
+  const user = getUserById(v.id)
+  if (!user) return res.status(404).json({ statusCode: 404, message: "User not found" });
+  const re = generateRereshToken(user);
+  const tk = generateAccessToken(user);
+
+
+
+  res.json({
+    statusCode: 201,
+    message: "Refresh token successful",
+    data: { access_token: tk, refresh_token: re }
+  })
+})
 
 
 router.post("/logout/:id", auth, async (req, res) => {
@@ -97,24 +137,23 @@ router.post("/logout/:id", auth, async (req, res) => {
 
 })
 
-router.post("/refresh", async (req, res) => {
-  const { refresh_token } = req.body
-  console.log('body', req.body);
+router.get("/me", auth, (req, res) => {
 
-  const v = verifyRefreshToken(refresh_token);
-  // const user = users.find(u => u.id === v.id);
-  const user = getUserById(userId)
+  console.log("me")
+
+  if (!req.user) {
+    return res.status(401).json({ statusCode: 401, message: "Unauthorized", data: null });
+  }
+
+  console.log("req user:", req.user)
+
+  const user = getUserById(req.user.id)
   if (!user) return res.status(404).json({ statusCode: 404, message: "User not found" });
-  const re = generateRereshToken(user);
-  const tk = generateAccessToken(user);
+
+  console.log("user:", user)
 
 
-
-  res.json({
-    statusCode: 201,
-    message: "Refresh token successful",
-    data: { access_token: tk, refresh_token: re }
-  })
+  res.json({ statusCode: 200, message: "Get Current User", data: user });
 })
 
 function verifyRefreshToken(refresh_token) {
@@ -131,8 +170,8 @@ function generateRereshToken(user) {
   return token
 }
 
-function verifyAccessToken(refresh_token) {
-  const decoded = jwt.verify(refresh_token, process.env.JWT_SECRET)
+function verifyAccessToken(access_token) {
+  const decoded = jwt.verify(access_token, process.env.JWT_SECRET)
   return decoded;
 }
 
@@ -141,9 +180,16 @@ function generateAccessToken(user) {
   const token = jwt.sign(
     { id: user.id, role: user.role },
     process.env.JWT_SECRET,
-    { expiresIn: process.env.EXPRIES_IN ?? "5m"}
+    { expiresIn: 30 }
   );
   return token
+}
+
+module.exports.AuthService = {
+  verifyRefreshToken,
+  generateRereshToken,
+  verifyAccessToken,
+  generateAccessToken
 }
 
 module.exports = router;
