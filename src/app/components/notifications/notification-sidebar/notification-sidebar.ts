@@ -162,8 +162,9 @@ export class NotificationSidebar {
   }
   
   handleNotificationClick(notification: any) {
-    if (!notification.read && notification.id) {
+    if (!notification.isRead && notification.id) {
       //this.store.markAsRead(notification.id);
+      this.store.markAsReadNotification(notification.id)
     }
   }
   
@@ -211,5 +212,9 @@ export class NotificationSidebar {
       event.preventDefault();
       this.close.emit();
     }
+  }
+
+  markAsRead(id: number){
+     this.store.markAsReadNotification(id)
   }
 }

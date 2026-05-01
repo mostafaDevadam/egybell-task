@@ -128,10 +128,10 @@
               @for (notification of filteredNotifications(); track notification.id) {
                 <div 
                   (click)="handleNotificationClick(notification)"
-                  class="notification-card p-4 cursor-pointer transition-all duration-200 hover:bg-gray-50 dark:hover:bg-gray-800/50 group"
+                  class="notification-card p-4 cursor-pointer transition-all duration-200 hover:bg-gray-50 dark:hover:bg-gray-800/50 group "
                   [class]="{
-                    'bg-blue-50 dark:bg-blue-900/20 border-l-4 border-l-blue-500': !notification.read,
-                    'opacity-75': notification.read
+                    'bg-blue-50 dark:bg-blue-900/20 border-l-4 border-l-blue-500 border': !notification.isRead,
+                    'opacity-75': notification.isRead
                   }">
                   
                   <div class="flex gap-3">
@@ -186,11 +186,11 @@
                         <span class="text-xs text-gray-500 dark:text-gray-400">
                           {{ formatTime(notification.date) }}
                         </span>
-                        @if (!notification.read) {
+                        @if (!notification.isRead) {
                           <span class="text-xs text-blue-600 dark:text-blue-400 font-medium">
                             New
                           </span>
-                        }
+                        } 
                         @if (notification.state) {
                           <span class="text-xs px-2 py-0.5 rounded-full bg-gray-100 dark:bg-gray-800">
                             {{ notification.state }}
@@ -199,8 +199,8 @@
                       </div>
                     </div>
                     
-                    <!-- Unread Indicator -->
-                    @if (!notification.read) {
+                    <!-- UnisRead Indicator -->
+                    @if (!notification.isRead) {
                       <div class="flex-shrink-0">
                         <div class="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></div>
                       </div>

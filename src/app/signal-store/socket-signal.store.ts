@@ -69,11 +69,11 @@ export const SocketSignalStore = signalStore(
 
                 socket.on('connect_error', (err) => {
                     console.error('Socket Connection Error:', err.message);
-                    store._authService.refreshTokenAPI().subscribe(response => {
+                    /*store._authService.refreshTokenAPI().subscribe(response => {
                         if (response?.access_token) {
                             this.updateToken(response.access_token);
                         }
-                    });
+                    });*/
 
                     // If the error is "unauthorized", you might need to logout
                     if (err.message === 'xhr poll error' || err.message === 'unauthorized') {
@@ -94,10 +94,16 @@ export const SocketSignalStore = signalStore(
                     }))
                 })
 
+             
+
                 socket.on('notifications', (payload: RESPONSE_TYPE<any[]>) => {
                     patchState(store, (state) => ({
                         notificationsList: payload.data
                     }))
+                })
+
+                   socket.on('read-notification', (payload: RESPONSE_TYPE<any>) => {
+                            console.log("socket read-notification: ", payload)
                 })
             },
             // The Interceptor calls this when a new token is received
@@ -150,6 +156,11 @@ export const SocketSignalStore = signalStore(
 
                 }
             },
+            markAsReadNotification(id: number){
+                if(socket){
+                    socket.emit('read-notification', {id})
+                }
+            },
             loadNotifications(): void {
 
                 if (socket) {
@@ -192,7 +203,7 @@ export const SocketSignalStore = signalStore(
             effect(() => {
 
 
-
+                console.log('SocketStore effect state changed to:', store.lastError());
                 console.log('SocketStore effect state changed to:', store.isConnected());
                 console.log("SocketStore effect notifications:", store.notifications())
                 console.log("SocketStore effect notificationsList:", store.notificationsList())
