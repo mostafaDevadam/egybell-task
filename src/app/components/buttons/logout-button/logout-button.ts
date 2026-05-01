@@ -10,18 +10,19 @@ import { AuthSignalStore } from '../../../signal-store/auth-signal.store';
   imports: [],
   templateUrl: './logout-button.html',
   styleUrl: './logout-button.css',
-  
+
 })
 export class LogoutButton {
-  service = inject(AuthService)
+  authService = inject(AuthService)
   private store = inject(Store)
   messageService = inject(MessageService)
-    private authSignalStore = inject(AuthSignalStore);
-  
+  private authSignalStore = inject(AuthSignalStore);
 
 
-  logout() {
-    this.service.logout()
+
+  async logout() {
+    
+    this.authService.logout()
     this.store.dispatch(logoutAction())
     this.authSignalStore.logout()
     this.messageService.showStacked(
