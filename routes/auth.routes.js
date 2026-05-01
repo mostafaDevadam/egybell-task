@@ -1,14 +1,19 @@
 const express = require("express");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const { addUser, getUserByEmail, getUserById } = require("../models/user.model");
+const { UserService } = require("../services/user.service");
 const auth = require("../middleware/auth");
 const role = require("../middleware/role");
-const { logs } = require("../models/log.model");
+const { LogService } = require("../services/log.service");
 const { SocketService } = require("../services/socket.service");
 const { NotificationsService } = require("../services/notifications.service");
+const { AuthService } = require("../services/auth.service");
+const { LoginService } = require("../services/login.service");
+const { LogoutService } = require("../services/logout.service");
 
 const router = express.Router();
+
+
 
 
 
@@ -21,8 +26,21 @@ router.post("/register", async (req, res) => {
   }
 
   //const existing = users.find(u => u.email === email);
-  const existing = getUserByEmail(email)
-  if (existing) return res.status(422).json({ statusCode: 422, message: "Email is already exiting", data: null });
+  const existing = UserService.getUserByEmail(email)
+  if (existing) {
+    const userObj = { id: existing.id, email: existing.email, role: existing.role }
+    const notify = NotificationsService.addNotification({
+      type: 'error',
+      date: new Date(),
+      message: "Email is already exiting",
+      state: "register",
+      user: userObj
+    })
+
+    SocketService.sendNotification(500, "Email is already exiting", notify);
+    SocketService.sendAllNotifications(NotificationsService.findAll());
+    return res.status(422).json({ statusCode: 422, message: "Email is already exiting", data: null })
+  }
 
   const hashedPassword = await bcrypt.hash(password, 10);
 
@@ -34,18 +52,36 @@ router.post("/register", async (req, res) => {
   };
 
   users.push(user);*/
-  const user = addUser(email, userRole || "user", hashedPassword)
+  const user = UserService.addUser(email, userRole || "user", hashedPassword)
 
   console.log("user:", user)
 
-  if (!user) return res.status(500).json({ statusCode: 500, message: "Cannot register user", data: null });
+  if (!user) {
+    const notify = NotificationsService.addNotification({
+      type: 'error',
+      date: new Date(),
+      message: "Cannot register user",
+      state: "register",
+      user: null
+    })
+
+    SocketService.sendNotification(500, "Cannot register user", notify);
+    SocketService.sendAllNotifications(NotificationsService.findAll());
+    return res.status(500).json({ statusCode: 500, message: "Cannot register user", data: null });
+
+  }
+  // create log
+  LogService.create({
+    user_id: user.id,
+    action: "register"
+  });
 
   // send notification: new user is registered
   //SocketService.sendNotification({ msg: "register is successfully", date: new Date(), state: "register", data: user });
   //SocketService.sendNotification({ statusCode: 201, message: "register successful", data: {type: 'success', date: new Date(), state: "register", user} });
   const userObj = { id: user.id, email: user.email, role: user.role }
   const notify = NotificationsService.addNotification({ type: 'success', date: new Date(), message: "User created or registered successfully", state: "register", user: userObj })
-  SocketService.sendNotification(notify);
+  SocketService.sendNotification(201, "User created or registered successfully", notify);
   SocketService.sendAllNotifications(NotificationsService.findAll());
 
   res.json({ statusCode: 201, message: "User created or registered successfully", message_ar: "تم إنشاء المستخدم أو تسجيله بنجاح", data: user });
@@ -56,27 +92,35 @@ router.post("/login", async (req, res) => {
   const { email, password } = req.body;
 
   // const user = users.find(u => u.email === email);
-  const user = getUserByEmail(email)
-  if (!user) return res.status(404).json({ statusCode: 404, message: "User not found", data: null });
+  const user = UserService.getUserByEmail(email)
+  if (!user) {
 
-  const isMatch = await bcrypt.compare(password, user.password);
-  if (!isMatch) return res.status(400).json({ statusCode: 400, message: "Wrong password", data: null });
+    return res.status(404).json({ statusCode: 404, message: "User not found", data: null });
 
+  }
 
+  const isMatch = await AuthService.comparePassword(password, user) //await bcrypt.compare(password, user.password);
+  if (!isMatch) {
+    return res.status(400).json({ statusCode: 400, message: "Wrong password", data: null });
+  }
 
   console.log("user:", user)
 
-  logs.push({
-    id: logs.length + 1,
+  // create login
+  LoginService.create({
+    user_id: user.id
+  })
+
+  // create log
+  LogService.create({
     user_id: user.id,
-    action: "login",
-    timestamp: new Date().toISOString(),
+    action: "login"
   });
 
   const obj = {
     id: user.id,
-    access_token: generateAccessToken(user),
-    refresh_token: generateRereshToken(user),
+    access_token: AuthService.generateAccessToken(user),
+    refresh_token: AuthService.generateRereshToken(user),
     role: user.role,
   }
 
@@ -84,7 +128,7 @@ router.post("/login", async (req, res) => {
   //SocketService.sendNotification({ statusCode: 201, message: "Login successful", data: {type: 'success', date: new Date(), state: "logged-in",user} });
   const userObj = { id: user.id, email: user.email, role: user.role }
   const notify = NotificationsService.addNotification({ type: 'success', date: new Date(), message: "User logged-in successfully", state: "login", user: userObj })
-  SocketService.sendNotification(notify);
+  SocketService.sendNotification(201, "Login successful", notify);
   SocketService.sendAllNotifications(NotificationsService.findAll());
 
 
@@ -95,12 +139,12 @@ router.post("/refresh", async (req, res) => {
   const { refresh_token } = req.body
   console.log('body', req.body);
 
-  const v = verifyRefreshToken(refresh_token);
+  const v = AuthService.verifyRefreshToken(refresh_token);
   // const user = users.find(u => u.id === v.id);
-  const user = getUserById(v.id)
+  const user = UserService.getUserById(v.id)
   if (!user) return res.status(404).json({ statusCode: 404, message: "User not found" });
-  const re = generateRereshToken(user);
-  const tk = generateAccessToken(user);
+  const re = AuthService.generateRereshToken(user);
+  const tk = AuthService.generateAccessToken(user);
 
 
 
@@ -122,15 +166,17 @@ router.post("/logout/:id", auth, async (req, res) => {
   }
 
   //const user = users.find(u => u.id === userId);
-  const user = getUserById(userId)
+  const user = UserService.getUserById(userId)
   if (!user) return res.status(404).json({ message: "User not found" });
 
-
-  logs.push({
-    id: logs.length + 1,
+  // create logout
+  LogoutService.create({
+    user_id: user.id
+  })
+  // create log
+  LogService.create({
     user_id: user.id,
-    action: "logout",
-    timestamp: new Date().toISOString(),
+    action: "logout"
   });
 
   res.json({ statusCode: 201, message: "Logout successful", data: null });
@@ -147,49 +193,36 @@ router.get("/me", auth, (req, res) => {
 
   console.log("req user:", req.user)
 
-  const user = getUserById(req.user.id)
+  const user = UserService.getUserById(req.user.id)
   if (!user) return res.status(404).json({ statusCode: 404, message: "User not found" });
 
   console.log("user:", user)
+
+  // create log
+   LogService.create({
+    user_id: user.id,
+    action: "get profile"
+  });
 
 
   res.json({ statusCode: 200, message: "Get Current User", data: user });
 })
 
-function verifyRefreshToken(refresh_token) {
-  const decoded = jwt.verify(refresh_token, process.env.JWT_REFRESH_SECRET)
-  return decoded;
-}
+
+// get logins for admin
+router.get("/logins", auth, role(["admin"]), (req, res) => {
+  const logins = LoginService.findAllWithUsers()
+  res.json({ statusCode: 200, message: "Get All Logins", data: logins });
+})
 
 
-function generateRereshToken(user) {
-  const token = jwt.sign(
-    { id: user.id, role: user.role },
-    process.env.JWT_REFRESH_SECRET,
-  );
-  return token
-}
-
-function verifyAccessToken(access_token) {
-  const decoded = jwt.verify(access_token, process.env.JWT_SECRET)
-  return decoded;
-}
+// get logouts for admin
+router.get("/logouts", auth, role(["admin"]), (req, res) => {
+  const logouts = LogoutService.findAllWithUsers()
+  res.json({ statusCode: 200, message: "Get All Logouts", data: logouts });
+})
 
 
-function generateAccessToken(user) {
-  const token = jwt.sign(
-    { id: user.id, role: user.role },
-    process.env.JWT_SECRET,
-    { expiresIn: 30 }
-  );
-  return token
-}
 
-module.exports.AuthService = {
-  verifyRefreshToken,
-  generateRereshToken,
-  verifyAccessToken,
-  generateAccessToken
-}
 
 module.exports = router;
