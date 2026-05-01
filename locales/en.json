@@ -1,9 +1,31 @@
 {
-	"auth": {},
+	"message": {
+		"register-success": "Register successful",
+		"login-success": "Login successful",
+		"logout-success": "Logout successful",
+		"email-password-role": "Email, password and role are required",
+		"email-exiting": "Email is already exiting",
+		"cannot-register": "Cannot register user",
+		"user-create-registered": "User created or registered successfully",
+		"user-not-found": "User not found",
+		"wrong-password": "Wrong password",
+		"user-logged-success": "User logged-in successfully",
+		"unauthorized": "Unauthorized",
+		"get-current-user": "Get Current User",
+		"get-all-users": "Get All Users",
+		"get-all-logs": "Get All Activity logs",
+		"get-all-notifications": "Get All notifications",
+		"user-details": "User details",
+		"access-deneid": "Access denied",
+		"updated-user": "Updated User",
+		"deleted-user-success": "Deleted User successfully",
+		"delete-user-failed": "Delete user failed",
+		"refresh-token-success": "Refresh token successful"
+	},
+	"notification": {},
 	"user": {},
 	"log": {},
 	"main": {
 		"api": "API is working"
 	}
-	
 }

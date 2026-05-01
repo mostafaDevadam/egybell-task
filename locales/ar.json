@@ -1,5 +1,28 @@
 {
-    "auth": {},
+    "message": {
+        "register-success": "تم التسجيل بنجاح",
+        "login-success": "تم تسجيل الدخول بنجاح",
+        "email-password-role": "البريد الإلكتروني وكلمة المرور والدور مطلوبة",
+        "email-exiting": "البريد الإلكتروني موجود بالفعل",
+        "cannot-register": "لا يمكن تسجيل المستخدم",
+        "user-create-registered": "تم إنشاء المستخدم أو تسجيله بنجاح",
+        "user-not-found": "المستخدم غير موجود",
+        "wrong-password": "كلمة المرور غير صحيحة",
+        "user-logged-success": "تم تسجيل دخول المستخدم بنجاح",
+        "unauthorized": "غير مصرح",
+        "get-current-user": "الحصول على المستخدم الحالي",
+        "get-all-users": "الحصول على جميع المستخدمين",
+        "get-all-logs": "الحصول على جميع سجلات النشاط",
+        "get-all-notifications": "الحصول على جميع الإشعارات",
+        "user-details": "تفاصيل المستخدم",
+        "access-deneid": "تم رفض الوصول",
+        "updated-user": "تم تحديث المستخدم",
+        "deleted-user-success": "تم حذف المستخدم بنجاح",
+        "delete-user-failed": "فشل حذف المستخدم",
+          "refresh-token-success": "تم تحديث رمز الدخول بنجاح"
+
+    },
+    "notification": {},
     "user": {},
     "log": {},
     "main": {
