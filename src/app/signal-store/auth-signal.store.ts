@@ -150,10 +150,10 @@ export const AuthSignalStore = signalStore(
       };
       if(store.access_token() === store._authService.getAccessTokenFromCookie()) {
         console.log("AuthStore effect Access token is the same")
-        store._messageService.showStacked("Access token is the same", 5)
+        //store._messageService.showStacked("Access token is the same", 5)
       }else {
         console.log("AuthStore effect Access token is different")
-        store._messageService.showStacked("Access token is different", 5)
+        //store._messageService.showStacked("Access token is different", 5)
         // copy access_token from cookie to state
         patchState(store, {
           access_token: store._authService.getAccessTokenFromCookie(),
