@@ -120,8 +120,10 @@
             <div class="hidden md:flex items-center gap-4">
 
                 <!-- notification button -->
+             @if(isAuth()){   
                 <app-notification-button [isOpen]="isOpenNotifySidebar()"
                     (onClickEvent)="toggleNotificationButton($event)"></app-notification-button>
+                }
 
                 @if(isOpenNotifySidebar()){
                 <app-notification-sidebar (close)="closeNotificationsidebar()"
@@ -171,8 +173,10 @@
 
                 <div>
                     <!-- notification button -->
+                     @if(isAuth()) {  
                     <app-notification-button [isOpen]="isOpenNotifySidebar()"
                         (onClickEvent)="toggleNotificationButton($event)"></app-notification-button>
+                     }
                 </div>
 
 
