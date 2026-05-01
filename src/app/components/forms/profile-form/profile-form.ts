@@ -1,4 +1,4 @@
-import { Component, effect, input, OnInit, output, signal } from '@angular/core';
+import { Component, effect, input, OnInit, output, signal, SimpleChanges } from '@angular/core';
 import { USER_TYPE } from '../../../shared/types';
 import { JsonPipe } from '@angular/common';
 import { form, FormField } from '@angular/forms/signals';
@@ -46,6 +46,13 @@ export class ProfileForm implements OnInit {
        this.profileForm = form(this.profileModel)*/
      }
   }
+
+    ngOnChanges(changes: SimpleChanges<ProfileForm>): void {
+      console.log("onChanges profile-form#", changes)
+  
+  
+  
+    }
 
   handleOnSubmit(event: Event): void {
     const submitEvent = event as SubmitEvent;
