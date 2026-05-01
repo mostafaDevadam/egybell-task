@@ -21,18 +21,14 @@ export class Register {
     console.log("register: ", e)
       ; (await this.service.register(e.email, e.password, e.role as Role)).subscribe(res => {
         console.log("register page res:", res)
-        this.messageService.showStacked(
-          'Register successfully',
-          4
-        );
+          this.messageService.showStacked(
+            res.message ?? 'Register successfully',
+            4
+          );
       }, error => {
         console.log("register page error:", error.error)
-        this.messageService.showStacked(
-          'Register failed',
-          4
-        );
          this.messageService.showStacked(
-           error.error.message,
+           error.error.message ?? 'Register failed',
           4
         );
       })
