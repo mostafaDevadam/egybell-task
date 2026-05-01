@@ -5,6 +5,7 @@ import { AuthService } from "../auth/auth-service";
 import { Store } from "@ngrx/store";
 import { loadUserFromTokenAction, selectUser, setAuthFromCookiesAction } from "../store/auth.store";
 import { Role } from "./enums";
+import { AuthSignalStore } from "../signal-store/auth-signal.store";
 
 export function appInitializer() {
 
@@ -13,6 +14,7 @@ export function appInitializer() {
         console.log('App Initializer - Starting...');
         const service = inject(AuthService);
         const store = inject(Store);
+        const authSignalStore = inject(AuthSignalStore)
 
         try {
             // Initialize cookie monitoring
@@ -48,6 +50,15 @@ export function appInitializer() {
                     // Save user data in Redux/store
                     // store.dispatch(setUser(user));
                     store.dispatch(loadUserFromTokenAction());
+                    const u = store.select(selectUser)
+                    u.pipe(tap(user => console.log("app init tap u:", user)))
+                    .subscribe(user => {
+                        if(user){
+                            console.log("u:", user)
+                            authSignalStore.updateUser({...user, id: Number(user.id)})
+                        }
+                        
+                    })
 
                 } catch (error) {
                     console.error("Error fetching user data:", error);
