@@ -2,45 +2,30 @@ require("dotenv").config();
 const express = require("express");
 const cors = require("cors")
 const path = require("path");
-const { createClient } = require('redis');
+//const { createClient } = require('redis');
 const userRoutes = require("./routes/user.routes");
 const authRoutes = require("./routes/auth.routes");
 const logRoutes = require("./routes/log.routes");
 const { I18n } = require('i18n')
+const i18n = require('./i18n')
 const Socket = require("socket.io");
+const { UserService } = require("./services/user.service");
+const cron = require('node-cron');
 
 const { createServer } = require('node:http');
 const { SocketService } = require("./services/socket.service");
+const { RedisService } = require("./services/redis.service");
+
+
 
 const app = express();
 
 const http_server = createServer(app);
 
 SocketService.connectSocket(http_server)
+
+
 /*
-const io = new Socket.Server(http_server)
-
-// socket connection
-io.on("connection", (socket) => {
-  console.log("User connected:", socket.id);
-
-  // listen event from client
-  socket.on("message", (data) => {
-    console.log("Message:", data);
-
-    // send to all clients
-    io.emit("message", data);
-  });
-
-   io.emit("msg", "Hallo!");
-
-  // disconnect
-  socket.on("disconnect", () => {
-    console.log("User disconnected:", socket.id);
-  });
-});
-*/
-
 const i18n = new I18n({
   locales: ['en', 'ar'],
   directory: path.join(__dirname, 'locales'),
@@ -52,7 +37,7 @@ const i18n = new I18n({
     __n: 'tn'
   }
 })
-
+*/
 app.use(i18n.init)
 app.use(express.json());
 app.use(cors())
@@ -65,8 +50,10 @@ app.use((req, res, next) => {
 
 // Optional: set locale manually (from header, query, etc.)
 app.use((req, res, next) => {
-  const lang = req.headers['Accept-Language'] || 'en'
+  const lang = req.headers['Accept-Language'] || req.headers['accept-language'] || 'ar'
+  //console.log("lang:", lang, req.headers)
   req.setLocale(lang)
+  i18n.setLocale(lang)
   next()
 })
 
@@ -80,7 +67,7 @@ app.get("/api/v1.1", (req, res) => {
   console.log("req ip:", req.ip, req.clientIp)
   res.json({
     statusCode: 200,
-    message: req.t("main.api"),
+    message: { "1": req.t("main.api"), "2": i18n.__("main.api") },
     data: null
   })
 })
@@ -113,14 +100,14 @@ app.get('/api/v1.1/health', async (req, res) => {
 });
 
 // redis
-const redis = createClient();
+//const redis = createClient();
 
 //redis.on('error', (err) => console.error('Redis error:', err));
 
-async function connectRedis() {
+/*async function connectRedis() {
   await redis.connect();
   console.log('Redis connected');
-}
+}*/
 
 async function saveShutdownTime(signal) {
   const timestamp = new Date().toISOString();
@@ -148,11 +135,57 @@ async function saveShutdownTime(signal) {
 
 
 const server = http_server.listen(process.env.PORT, async () => {
-  await connectRedis();
+  await RedisService.connectRedis()
   //await redis.set('server:last_startup', new Date().toISOString());
   console.log('PID:', process.pid);
   console.log(`Server running on port ${process.env.PORT}`);
 });
+
+
+// Background worker
+function startUserCountJob() {
+  setInterval(() => {
+    userCount = UserService.users.length;
+    console.log(`[${new Date().toISOString()}] User count:`, userCount);
+  }, 10000); // every 10 seconds
+}
+
+//startUserCountJob()
+
+let userCount = 0;
+
+// Cron job: every 10 seconds
+cron.schedule('*/10 * * * * *', () => {
+  userCount = UserService.getCount()
+  //console.log(`Cron [${new Date().toISOString()}] User count:`, userCount);
+  RedisService.saveCount('users:count', userCount)
+});
+
+
+app.get("/api/v1.1/count", async (req, res) => {
+  const count = await RedisService.getCount('users:count');
+  console.log("redis count:", count)
+  res.json({ count: count })
+})
+
+app.post("/api/v1.1/redis", async (req, res) => {
+  const user = UserService.getAllUsers()[0]
+  if (!user) return res.statusCode(404).json({ statusCode: 404, message: "User not found" })
+
+  RedisService.saveObject(`users:user:${user.id}`, user)
+
+  res.status(201).json({ statusCode: 201, message: "User saved in redis" })
+})
+
+app.get("/api/v1.1/redis", async (req, res) => {
+  const user = UserService.getAllUsers()[0]
+  const u = await RedisService.getObject(`users:user:${user.id}`)
+  if (!u) return res.statusCode(404).json({ statusCode: 404, message: "User not found in redis" })
+  res.status(201).json({ statusCode: 201, message: "User found in redis", data: u })
+
+})
+
+
 /*
 //---------------------------------
 let isShuttingDown = false;
