@@ -112,6 +112,10 @@ export class AuthService {
     );
   }
 
+  logoutAPI(id: any): Observable<any> {
+    return this.http.post<RESPONSE_TYPE<any>>(`${this.apiUrl}/auth/logout/${id}`, null)
+  }
+
 
   async fetchAuthUser() {
      return await this.http.get<RESPONSE_TYPE<USER_TYPE>>(`${this.apiUrl}/auth/me`)
@@ -221,9 +225,10 @@ export class AuthService {
 
 
 
-  logout() {
+  async logout() {
     //this.userRole.set(null)
     //localStorage.removeItem('userRole')
+    await this.logoutAPI(this.getUserIDFromCookie()).subscribe(res => console.log("logout res:", res))
     this.clearAll()
     console.log("logout:", this.isAuth())
     this.router.navigate(['/login'])
