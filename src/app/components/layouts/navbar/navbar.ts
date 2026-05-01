@@ -1,4 +1,4 @@
-import { Component, computed, effect, HostListener, inject, model, OnChanges, signal, SimpleChanges } from '@angular/core';
+import { Component, computed, CUSTOM_ELEMENTS_SCHEMA, effect, HostListener, inject, model, OnChanges, signal, SimpleChanges } from '@angular/core';
 import { LogoutButton } from '../../buttons/logout-button/logout-button';
 import { NavigationEnd, Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../../auth/auth-service';
@@ -11,13 +11,24 @@ import { toSignal } from '@angular/core/rxjs-interop';
 import { UserSignalStore } from '../../../signal-store/user-signal.store';
 import { ToggleSwitch } from "../../forms/inputs/toggle-switch/toggle-switch";
 import { DarkModeSignalStore } from '../../../signal-store/dark-mode.store';
+import { AuthSignalStore } from '../../../signal-store/auth-signal.store';
+import { SocketSignalStore } from '../../../signal-store/socket-signal.store';
+import { NotificationButton } from '../../notifications/notification-button/notification-button';
+import { NotificationSidebar } from '../../notifications/notification-sidebar/notification-sidebar';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [RouterModule, LogoutButton, ToggleSwitch, CommonModule],
+  imports: [RouterModule, LogoutButton, ToggleSwitch, CommonModule, NotificationButton, NotificationSidebar,
+
+
+  ],
   templateUrl: './navbar.html',
   styleUrl: './navbar.css',
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  providers: [
+
+  ]
 })
 export class Navbar implements OnChanges {
 
@@ -69,15 +80,20 @@ export class Navbar implements OnChanges {
   isMobile = signal(window.innerWidth < 768);
   isMobileMenuOpen = signal(false);
 
-    private darkModeSignalStore = inject(DarkModeSignalStore);
+  private darkModeSignalStore = inject(DarkModeSignalStore);
+  private authSignalStore = inject(AuthSignalStore);
+  private socketSignalStore = inject(SocketSignalStore)
 
+  notifys = signal<any[]>([])
 
-
+  cn = computed(() => this.socketSignalStore.notifications())
 
 
   constructor() {
+
     // Effect runs whenever auth state OR route changes
     effect(() => {
+      this.notifys.set(this.socketSignalStore.notifications())
       const isAuth = this.service.isAuth();
       const role = this.service.role();
       const isAdmin = this.service.isAdmin();
@@ -85,6 +101,9 @@ export class Navbar implements OnChanges {
 
 
       //const currentUrl = this.router.url;
+      console.log("socketSignalStore navbar#", this.notifys(), this.socketSignalStore.notifications(), this.cn(),
+        this.socketSignalStore.notificationsList()
+      )
 
       // Check access token on route changes
       //const token = this.service.getFromCookie('ng_accessToken');
@@ -92,23 +111,35 @@ export class Navbar implements OnChanges {
 
       console.log({ isAuth, role, isAdmin, isUser })
 
+      console.log("authSignalStore navbar#:",
+        {
+          user: this.authSignalStore.user(),
+          role: this.authSignalStore.role(),
+          access_token: this.authSignalStore.access_token(),
+          refresh_token: this.authSignalStore.refresh_token(),
+          userID: this.authSignalStore.userID(),
+          isAuth: this.authSignalStore.isAuthenticated(),
+        })
+
       /*if (!token ) {
         console.log('No token found, redirecting to login');
         //this.router.navigate(['/login']);
       }*/
     });
 
-   /* window.addEventListener('resize', () => {
-      this.isMobile.set(window.innerWidth < 768);
-    });*/
+    /* window.addEventListener('resize', () => {
+       this.isMobile.set(window.innerWidth < 768);
+     });*/
 
-     this.checkScreenSize();
+    this.checkScreenSize();
     this.loadDarkModePreference();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log("onChanges")
+    console.log("onChanges navbar#")
     console.log("role$:", this.role$)
+
+
 
   }
 
@@ -126,39 +157,39 @@ export class Navbar implements OnChanges {
   onResize() {
     this.checkScreenSize();
   }
-  
+
   checkScreenSize() {
     const mobile = window.innerWidth < 768;
     this.isMobile.set(mobile);
-    
+
     // Close mobile menu when switching to desktop
     if (!mobile && this.isMobileMenuOpen()) {
       this.isMobileMenuOpen.set(false);
     }
   }
-  
+
   loadDarkModePreference() {
     // Check localStorage for saved preference
     const savedPreference = localStorage.getItem('darkMode');
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    
-    const initialValue = savedPreference !== null 
-      ? savedPreference === 'true' 
+
+    const initialValue = savedPreference !== null
+      ? savedPreference === 'true'
       : prefersDark;
-    
+
     this.isDarkMode.set(initialValue);
     //this.darkModeSignalStore.toggle()
     this.applyDarkMode(initialValue);
   }
-  
+
   onDarkModeChange(value: boolean): void {
     this.isDarkMode.set(value);
     this.applyDarkMode(value);
     localStorage.setItem('darkMode', String(value));
-     //this.darkModeSignalStore.toggle();
-    
+    //this.darkModeSignalStore.toggle();
+
   }
-  
+
   applyDarkMode(enabled: boolean): void {
     /*if (enabled) {
       document.documentElement.classList.add('dark');
@@ -168,23 +199,27 @@ export class Navbar implements OnChanges {
       document.body.classList.remove('dark-mode');
     }*/
     this.darkModeSignalStore.set(enabled);
-    
+
   }
-  
-
-
-
-
-  
-  
 
 
   toggleMobileMenu(): void {
     this.isMobileMenuOpen.set(!this.isMobileMenuOpen());
   }
 
+  isOpenNotifySidebar = signal<boolean>(false)
 
- 
+  toggleNotificationButton(val: boolean){
+       console.log("toggleNotificationButton:", val)
+       this.isOpenNotifySidebar.set(val)
+  }
+
+  closeNotificationsidebar(){
+     this.isOpenNotifySidebar.set(false)
+  }
+
+
+
 
 
 

@@ -94,30 +94,41 @@
             </div>
 
             <!-- Desktop Navigation Links -->
-             @if(isAuth()){
+            @if(isAuth()){
             <div class="hidden md:flex items-center space-x-6">
-                <a routerLink="/"  [class.bg-blue-100]="isRouteActive('/')"
+                <a routerLink="/" [class.bg-blue-100]="isRouteActive('/')"
                     class="px-4 py-2 rounded-lg text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
                     Dashboard
                 </a>
                 @if(isAdmin()) {
-                <a routerLink="/users"  [class.bg-blue-100]="isRouteActive('/users')"
+                <a routerLink="/users" [class.bg-blue-100]="isRouteActive('/users')"
                     class="px-4 py-2 rounded-lg text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
                     Users
                 </a>
-                <a routerLink="/logs"  [class.bg-blue-100]="isRouteActive('/logs')"
+                <a routerLink="/logs" [class.bg-blue-100]="isRouteActive('/logs')"
                     class="px-4 py-2 rounded-lg text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
                     Activity Logs
                 </a> }
-                <a routerLink="/profile"  [class.bg-blue-100]="isRouteActive('/profile')"
+                <a routerLink="/profile" [class.bg-blue-100]="isRouteActive('/profile')"
                     class="px-4 py-2 rounded-lg text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
                     Profile
                 </a>
             </div>
-        }
+            }
 
             <!-- Right side items (Desktop) -->
             <div class="hidden md:flex items-center gap-4">
+
+                <!-- notification button -->
+                <app-notification-button [isOpen]="isOpenNotifySidebar()"
+                    (onClickEvent)="toggleNotificationButton($event)"></app-notification-button>
+
+                @if(isOpenNotifySidebar()){
+                <app-notification-sidebar (close)="closeNotificationsidebar()"
+                    [isOpen]="isOpenNotifySidebar()"></app-notification-sidebar>
+                }
+
+
 
                 <!-- Dark Mode Toggle Switch -->
                 <app-toggle-switch [value]="isDarkMode()" (valueChange)="onDarkModeChange($event)" name="darkMode"
@@ -126,11 +137,11 @@
                 <!-- Auth Buttons for Desktop -->
                 @if (!isAuth()) {
                 <div class="flex items-center gap-3">
-                    <a routerLink="/login" 
+                    <a routerLink="/login"
                         class="px-4 py-2 text-blue-600 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-gray-800 rounded-lg transition-colors">
                         Login
                     </a>
-                    <a routerLink="/register" 
+                    <a routerLink="/register"
                         class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
                         Register
                     </a>
@@ -152,12 +163,18 @@
             <!-- Mobile Menu Button and Toggle -->
             <div class="flex md:hidden items-center gap-3">
                 <!-- Dark Mode Toggle for Mobile -->
-                 <div class="items-start">
+                <div class="items-start">
                     <app-toggle-switch [value]="isDarkMode()" (valueChange)="onDarkModeChange($event)" name="darkMode"
                         label="" [isMobile]="true" size="large" />
-                        <div class="mb-3"></div>
-                 </div>
-                
+                    <div class="mb-3"></div>
+                </div>
+
+                <div>
+                    <!-- notification button -->
+                    <app-notification-button [isOpen]="isOpenNotifySidebar()"
+                        (onClickEvent)="toggleNotificationButton($event)"></app-notification-button>
+                </div>
+
 
                 <button (click)="toggleMobileMenu()" class="text-gray-600 dark:text-gray-300 focus:outline-none">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -219,3 +236,8 @@
         }
     </div>
 </nav>
+
+@if(isOpenNotifySidebar()){
+<app-notification-sidebar (close)="closeNotificationsidebar()"
+    [isOpen]="isOpenNotifySidebar()"></app-notification-sidebar>
+}
