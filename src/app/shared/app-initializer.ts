@@ -6,6 +6,7 @@ import { Store } from "@ngrx/store";
 import { loadUserFromTokenAction, selectUser, setAuthFromCookiesAction } from "../store/auth.store";
 import { Role } from "./enums";
 import { AuthSignalStore } from "../signal-store/auth-signal.store";
+import { SocketSignalStore } from "../signal-store/socket-signal.store";
 
 export function appInitializer() {
 
@@ -15,6 +16,7 @@ export function appInitializer() {
         const service = inject(AuthService);
         const store = inject(Store);
         const authSignalStore = inject(AuthSignalStore)
+        const socketSignalStore = inject(SocketSignalStore)
 
         try {
             // Initialize cookie monitoring
@@ -42,6 +44,9 @@ export function appInitializer() {
                     userId: Number(id),
                     isAuth: Boolean(hasToken)
                 }))
+
+                //socketSignalStore.connect()
+                socketSignalStore.loadNotifications()
 
                 // Convert observable to promise for cleaner async/await
                 try {
