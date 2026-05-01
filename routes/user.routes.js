@@ -1,17 +1,17 @@
 const express = require("express");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const { getAllUsers, getUserById, deleteUserById, updateUser } = require("../models/user.model");
+const { UserService } = require("../services/user.service");
 const auth = require("../middleware/auth");
 const role = require("../middleware/role");
-const { logs } = require("../models/log.model");
+const { LogService } = require("../services/log.service");
 
 const router = express.Router();
 
 
 // ✅ Admin → get all users
 router.get("/", auth, role(["admin"]), (req, res) => {
-    res.json({ statusCode: 200, message: "All users", data: getAllUsers() });
+    res.json({ statusCode: 200, message: "All users", data: UserService.getAllUsers() });
 });
 
 // ✅ User → get own data by ID
@@ -24,7 +24,7 @@ router.get("/:id", auth, (req, res) => {
     }
 
     //const user = users.find(u => u.id === userId);
-    const user = getUserById(userId)
+    const user = UserService.getUserById(userId)
     if (!user) return res.status(404).json({ message: "User not found" });
 
     res.json({ statusCode: 200, message: "User details", data: user });
@@ -40,7 +40,7 @@ router.patch("/:id", auth, (req, res) => {
     }
 
     //const user = users.find(u => u.id === userId);
-    const user = getUserById(userId)
+    const user = UserService.getUserById(userId)
     if (!user) return res.status(404).json({ statusCode: 404, message: "User not found" });
 
     user.email = req.body.email || user.email;
@@ -48,14 +48,12 @@ router.patch("/:id", auth, (req, res) => {
 
     //const updated = users.map((m) => m.id === userId && (m = user));
     //console.log("updated:", updated)
-    const updated = updateUser(userId)
+    const updated = UserService.updateUser(userId)
 
     if (req.body.role) {
-        logs.push({
-            id: logs.length + 1,
+        LogService.create({
             user_id: user.id,
-            action: "changed role to " + req.body.role,
-            timestamp: new Date().toISOString(),
+            action: "changed role to " + req.body.role
         });
     }
 
@@ -76,18 +74,18 @@ router.delete("/:id", auth, (req, res) => {
     }
 
     //const user = users.find(u => u.id === userId);
-    const user = getUserById(userId)
+    const user = UserService.getUserById(userId)
     if (!user) return res.status(404).json({ statusCode: 404, message: "User not found" });
 
     let isDeleted = false;
     let deletedUser = null;
     if (userId === req.user.id) {
-        deletedUser = deleteUserById(userId)
+        deletedUser = UserService.deleteUserById(userId)
         isDeleted = true
     }
 
     if (req.user.role === "admin") {
-        deletedUser = deleteUserById(userId)
+        deletedUser = UserService.deleteUserById(userId)
         isDeleted = true
     }
 
