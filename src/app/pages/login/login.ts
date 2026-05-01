@@ -13,6 +13,8 @@ import { ToastrService } from 'ngx-toastr';
 import { MessageService } from '../../components/toast-uis/message/message-service';
 import { PositionedMessages } from "../../components/toast-uis/positioned-messages/positioned-messages";
 import { StackedMessages } from "../../components/toast-uis/stacked-messages/stacked-messages";
+import { AuthSignalStore } from '../../signal-store/auth-signal.store';
+import { Role } from '../../shared/enums';
 
 interface ILoginModel {
   email: string
@@ -51,6 +53,7 @@ export class Login implements OnInit {
   toast = inject(ToastService);
   toastr = inject(ToastrService);
   messageService = inject(MessageService)
+  authSignalStore = inject(AuthSignalStore)
 
 
 
@@ -168,9 +171,17 @@ export class Login implements OnInit {
             userId: Number(res.data.id),
             isAuth: Boolean(res.data.access_token)
           }))
+          
+          this.authSignalStore.login({
+            access_token: res.data.access_token,
+            refresh_token: res.data.refresh_token,
+            role: res.data.role as Role,
+            userID: Number(res.data.id)
+          })
+
 
           this.messageService.showStacked(
-            'Login recorded from Chrome on Windows',
+            res.message ?? 'Login is successful',
             4
           );
 
@@ -186,13 +197,11 @@ export class Login implements OnInit {
               );
             }, 500);
           }, 1000);
-
-
         }
       }, error => {
         console.log("login page error:", error)
         this.messageService.showStacked(
-          'Login failed',
+          error.error.message ?? 'Login failed',
           4
         );
       })
