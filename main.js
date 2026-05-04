@@ -1,4 +1,4 @@
-require("dotenv").config();
+require("dotenv").config() //({ quiet: true });;
 const express = require("express");
 const cors = require("cors")
 const path = require("path");
@@ -183,6 +183,36 @@ app.get("/api/v1.1/redis", async (req, res) => {
   if (!u) return res.statusCode(404).json({ statusCode: 404, message: "User not found in redis" })
   res.status(201).json({ statusCode: 201, message: "User found in redis", data: u })
 
+})
+// sse
+let liveData = {
+  created_at: new Date().toISOString(),
+  value: 100,
+  usersOnline: 42,
+  message: "Init data",
+
+}
+
+app.get("/api/v1.1/sse/events", (req, res) => {
+     res.setHeader('Content-Type', 'text/event-stream')
+     res.setHeader('Cache-Control', 'no-cache')
+     res.setHeader('Connection', 'keep-alive')
+     res.flushHeaders()
+
+     console.log("SSE Client connected")
+
+     const interval = setInterval(() => {
+          liveData.created_at = new Date().toISOString()
+          liveData.value = Math.floor(Math.random() * 100)
+          liveData.usersOnline = UserService.users.length
+          liveData.message = "Random data"
+          res.write(`data: ${JSON.stringify(liveData)}\n\n`)
+     }, 2000)
+
+     req.on('close', () => {
+      clearInterval(interval)
+      console.log("SSE Client disconnected")
+     })
 })
 
 
