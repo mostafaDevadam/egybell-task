@@ -24,20 +24,38 @@ export class EditProfile implements OnInit {
 
   async update(e: any) {
     console.log("update:", e)
+
     const res = firstValueFrom(await this.service.updateUser(e.id, e))
-    res.then(res => {
+      
+      res.then(res => {
+        console.log("updated user res:", res)
+        this.messageService.showStacked(
+          'Updated User is successfully',
+          4
+        );
+      }).catch(err => {
+        console.log("updateUser error:", err)
+        this.messageService.showStacked(
+          'Updated User is failed',
+          4
+        );
+      })
+
+/*
+    try {
+      const res = await firstValueFrom(await this.service.updateUser(e.id, e))
       console.log("updated user res:", res)
        this.messageService.showStacked(
-            'Updated User is successfully',
-            4
-          );
-    }).catch(err => {
-      console.log("updateUser error:", err)
-       this.messageService.showStacked(
-            'Updated User is failed',
-            4
-          );
-    })
+          'Updated User is successfully',
+          4
+        );
+    } catch (error) {
+      this.messageService.showStacked(
+        'Updated User is failed',
+        4
+      );
+    }*/
+
 
 
   }
