@@ -15,6 +15,7 @@ const cron = require('node-cron');
 const { createServer } = require('node:http');
 const { SocketService } = require("./services/socket.service");
 const { RedisService } = require("./services/redis.service");
+const { ShareService } = require("./services/share.service");
 
 
 
@@ -186,6 +187,7 @@ app.get("/api/v1.1/redis", async (req, res) => {
 })
 // sse
 let liveData = {
+  id: '0',
   created_at: new Date().toISOString(),
   value: 100,
   usersOnline: 42,
@@ -197,24 +199,74 @@ app.get("/api/v1.1/sse/events", (req, res) => {
      res.setHeader('Content-Type', 'text/event-stream')
      res.setHeader('Cache-Control', 'no-cache')
      res.setHeader('Connection', 'keep-alive')
+     res.setHeader('X-Accel-Buffering', 'no')
      res.flushHeaders()
 
      console.log("SSE Client connected")
 
+     console.log(`Client connected: ${req.ip}`)
+
+     const sendEvent = (data) => {
+      res.write(`id: ${data.id}\n`)
+      res.write(`data: ${JSON.stringify(data)}\n\n`)
+     }
+
      const interval = setInterval(() => {
+          liveData.id = ShareService.getUUID()
           liveData.created_at = new Date().toISOString()
           liveData.value = Math.floor(Math.random() * 100)
           liveData.usersOnline = UserService.users.length
           liveData.message = "Random data"
-          res.write(`data: ${JSON.stringify(liveData)}\n\n`)
+          sendEvent(liveData)
+          //res.write(`data: ${JSON.stringify(liveData)}\n\n`)
      }, 2000)
 
      req.on('close', () => {
       clearInterval(interval)
+      res.end()
       console.log("SSE Client disconnected")
      })
 })
 
+
+app.get("/api/v1.1/sse/events/list", (req, res) => {
+    res.setHeader('Content-Type', 'text/event-stream');
+    res.setHeader('Cache-Control', 'no-cache');
+    res.setHeader('Connection', 'keep-alive');
+    res.flushHeaders();
+
+    // This array persists for the duration of THIS specific client's connection
+    let dynamicHistory = [];
+
+    const interval = setInterval(() => {
+        // 1. Create the new data point
+        const newEntry = {
+            id: ShareService.getUUID(),
+            created_at: new Date().toISOString(),
+            value: Math.floor(Math.random() * 100),
+            usersOnline: UserService.users.length,
+            message: "Updated live stream"
+        };
+
+        // 2. Update the array (Add to the front)
+        dynamicHistory.unshift(newEntry);
+
+        // 3. Keep the array dynamic and manageable (e.g., max 10 items)
+        if (dynamicHistory.length > 10) {
+            dynamicHistory.pop();
+        }
+
+        // 4. Send the entire array as a JSON string
+        // Note the double newline \n\n is mandatory to trigger the message event
+        res.write(`data: ${JSON.stringify(dynamicHistory)}\n\n`);
+
+    }, 2000);
+
+    req.on('close', () => {
+        clearInterval(interval);
+        console.log("SSE Client disconnected and history cleared");
+    });
+});
 
 /*
 //---------------------------------
