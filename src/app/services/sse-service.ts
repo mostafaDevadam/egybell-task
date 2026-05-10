@@ -1,5 +1,6 @@
-import { Injectable, signal } from '@angular/core';
+import { inject, Injectable, NgZone, signal } from '@angular/core';
 import { environment } from '../../environments/environment.development';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -7,6 +8,8 @@ import { environment } from '../../environments/environment.development';
 export class SseService {
   private sseSource?: EventSource;
   private apiUrl = environment.apiUrl
+
+  private _zone = inject(NgZone)
 
   data = signal<any>({
     created_at: '',
@@ -44,6 +47,54 @@ export class SseService {
       console.log("SSE connection closed")
     }
     
+  }
+
+  connectSSE_() {
+    if (this.sseSource) this.sseSource.close();
+
+    this.sseSource = new EventSource(`${this.apiUrl}/sse/events`);
+
+    this.sseSource.onmessage = (event) => {
+      // EventSource runs outside Angular's zone. 
+      // zone.run() forces Angular to check for changes.
+      this._zone.run(() => {
+        try {
+          const parsed = JSON.parse(event.data);
+          this.data.set(parsed);
+          console.log("New data received:", parsed);
+        } catch (error) {
+          console.error("Error parsing SSE data:", error);
+        }
+      });
+    };
+
+    this.sseSource.onerror = (err) => {
+      console.error("SSE connection lost. Browser will auto-retry...", err);
+    };
+  }
+
+
+  getServerSentEvents(): Observable<any[]>{
+    return new Observable<any[]>(observer => {
+      const eventSource = new EventSource(`${this.apiUrl}/sse/events/list`)
+
+      eventSource.onmessage = (event) => {
+        this._zone.run(() => {
+          const data = JSON.parse(event.data)
+          observer.next(data)
+        })
+      }
+
+      eventSource.onerror = (event) => {
+        this._zone.run(() => {
+          observer.error(event)
+        })
+      }
+
+      return () => {
+        eventSource.close()
+      }
+    })
   }
 
 

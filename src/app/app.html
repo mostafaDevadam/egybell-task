@@ -177,6 +177,47 @@
   <app-navbar></app-navbar>
 </header>
 
+<aside>
+
+
+  <div>
+    @if(sseStore.objectStatus() === 'connected'; as item){
+    {{ sseStore.latestObject().id }} -
+    {{ sseStore.latestObject().created_at }} -
+    {{ sseStore.latestObject().message }} -
+    {{ sseStore.latestObject().value }} -
+    } @else {
+    <p>Connecting to Object Stream...</p>
+    }
+
+    <h2>Live History List</h2>
+    @if(sseStore.arrayStatus() === 'connected'; as item){
+    <ul>
+      @for(item of sseStore.historyArray(); track item.id; let index = $index){
+      <li>
+        {{ item.id }} -
+        {{ item.created_at }} -
+        {{ item.message }} -
+        {{ item.value }} -
+      </li>
+      } @empty {
+      <li>No history data yet.</li>
+      }
+
+
+    </ul>
+    } @else {
+    <li>Not connected</li>
+    }
+
+
+
+
+
+  </div>
+
+</aside>
+
 <main [class]="isDark() ? 'bg-black' : ''">
   <div class="border p-5 rounded-lg w-full h-3/4">
     <router-outlet />
@@ -185,5 +226,5 @@
 
   <app-message />
   <app-message-container />
-   <app-global-message-container />
+  <app-global-message-container />
 </main>
