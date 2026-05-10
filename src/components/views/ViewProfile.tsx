@@ -41,8 +41,6 @@ const ViewProfile = ({ user }: Props) => {
                     <div className='bg-gray-50 dark:bg-gray-800 p-6 rounded-lg shadow-md border border-gray-200 dark:border-gray-700 sm:mt-10'>
                         <p data-testid="bio" className='test-content'>{t("bio")}</p>
                         <p data-testid="bio-content" className='test-content'>{locale === "ar" ? ar_bio : bio}</p>
-
-
                     </div>
                 </div>
 
