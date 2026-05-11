@@ -1,9 +1,11 @@
 const { createClient } = require('redis');
 
 
-const redis = createClient();
+const redis = createClient({
+    url: "redis://redis_db:6379"
+});
 
-
+redis.on('error', (err) => console.log('Redis Client Error', err));
 
 const connectRedis = async () => {
     await redis.connect();
